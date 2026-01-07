@@ -11,6 +11,8 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    cardperformance.cpp \
+    cardwidget.cpp \
     databasemanager.cpp \
     main.cpp \
     loginwidget.cpp \
@@ -24,6 +26,8 @@ SOURCES += \
 
 
 HEADERS += \
+    cardperformance.h \
+    cardwidget.h \
     databasemanager.h \
     loginwidget.h \
     mainwidget.h \
@@ -36,6 +40,7 @@ HEADERS += \
 
 
 FORMS += \
+    cardperformance.ui \
     loginwidget.ui \
     mainwidget.ui \
     registerwidget.ui \

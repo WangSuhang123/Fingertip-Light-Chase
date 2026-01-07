@@ -15,6 +15,20 @@ QWidget[type="frontPage"] {
     color: #262626;
 }
 
+QWidget[type="PerformanceWidget"] {
+    background-color: #ebf5fc;
+    color: #262626;
+}
+
+QWidget[type="MainFeatures"] {
+    background-color: #ffffff;
+    color: #262626;
+}
+
+QWidget[type="StatusWidget"] {
+    background-color: #218edb;
+    color: #262626;
+}
 
 
 /* ===================== Typography ===================== */
@@ -619,3 +633,320 @@ QLineEdit[status="error"], QTextEdit[status="error"] {
 QLineEdit[status="error"]:focus, QTextEdit[status="error"]:focus {
     border-color: #ff4d4f;
 }
+
+
+/* ===================== Ant Design 风格 QScrollArea 核心样式 ===================== */
+/* 1. ScrollArea 整体容器 */
+QScrollArea {
+    border: none;
+    background-color: #ffffff;
+    padding: 0px;
+}
+
+/* 2. ScrollArea 视口（内容显示区域） */
+QScrollArea > QWidget > QWidget { /* scrollAreaWidgetContents */
+    background-color: transparent;
+}
+
+QScrollArea > QAbstractScrollAreaViewport { /* 视口 */
+    background-color: #ffffff;
+}
+
+/* ===================== Ant Design 滚动条样式（垂直+水平） ===================== */
+/* 通用滚动条基础样式 */
+QScrollBar {
+    background-color: #f5f5f5;
+    border: none;
+}
+
+/* 垂直滚动条 */
+QScrollBar:vertical {
+    width: 8px; /* 默认宽度，hover时变宽 */
+    margin: 0px 0px 0px 0px;
+}
+
+/* 水平滚动条 */
+QScrollBar:horizontal {
+    height: 8px; /* 默认高度，hover时变高 */
+    margin: 0px 0px 0px 0px;
+}
+
+/* 滚动条滑块（核心交互） */
+QScrollBar::handle:vertical {
+    background-color: #40a0e2; /* 默认灰色 */
+    border-radius: 4px; /* Ant Design 圆角规范 */
+    min-height: 40px; /* 滑块最小高度 */
+}
+
+QScrollBar::handle:horizontal {
+    background-color: #d9d9d9;
+    border-radius: 4px;
+    min-width: 40px; /* 滑块最小宽度 */
+}
+
+/* 滑块 hover 状态（Ant Design 主色 #1677ff） */
+QScrollBar::handle:vertical:hover,
+QScrollBar::handle:horizontal:hover {
+    background-color: #1677ff;
+}
+
+/* 滑块 按压 状态（主色加深） */
+QScrollBar::handle:vertical:pressed,
+QScrollBar::handle:horizontal:pressed {
+    background-color: #0958d9;
+}
+
+/* 滚动条 hover 时加宽/加高（细腻交互） */
+QScrollArea:hover QScrollBar:vertical {
+    width: 12px;
+}
+
+QScrollArea:hover QScrollBar:horizontal {
+    height: 12px;
+}
+
+/* 滚动条空白区域（page up/down 区域） */
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical,
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
+    background-color: transparent;
+}
+
+/* 隐藏滚动条箭头（Ant Design 风格无箭头） */
+QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical,
+QScrollBar::left-arrow:horizontal, QScrollBar::right-arrow:horizontal {
+    width: 0px;
+    height: 0px;
+}
+
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical,
+QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
+    background-color: transparent;
+}
+
+/* ===================== 禁用状态样式 ===================== */
+QScrollArea:disabled {
+    background-color: #fafafa;
+}
+
+QScrollArea:disabled QScrollBar::handle {
+    background-color: #f0f0f0;
+}
+
+
+/* ===================== CardPerformance ===================== */
+/* 基础样式 */
+CardPerformance,
+QWidget[class="CardPerformance"] {
+    background-color: #f5f5f5;
+    border: 1px solid #3498DB;
+    border-radius: 8px;
+}
+
+/* 状态控制 */
+CardPerformance[state="normal"],
+QWidget[class="CardPerformance"][state="normal"] {
+    background-color: #AED6F1;
+    border-color: #3498DB;
+}
+
+CardPerformance[state="hover"],
+QWidget[class="CardPerformance"][state="hover"] {
+    background-color: #5DADE2;
+    border-color: #3498DB;
+}
+
+CardPerformance[state="pressed"],
+QWidget[class="CardPerformance"][state="pressed"] {
+    background-color: #3498DB;
+    border-color: #2980B9;
+}
+
+/* 主题：white */
+CardPerformance[theme="white"][state="normal"],
+QWidget[theme="white"][state="normal"] {
+    background-color: #f5f5f5;
+    border-color: #27AE60;
+}
+
+CardPerformance[theme="white"][state="hover"],
+QWidget[theme="white"][state="hover"] {
+    background-color: #cccccc;
+}
+
+CardPerformance[theme="white"][state="pressed"],
+QWidget[theme="white"][state="pressed"] {
+    background-color: #e0e0e0;
+}
+
+/* 主题：green */
+CardPerformance[theme="green"][state="normal"],
+QWidget[theme="green"][state="normal"] {
+    background-color: #A8E6CE;
+    border-color: #27AE60;
+}
+
+CardPerformance[theme="green"][state="hover"],
+QWidget[theme="green"][state="hover"] {
+    background-color: #55D68E;
+}
+
+CardPerformance[theme="green"][state="pressed"],
+QWidget[theme="green"][state="pressed"] {
+    background-color: #27AE60;
+}
+
+/* 主题：orange */
+CardPerformance[theme="orange"][state="normal"],
+QWidget[theme="orange"][state="normal"] {
+    background-color: #FFD3A5;
+    border-color: #E67E22;
+}
+
+CardPerformance[theme="orange"][state="hover"],
+QWidget[theme="orange"][state="hover"] {
+    background-color: #FFC078;
+}
+
+CardPerformance[theme="orange"][state="pressed"],
+QWidget[theme="orange"][state="pressed"] {
+    background-color: #E67E22;
+}
+
+/* 子控件透明背景（防止遮挡） */
+CardPerformance QLabel {
+    background: transparent;
+}
+
+
+/* ======================
+   CardWidget 多主题样式
+====================== */
+/* 基础样式（默认白色主题，无theme属性时生效） */
+CardWidget {
+    background-color: #ffffff;
+    border: 1px solid #c7ddff;
+    border-radius: 10px;
+}
+
+/* 默认白色主题 - 状态控制 */
+CardWidget[state="hover"] {
+    background-color: #eaf2ff;
+    border-color: #91b8ff;
+}
+CardWidget[state="pressed"] {
+    background-color: #dbe8ff;
+}
+
+/* 主题：lightblue（浅蓝） */
+CardWidget[theme="lightblue"][state="normal"] {
+    background-color: #e6f4ff;
+    border-color: #94d0ff;
+}
+CardWidget[theme="lightblue"][state="hover"] {
+    background-color: #bae0ff;
+    border-color: #69b1ff;
+}
+CardWidget[theme="lightblue"][state="pressed"] {
+    background-color: #91caff;
+    border-color: #4096ff;
+}
+
+/* 主题：darkblue（深蓝） */
+CardWidget[theme="darkblue"][state="normal"] {
+    background-color: #e0e7ff;
+    border-color: #818cf8;
+}
+CardWidget[theme="darkblue"][state="hover"] {
+    background-color: #c7d2fe;
+    border-color: #6366f1;
+}
+CardWidget[theme="darkblue"][state="pressed"] {
+    background-color: #a5b4fc;
+    border-color: #4f46e5;
+}
+
+/* 主题：purple（紫色） */
+CardWidget[theme="purple"][state="normal"] {
+    background-color: #f3e8ff;
+    border-color: #c084fc;
+}
+CardWidget[theme="purple"][state="hover"] {
+    background-color: #e9d5ff;
+    border-color: #a855f7;
+}
+CardWidget[theme="purple"][state="pressed"] {
+    background-color: #d8b4fe;
+    border-color: #9333ea;
+}
+
+/* 主题：lightgreen（浅绿） */
+CardWidget[theme="lightgreen"][state="normal"] {
+    background-color: #f0fdf4;
+    border-color: #86efac;
+}
+CardWidget[theme="lightgreen"][state="hover"] {
+    background-color: #dcfce7;
+    border-color: #4ade80;
+}
+CardWidget[theme="lightgreen"][state="pressed"] {
+    background-color: #bbf7d0;
+    border-color: #22c55e;
+}
+
+/* 主题：pink（粉红） */
+CardWidget[theme="pink"][state="normal"] {
+    background-color: #fef2f2;
+    border-color: #fda4af;
+}
+CardWidget[theme="pink"][state="hover"] {
+    background-color: #fee2e2;
+    border-color: #fb7185;
+}
+CardWidget[theme="pink"][state="pressed"] {
+    background-color: #fecdd3;
+    border-color: #f43f5e;
+}
+
+/* 主题：lightyellow（浅黄） */
+CardWidget[theme="lightyellow"][state="normal"] {
+    background-color: #fffbeb;
+    border-color: #fde047;
+}
+CardWidget[theme="lightyellow"][state="hover"] {
+    background-color: #fef3c7;
+    border-color: #facc15;
+}
+CardWidget[theme="lightyellow"][state="pressed"] {
+    background-color: #fde68a;
+    border-color: #eab308;
+}
+
+/* 主题：cyan（青色） */
+CardWidget[theme="cyan"][state="normal"] {
+    background-color: #ecfeff;
+    border-color: #67e8f9;
+}
+CardWidget[theme="cyan"][state="hover"] {
+    background-color: #cffafe;
+    border-color: #22d3ee;
+}
+CardWidget[theme="cyan"][state="pressed"] {
+    background-color: #a5f3fc;
+    border-color: #06b6d4;
+}
+/* ======================
+   新增：amber（琥珀色）主题
+====================== */
+CardWidget[theme="amber"][state="normal"] {
+    background-color: #fff8e6;
+    border-color: #fbbc04;
+}
+CardWidget[theme="amber"][state="hover"] {
+    background-color: #feebc8;
+    border-color: #f59e0b;
+}
+CardWidget[theme="amber"][state="pressed"] {
+    background-color: #fcd34d;
+    border-color: #d97706;
+}
+

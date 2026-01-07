@@ -47,14 +47,7 @@ public:
     {
         if (CardPerformance->objectName().isEmpty())
             CardPerformance->setObjectName("CardPerformance");
-        CardPerformance->resize(340, 144);
-        QSizePolicy sizePolicy(QSizePolicy::Policy::Fixed, QSizePolicy::Policy::Fixed);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(CardPerformance->sizePolicy().hasHeightForWidth());
-        CardPerformance->setSizePolicy(sizePolicy);
-        CardPerformance->setMinimumSize(QSize(340, 144));
-        CardPerformance->setStyleSheet(QString::fromUtf8(""));
+        CardPerformance->resize(311, 144);
         horizontalLayout_6 = new QHBoxLayout(CardPerformance);
         horizontalLayout_6->setObjectName("horizontalLayout_6");
         widget_8 = new QWidget(CardPerformance);
@@ -70,12 +63,13 @@ public:
         widget_5 = new QWidget(widget_4);
         widget_5->setObjectName("widget_5");
         horizontalLayout_2 = new QHBoxLayout(widget_5);
-        horizontalLayout_2->setSpacing(0);
+        horizontalLayout_2->setSpacing(1);
         horizontalLayout_2->setObjectName("horizontalLayout_2");
-        horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
+        horizontalLayout_2->setContentsMargins(1, 1, 1, 1);
         TitleLabel = new QLabel(widget_5);
         TitleLabel->setObjectName("TitleLabel");
-        TitleLabel->setStyleSheet(QString::fromUtf8("font-size: 22px;\n"
+        TitleLabel->setStyleSheet(QString::fromUtf8("font-size: 15px;\n"
+"font-weight: bold;\n"
 "color: #000000;\n"
 "font-family: \"Microsoft YaHei\";\n"
 ""));
@@ -88,12 +82,12 @@ public:
         widget_6 = new QWidget(widget_4);
         widget_6->setObjectName("widget_6");
         horizontalLayout_3 = new QHBoxLayout(widget_6);
-        horizontalLayout_3->setSpacing(0);
+        horizontalLayout_3->setSpacing(1);
         horizontalLayout_3->setObjectName("horizontalLayout_3");
-        horizontalLayout_3->setContentsMargins(0, 0, 0, 0);
+        horizontalLayout_3->setContentsMargins(1, 1, 1, 1);
         dataLabel = new QLabel(widget_6);
         dataLabel->setObjectName("dataLabel");
-        dataLabel->setStyleSheet(QString::fromUtf8("font-size: 40px;\n"
+        dataLabel->setStyleSheet(QString::fromUtf8("font-size: 23px;\n"
 "font-weight: bold;\n"
 "color: #409EFF;\n"
 "font-family: \"Microsoft YaHei\";"));
@@ -106,13 +100,14 @@ public:
         widget_7 = new QWidget(widget_4);
         widget_7->setObjectName("widget_7");
         horizontalLayout_4 = new QHBoxLayout(widget_7);
-        horizontalLayout_4->setSpacing(0);
+        horizontalLayout_4->setSpacing(1);
         horizontalLayout_4->setObjectName("horizontalLayout_4");
-        horizontalLayout_4->setContentsMargins(0, 0, 0, 0);
+        horizontalLayout_4->setContentsMargins(1, 1, 1, 1);
         describeLabel = new QLabel(widget_7);
         describeLabel->setObjectName("describeLabel");
         describeLabel->setStyleSheet(QString::fromUtf8("color: #312e2eF;\n"
-"font-family: \"Microsoft YaHei\";"));
+"font-family: \"Microsoft YaHei\";\n"
+"font-size: 1px;"));
         describeLabel->setWordWrap(false);
 
         horizontalLayout_4->addWidget(describeLabel);
@@ -150,6 +145,11 @@ public:
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
         iconLabel = new QLabel(widget);
         iconLabel->setObjectName("iconLabel");
+        QSizePolicy sizePolicy(QSizePolicy::Policy::Fixed, QSizePolicy::Policy::Fixed);
+        sizePolicy.setHorizontalStretch(40);
+        sizePolicy.setVerticalStretch(40);
+        sizePolicy.setHeightForWidth(iconLabel->sizePolicy().hasHeightForWidth());
+        iconLabel->setSizePolicy(sizePolicy);
         iconLabel->setPixmap(QPixmap(QString::fromUtf8(":/res/Blizt.png")));
         iconLabel->setScaledContents(false);
 

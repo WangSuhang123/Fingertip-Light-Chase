@@ -17,6 +17,10 @@ public:
 
 private:
     Ui::MainWidget *ui;
+    void widgetStyle();
+    void CardPerformanceStyle();
+    void FunturesCardStyle();
+
 };
 
 #endif // MAINWIDGET_H

@@ -5,5 +5,9 @@
         <file>res/RegisterPage.jpg</file>
         <file>res/RetrievePage.jpg</file>
         <file>res/Blizt.png</file>
+        <file>res/banner.png</file>
+        <file>res/mainFeatures.jpg</file>
+        <file>res/rakete.png</file>
+        <file>res/Rank.png</file>
     </qresource>
 </RCC>

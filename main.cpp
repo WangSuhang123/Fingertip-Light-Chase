@@ -1,5 +1,4 @@
 #include "loginwidget.h"
-#include "cardperformance.h"
 #include "mainwidget.h"
 #include "databasemanager.h"
 #include <QApplication>
