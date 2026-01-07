@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>res/ant.qss</file>
+        <file>res/ZYLoginPage.jpg</file>
+        <file>res/RegisterPage.jpg</file>
+        <file>res/RetrievePage.jpg</file>
+        <file>res/Blizt.png</file>
+    </qresource>
+</RCC>
