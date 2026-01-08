@@ -92,6 +92,38 @@ void MainWidget::FunturesCardStyle()
     //设置默认卡片控件显示内容
     //第一个
     ui->PracticeFeature->setTitle("练习");
-    ui->PracticeFeature->setIcon(QPixmap(":/res/banner.png"));
+    ui->PracticeFeature->setIcon(QPixmap(":/res/icon/danju.png"));
     ui->PracticeFeature->setDescription("提高你的打字速度和准确性");
+    //第二个
+    ui->CompetitionFeature->setTitle("比赛");
+    ui->CompetitionFeature->setIcon(QPixmap(":/res/icon/report.png"));
+    ui->CompetitionFeature->setDescription("参加现场比赛");
+    //第三个
+    ui->LeaderboardFeature->setTitle("排行榜");
+    ui->LeaderboardFeature->setIcon(QPixmap(":/res/icon/data.png"));
+    ui->LeaderboardFeature->setDescription("查看在本学校的排行榜");
+    //第四个
+    ui->CompetitionManagementFeature->setTitle("比赛信息管理");
+    ui->CompetitionManagementFeature->setIcon(QPixmap(":/res/icon/app.png"));
+    ui->CompetitionManagementFeature->setDescription("管理员管理比赛信息");
+    //第五个
+    ui->InfoManagerFeature->setTitle("用户信息管理");
+    ui->InfoManagerFeature->setIcon(QPixmap(":/res/icon/team.png"));
+    ui->InfoManagerFeature->setDescription("管理员管理用户信息");
+    //第六个
+    ui->SettingFeature->setTitle("设置");
+    ui->SettingFeature->setIcon(QPixmap(":/res/icon/shiyan.png"));
+    ui->SettingFeature->setDescription("系统设置");
+    //第七个
+    ui->beiyong1->setTitle("统计");
+    ui->beiyong1->setIcon(QPixmap(":/res/icon/tongji.png"));
+    ui->beiyong1->setDescription("统计");
+    //第八个
+    ui->beiyong2->setTitle("开发人员");
+    ui->beiyong2->setIcon(QPixmap(":/res/icon/kefu.png"));
+    ui->beiyong2->setDescription("开发成员");
+    //第九个
+    ui->beiyong3->setTitle("信息");
+    ui->beiyong3->setIcon(QPixmap(":/res/icon/xiaoxi.png"));
+    ui->beiyong3->setDescription("消息");
 }

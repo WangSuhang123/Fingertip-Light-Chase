@@ -9,5 +9,20 @@
         <file>res/mainFeatures.jpg</file>
         <file>res/rakete.png</file>
         <file>res/Rank.png</file>
+        <file>res/icon/app.png</file>
+        <file>res/icon/danju.png</file>
+        <file>res/icon/data.png</file>
+        <file>res/icon/kefu.png</file>
+        <file>res/icon/pizhun.png</file>
+        <file>res/icon/report.png</file>
+        <file>res/icon/shenpi.png</file>
+        <file>res/icon/shiyan.png</file>
+        <file>res/icon/shouye.png</file>
+        <file>res/icon/team.png</file>
+        <file>res/icon/tongji.png</file>
+        <file>res/icon/tongzhi.png</file>
+        <file>res/icon/wenjianjia.png</file>
+        <file>res/icon/xiaoxi.png</file>
+        <file>res/icon/yibiao.png</file>
     </qresource>
 </RCC>

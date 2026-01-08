@@ -231,7 +231,22 @@ release\qrc_res.cpp: D:\QtProject\Fingertip-Light-Chase\res.qrc \
 		D:\QtProject\Fingertip-Light-Chase\res\banner.png \
 		D:\QtProject\Fingertip-Light-Chase\res\mainFeatures.jpg \
 		D:\QtProject\Fingertip-Light-Chase\res\RetrievePage.jpg \
-		D:\QtProject\Fingertip-Light-Chase\res\ZYLoginPage.jpg
+		D:\QtProject\Fingertip-Light-Chase\res\ZYLoginPage.jpg \
+		D:\QtProject\Fingertip-Light-Chase\res\icon\shouye.png \
+		D:\QtProject\Fingertip-Light-Chase\res\icon\danju.png \
+		D:\QtProject\Fingertip-Light-Chase\res\icon\team.png \
+		D:\QtProject\Fingertip-Light-Chase\res\icon\report.png \
+		D:\QtProject\Fingertip-Light-Chase\res\icon\pizhun.png \
+		D:\QtProject\Fingertip-Light-Chase\res\icon\shiyan.png \
+		D:\QtProject\Fingertip-Light-Chase\res\icon\yibiao.png \
+		D:\QtProject\Fingertip-Light-Chase\res\icon\tongji.png \
+		D:\QtProject\Fingertip-Light-Chase\res\icon\app.png \
+		D:\QtProject\Fingertip-Light-Chase\res\icon\tongzhi.png \
+		D:\QtProject\Fingertip-Light-Chase\res\icon\shenpi.png \
+		D:\QtProject\Fingertip-Light-Chase\res\icon\kefu.png \
+		D:\QtProject\Fingertip-Light-Chase\res\icon\xiaoxi.png \
+		D:\QtProject\Fingertip-Light-Chase\res\icon\wenjianjia.png \
+		D:\QtProject\Fingertip-Light-Chase\res\icon\data.png
 	D:\Qt\6.10.1\msvc2022_64\bin\rcc.exe -name res --no-zstd D:\QtProject\Fingertip-Light-Chase\res.qrc -o release\qrc_res.cpp
 
 compiler_moc_predefs_make_all: release\moc_predefs.h

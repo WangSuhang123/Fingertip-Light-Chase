@@ -36,14 +36,17 @@ void CardWidget::initUi()
     iconLabel->setFixedSize(40, 40);
     iconLabel->setScaledContents(true);
 
-    titleLabel->setStyleSheet("font-size:16px; font-weight:600;");
-    descLabel->setStyleSheet("color:#666666;");
+    titleLabel->setStyleSheet("font-size:16px; font-weight:600;padding-top: 18px;");
+    descLabel->setStyleSheet("color:#666666;margin-top:5px;");
+
 
     auto textLayout = new QVBoxLayout;
     textLayout->addWidget(titleLabel);
     textLayout->addWidget(descLabel);
     textLayout->setSpacing(4);
     textLayout->setContentsMargins(0, 0, 0, 0);
+    // 可选：设置文本垂直对齐，避免标签因文本基线问题显得间距大
+    textLayout->setAlignment(Qt::AlignTop);
 
     auto mainLayout = new QHBoxLayout(this);
     mainLayout->addWidget(iconLabel);
@@ -52,6 +55,11 @@ void CardWidget::initUi()
     mainLayout->setContentsMargins(16, 16, 16, 16);
 
     // 强制设置布局（覆盖UI设计师的默认布局）
+    // 强制重置布局（确保完全覆盖Designer的默认布局）
+    QLayout *oldLayout = layout();
+    if (oldLayout) {
+        oldLayout->deleteLater();
+    }
     setLayout(mainLayout);
 }
 
