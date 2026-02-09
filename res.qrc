@@ -24,5 +24,7 @@
         <file>res/icon/wenjianjia.png</file>
         <file>res/icon/xiaoxi.png</file>
         <file>res/icon/yibiao.png</file>
+        <file>res/icon/xialajiantou.png</file>
+        <file>res/icon/xialajiantou.svg</file>
     </qresource>
 </RCC>

@@ -143,3 +143,19 @@ bool UserDao::retrieveUserPassword(const QString &UserName, const QString &Passw
         return false;
     }
 }
+
+int UserDao::getUserStatus(const QString &UserName, const QString &StudentID, const QString &SchoolName)
+{
+    QSqlDatabase& db = DatabaseManager::instance().getDatabase();
+    QSqlQuery query(db);
+    // 数据库表 userinfo 中有一个字段叫 userStatus (INT类型)
+    query.prepare("SELECT userStatus FROM userinfo WHERE UserName = ? AND StudentID = ? AND SchoolName = ?");
+    query.addBindValue(UserName);
+    query.addBindValue(StudentID);
+    query.addBindValue(SchoolName);
+
+    if (query.exec() && query.next()) {
+        return query.value(0).toInt();
+    }
+    return 0; // 默认返回普通用户状态
+}

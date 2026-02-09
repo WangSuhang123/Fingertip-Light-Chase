@@ -1,5 +1,10 @@
 #include "mainwidget.h"
 #include "ui_mainwidget.h"
+#include "loginwidget.h"
+// 引入UserManager（保存用户信息）
+#include "usermanager.h"
+#include "practicesetupdialog.h"
+
 #include <QStyle>
 
 MainWidget::MainWidget(QWidget *parent)
@@ -11,12 +16,17 @@ MainWidget::MainWidget(QWidget *parent)
     widgetStyle();
     CardPerformanceStyle();
     FunturesCardStyle();
-
-
+    //设置用户登录的欢迎横幅（用户名-学校-权限
+    UpdateWidgetTitle();
     // 连接点击信号
     connect(ui->typeSpeed, &CardPerformance::clicked, this, []{
         qDebug() << "Type Speed Card Clicked!";
+
     });
+    //连接退出登录按钮
+    connect(ui->LogOutBtn,&QPushButton::clicked,this,&MainWidget::Logout);
+    //连接练习功能
+    connect(ui->PracticeFeature,&CardWidget::clicked,this,&MainWidget::OpenPracticeFeature);
 
 }
 
@@ -126,4 +136,83 @@ void MainWidget::FunturesCardStyle()
     ui->beiyong3->setTitle("信息");
     ui->beiyong3->setIcon(QPixmap(":/res/icon/xiaoxi.png"));
     ui->beiyong3->setDescription("消息");
+}
+
+void MainWidget::Logout()
+{
+    //清空当前登录的账户信息
+    UserManager::instance().logout();
+
+    // //测试是否删除成功
+    // //通过 instance() 获取那个唯一的实例
+    // UserManager& userTest = UserManager::instance();
+    // // 检查是否登录
+    // QString LoginUserName = userTest.getUserName();
+    // QString LoginUserId = userTest.getStudentId();
+    // QString LoginUserSchool = userTest.getSchoolName();
+    // int LoginUserStatus = userTest.getUserStatus();
+
+    // QString userStatus = "";
+
+    // if(LoginUserStatus==0){
+    //     userStatus = "普通用户";
+    // }else if(LoginUserStatus==1){
+    //     userStatus = "管理员";
+    // }else{
+    //     userStatus = "其他";
+    // }
+
+    // qDebug() << "当前登录用户：" << LoginUserName << " 学号：" << LoginUserId;
+    // qDebug() << "当前登录学校：" << LoginUserSchool << " 权限：" << userStatus;
+
+    //跳转到登录页面
+    OpenLoginWidget();
+
+}
+
+
+
+void MainWidget::UpdateWidgetTitle()
+{
+    //通过 instance() 获取那个唯一的实例
+    UserManager& userMgr = UserManager::instance();
+    // 检查是否登录
+    if (userMgr.isLogin()) {
+        QString LoginUserName = userMgr.getUserName();
+        QString LoginUserId = userMgr.getStudentId();
+        QString LoginUserSchool = userMgr.getSchoolName();
+        int LoginUserStatus = userMgr.getUserStatus();
+
+        QString userStatus = "";
+
+        if(LoginUserStatus==0){
+            userStatus = "普通用户";
+        }else if(LoginUserStatus==1){
+            userStatus = "管理员";
+        }else{
+            userStatus = "其他";
+        }
+
+        //qDebug() << "当前登录用户：" << LoginUserName << " 学号：" << LoginUserId;
+        // 更新 UI 上的欢迎语
+        ui->label_5->setText(LoginUserName+"-"+userStatus+"-"+LoginUserSchool);
+    } else {
+        qDebug() << "暂无用户登录";
+    }
+
+}
+
+void MainWidget::OpenLoginWidget()
+{
+    LoginWidget *loginWidget = new LoginWidget();
+    loginWidget->setAttribute(Qt::WA_DeleteOnClose);
+    loginWidget->show();
+    this->close();
+}
+
+void MainWidget::OpenPracticeFeature()
+{
+    PracticeSetupDialog *practiceDialog = new PracticeSetupDialog();
+    practiceDialog->setAttribute(Qt::WA_DeleteOnClose);
+    practiceDialog->show();
 }

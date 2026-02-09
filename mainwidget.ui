@@ -101,7 +101,7 @@ font: 700 12pt &quot;微软雅黑&quot;;</string>
            </spacer>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton">
+           <widget class="QPushButton" name="LogOutBtn">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>0</horstretch>

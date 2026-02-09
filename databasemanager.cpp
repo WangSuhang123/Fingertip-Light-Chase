@@ -12,6 +12,8 @@ DatabaseManager::DatabaseManager() {
     db.setUserName("root");
     db.setPassword("123456");        // 你的密码
     db.setDatabaseName("Fingertip-Light-Chase");   // 数据库名
+    // qDebug() << "Available drivers:" << QSqlDatabase::drivers();
+    // qDebug() << "Database Error:" << db.lastError().text();
 
 }
 

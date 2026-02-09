@@ -20,6 +20,10 @@ public:
 
     //忘记-找回密码逻辑
     bool retrieveUserPassword(const QString& UserName, const QString& Password,const QString& StudentID, const QString& SchoolName,const QString& EMail);
+
+    //获取用户的权限
+    int getUserStatus(const QString &UserName, const QString &StudentID, const QString &SchoolName);
+
 };
 
 #endif // USERDAO_H

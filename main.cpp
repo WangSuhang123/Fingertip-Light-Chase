@@ -1,5 +1,7 @@
 #include "loginwidget.h"
 #include "mainwidget.h"
+#include "practicesetupdialog.h"
+#include "practicewidget.h"
 #include "databasemanager.h"
 #include <QApplication>
 #include <QFile>
@@ -18,9 +20,11 @@ int main(int argc, char *argv[])
     }
     // LoginWidget w;
     // w.show();
-    // CardPerformance cp;
-    // cp.show();
-    MainWidget mw;
-    mw.show();
+    // PracticeSetupDialog psd;
+    // psd.show();
+    PracticeWidget pw;
+    pw.show();
+    // MainWidget mw;
+    // mw.show();
     return a.exec();
 }

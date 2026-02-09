@@ -1,7 +1,9 @@
 #include "loginwidget.h"
 #include "ui_loginwidget.h"
+#include "mainwidget.h"
 // 引入UserManager（保存用户信息）
 #include "usermanager.h"
+
 #include "databasemanager.h"
 #include "registerwidget.h"
 #include "retrievewidget.h"
@@ -59,19 +61,23 @@ void LoginWidget::LoginFunction()
         return;
     }
 
+    //定义一个变量接收状态权限
+    int userStatus = 0;
+
 
     //操作登录是否成功和whether存在数据
-    bool loginSuccess = m_userService.login(username, password, StudentID, SchoolName);
+    bool loginSuccess = m_userService.login(username, password, StudentID, SchoolName,userStatus);
     bool isExists = m_userService.isUserExists(username,StudentID,SchoolName);
 
     if(isExists){
         //如果存在，做登录判断
         if(loginSuccess){
-            //暂时做弹窗处理，
-            QMessageBox::information(this,"成功","登录成功!");
-            // 保存当前用户信息到全局单例
-            UserManager::instance().setCurrentUser(username, StudentID, SchoolName);
-            return;
+            //登录成功后，获取用户的userStatus
+
+            // 保存当前用户信息到全局单例，包括用户的状态，普通用户或管理员等，
+            UserManager::instance().setCurrentUser(username, StudentID, SchoolName, userStatus);
+            //打开主窗口
+            OpenMainWidget();
         }else{
             QMessageBox::warning(this, "失败", "用户名或密码错误！");
         }
@@ -94,6 +100,14 @@ void LoginWidget::OpenRetrieveWidget()
     RetrieveWidget * retrieveWidget = new RetrieveWidget();
     retrieveWidget->setAttribute(Qt::WA_DeleteOnClose);
     retrieveWidget->show();
+    this->close();
+}
+
+void LoginWidget::OpenMainWidget()
+{
+    MainWidget * mainwidget = new MainWidget();
+    mainwidget->setAttribute(Qt::WA_DeleteOnClose);
+    mainwidget->show();
     this->close();
 }
 

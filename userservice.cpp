@@ -6,7 +6,7 @@ UserService::UserService() {}
 
 
 // 登录业务逻辑的核心实现
-bool UserService::login(const QString &userName, const QString &password, const QString &studentId, const QString &schoolName)
+bool UserService::login(const QString &userName, const QString &password, const QString &studentId, const QString &schoolName,int &userStatus)
 {
     // 【业务逻辑1：参数非空校验】（可以把UI层的非空校验移到这里，让UI层更轻）
     if (userName.trimmed().isEmpty() || password.trimmed().isEmpty() ||
@@ -21,6 +21,11 @@ bool UserService::login(const QString &userName, const QString &password, const 
     // 【业务逻辑3：调用DAO层查询数据库，验证用户】
     // 注意：这里调用的是DAO的verifyUser方法，//暂时没有实现 传入的是加密后的密码
     bool verifySuccess = m_userDao.verifyUserInfo(userName, encryptedPwd, studentId, schoolName);
+
+    //如果验证成功，就获取用户的状态权限
+    if(verifySuccess){
+        userStatus = m_userDao.getUserStatus(userName,studentId,schoolName);
+    }
 
     return verifySuccess;
 

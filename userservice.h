@@ -9,7 +9,7 @@ public:
     UserService();
 
     //用户登录验证（业务逻辑入口），return 登录是否成功
-    bool login(const QString &userName, const QString &password, const QString &studentId, const QString &schoolName);
+    bool login(const QString &userName, const QString &password, const QString &studentId, const QString &schoolName,int &userStatus);
 
     //判断用户是否存在（业务层封装） @return 用户是否存在
     bool isUserExists(const QString &userName, const QString &studentId, const QString &schoolName);

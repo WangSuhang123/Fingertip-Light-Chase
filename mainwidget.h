@@ -20,6 +20,16 @@ private:
     void widgetStyle();
     void CardPerformanceStyle();
     void FunturesCardStyle();
+    //退出当前登录的账号,并回到登录页面
+    void Logout();
+
+    //修改主页面上的欢迎标题头，改成登录者的姓名+学校
+    void UpdateWidgetTitle();
+    //打开登录页面
+    void OpenLoginWidget();
+    //打开练习功能
+    void OpenPracticeFeature();
+
 
 };
 

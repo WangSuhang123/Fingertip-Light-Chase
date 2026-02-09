@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include "userservice.h"
-#include "registerwidget.h"
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -27,6 +27,8 @@ private slots: // 槽函数建议放这里（Qt规范）
     void OpenRegisterWidegt();
     //打开找回密码
     void OpenRetrieveWidget();
+    //登录成功打开主页面
+    void OpenMainWidget();
 
 private:
     Ui::LoginWidget *ui;

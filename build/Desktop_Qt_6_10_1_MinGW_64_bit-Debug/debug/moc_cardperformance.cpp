@@ -38,12 +38,19 @@ template <> constexpr inline auto CardPerformance::qt_create_metaobjectdata<qt_m
 {
     namespace QMC = QtMocConstants;
     QtMocHelpers::StringRefStorage qt_stringData {
-        "CardPerformance"
+        "CardPerformance",
+        "clicked",
+        "",
+        "scale"
     };
 
     QtMocHelpers::UintData qt_methods {
+        // Signal 'clicked'
+        QtMocHelpers::SignalData<void()>(1, 2, QMC::AccessPublic, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
+        // property 'scale'
+        QtMocHelpers::PropertyData<qreal>(3, QMetaType::QReal, QMC::DefaultPropertyFlags | QMC::Writable | QMC::StdCppSet),
     };
     QtMocHelpers::UintData qt_enums {
     };
@@ -63,10 +70,30 @@ Q_CONSTINIT const QMetaObject CardPerformance::staticMetaObject = { {
 void CardPerformance::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     auto *_t = static_cast<CardPerformance *>(_o);
-    (void)_t;
-    (void)_c;
-    (void)_id;
-    (void)_a;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        switch (_id) {
+        case 0: _t->clicked(); break;
+        default: ;
+        }
+    }
+    if (_c == QMetaObject::IndexOfMethod) {
+        if (QtMocHelpers::indexOfMethod<void (CardPerformance::*)()>(_a, &CardPerformance::clicked, 0))
+            return;
+    }
+    if (_c == QMetaObject::ReadProperty) {
+        void *_v = _a[0];
+        switch (_id) {
+        case 0: *reinterpret_cast<qreal*>(_v) = _t->scale(); break;
+        default: break;
+        }
+    }
+    if (_c == QMetaObject::WriteProperty) {
+        void *_v = _a[0];
+        switch (_id) {
+        case 0: _t->setScale(*reinterpret_cast<qreal*>(_v)); break;
+        default: break;
+        }
+    }
 }
 
 const QMetaObject *CardPerformance::metaObject() const
@@ -85,6 +112,30 @@ void *CardPerformance::qt_metacast(const char *_clname)
 int CardPerformance::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QWidget::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 1)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 1;
+    }
+    if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 1)
+            *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
+        _id -= 1;
+    }
+    if (_c == QMetaObject::ReadProperty || _c == QMetaObject::WriteProperty
+            || _c == QMetaObject::ResetProperty || _c == QMetaObject::BindableProperty
+            || _c == QMetaObject::RegisterPropertyMetaType) {
+        qt_static_metacall(this, _c, _id, _a);
+        _id -= 1;
+    }
     return _id;
+}
+
+// SIGNAL 0
+void CardPerformance::clicked()
+{
+    QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
 }
 QT_WARNING_POP

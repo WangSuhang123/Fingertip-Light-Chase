@@ -17,11 +17,12 @@ UserManager::UserManager() : m_isLogin(false)
 }
 
 // 实现设置用户信息的方法
-void UserManager::setCurrentUser(const QString& userName, const QString& studentId, const QString& schoolName)
+void UserManager::setCurrentUser(const QString& userName, const QString& studentId, const QString& schoolName,int userStatus)
 {
     m_userName = userName;
     m_studentId = studentId;
     m_schoolName = schoolName;
+    m_userStatus = userStatus;
     m_isLogin = true;
 
     // 这里可以添加复杂逻辑，比如：
@@ -46,6 +47,13 @@ QString UserManager::getSchoolName() const
     return m_schoolName;
 }
 
+int UserManager::getUserStatus() const
+{
+    return m_userStatus;
+}
+
+
+
 bool UserManager::isLogin() const
 {
     return m_isLogin;
@@ -57,6 +65,7 @@ void UserManager::logout()
     m_userName.clear();
     m_studentId.clear();
     m_schoolName.clear();
+    m_userStatus = 0;   //默认值为 0
     m_isLogin = false;
 
     // 这里可以添加复杂逻辑，比如：

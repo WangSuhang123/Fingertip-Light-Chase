@@ -8,8 +8,6 @@
     font-size: 14px;
 }
 
-
-
 QWidget[type="frontPage"] {
     background-color: #e3efff;
     color: #262626;
@@ -30,6 +28,27 @@ QWidget[type="StatusWidget"] {
     color: #262626;
 }
 
+QDialog[type="DialogPage"]{
+    background-color: #e3efff;
+    color: #262626;
+}
+
+QWidget[type="TitleWidget"] {
+    background-color: #227ff7;
+    color: #262626;
+}
+
+QWidget[type="typingWidget"] {
+    background-color: #e9f0f9;
+    color: #262626;
+    border-radius: 20px;
+}
+
+QWidget[type="typingState"] {
+    background-color: #eae9f9;
+    color: #262626;
+    border-radius: 20px;
+}
 
 /* ===================== Typography ===================== */
 QLabel {
@@ -307,40 +326,43 @@ QLineEdit:disabled, QTextEdit:disabled, QPlainTextEdit:disabled {
 QComboBox {
     min-height: 32px;
     padding: 4px 12px;
-    padding-right: 32px;
+    /* 增大右侧内边距，确保箭头绝对不会被挤压 */
+    padding-right: 36px; /* 增加空间给箭头 */
     border-radius: 6px;
     border: 1px solid #d9d9d9;
     background-color: #ffffff;
     font-size: 14px;
 }
 
-/*重置QMessageBox内部按钮的容器背景*/
-QMessageBox QWidget {
-    background-color: #ffffff;
-}
-/*重置QMessageBox内部文字标签的背景（透明/白色，避免继承全局色）*/
-QMessageBox QLabel {
-    background-color: transparent; /* 文字背景透明，或设为#ffffff */
-    color: #262626; /* 文字颜色 */
+/* 下拉按钮的样式 */
+QComboBox::drop-down {
+    background: transparent;  /* 设置下拉按钮背景透明 */
+    width: 24px;  /* 按钮宽度 */
+    height: 24px;  /* 按钮高度 */
+    border-radius: 12px;  /* 圆角半径 */
+
 }
 
+QComboBox::down-arrow {
+    image: url(':/res/icon/xialajiantou.png'); /* 替换成你的箭头图片路径 */
+    width: 12px; /* 调整箭头大小 */
+    height: 12px;
+    right: 2px; /* 箭头与右边界的距离 */
+    top: 10px; /* 箭头垂直居中 */
+}
+
+/* 当鼠标悬停时 */
 QComboBox:hover {
     border-color: #4096ff;
 }
 
+/* 当焦点在控件上时 */
 QComboBox:focus {
     border-color: #1677ff;
+    outline: none;
 }
 
-QComboBox::drop-down {
-    border: none;
-    width: 32px;
-}
-
-QComboBox::down-arrow {
-    image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAi0lEQVQ4jc3SsQ3CQAxG0Q9iEgQrUOaMjMAITEI5IwYgK2cEOnoyQqYgUeD4X3+ymAP/J0UZJvQo4YWdD+f2nmLjVQYP7BUJ2CmqcYdzjtz71Kf7F2y8bS0wUKTEuk9wh2UMmHiVwY0a4w56vOCVYl1Y0Spgf6zFs+PEpg0YXmXwh6u1A0utA8m3KJ4EAAAAAElFTkSuQmCC);
-}
-
+/* 下拉列表样式 */
 QComboBox QAbstractItemView {
     background-color: #ffffff;
     border: 1px solid #d9d9d9;
@@ -348,8 +370,11 @@ QComboBox QAbstractItemView {
     padding: 4px 0px;
     selection-background-color: #e6f4ff;
     selection-color: #262626;
+    /* 避免列表样式干扰箭头 */
+    outline: none;
 }
 
+/* 为下拉项设置样式 */
 QComboBox QAbstractItemView::item {
     min-height: 32px;
     padding: 5px 12px;
@@ -364,8 +389,6 @@ QComboBox QAbstractItemView::item:selected {
     background-color: #e6f4ff;
     color: #1677ff;
 }
-
-
 
 /* ===================== Table ===================== */
 QTableView {
@@ -732,6 +755,23 @@ QScrollArea:disabled QScrollBar::handle {
     background-color: #f0f0f0;
 }
 
+/* ===================== QGroupBox ===================== */
+QGroupBox {
+    border: 1px solid #C4E1F2;
+    border-radius: 4px;
+    font-family: "Microsoft YaHei";
+    /*font-size: 14px;*/
+    color: #333333;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    font-family: "Microsoft YaHei";
+    font-weight: bold;
+    /*font-size: 14px;*/
+    /*color: #409EFF;*/
+}
 
 /* ===================== CardPerformance ===================== */
 /* 基础样式 */

@@ -16,10 +16,11 @@ public:
     UserManager& operator=(const UserManager&) = delete;
 
     // 对外暴露的接口（仅声明）
-    void setCurrentUser(const QString& userName, const QString& studentId, const QString& schoolName);
+    void setCurrentUser(const QString& userName, const QString& studentId, const QString& schoolName, int userStatus);
     QString getUserName() const;
     QString getStudentId() const;
     QString getSchoolName() const;
+    int getUserStatus() const;
     bool isLogin() const;
     void logout();
 private:
@@ -30,6 +31,7 @@ private:
     QString m_userName;
     QString m_studentId;
     QString m_schoolName;
+    int m_userStatus;
     bool m_isLogin;
 };
 
