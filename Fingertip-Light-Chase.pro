@@ -37,6 +37,7 @@ SOURCES += \
 
 HEADERS += \
     Article.h \
+    NoCopyPasteLineEdit.h \
     articledao.h \
     articleservice.h \
     cardperformance.h \

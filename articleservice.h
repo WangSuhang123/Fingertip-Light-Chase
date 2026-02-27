@@ -10,6 +10,10 @@ public:
     // 供 UI 调用的接口
     QList<Article> getArticleListForDropdown();
 
+    QString getArticleById(int articleID);
+
+    QString getArticleTitleById(int articleID);
+
 private:
     ArticleDao articleDao;
 

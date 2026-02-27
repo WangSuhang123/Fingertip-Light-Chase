@@ -18,12 +18,12 @@ int main(int argc, char *argv[])
         a.setStyleSheet(qss.readAll());
         qss.close();
     }
-    // LoginWidget w;
-    // w.show();
+    LoginWidget w;
+    w.show();
     // PracticeSetupDialog psd;
     // psd.show();
-    PracticeWidget pw;
-    pw.show();
+    // PracticeWidget pw;
+    // pw.show();
     // MainWidget mw;
     // mw.show();
     return a.exec();

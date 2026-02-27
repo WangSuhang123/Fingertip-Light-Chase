@@ -21,6 +21,7 @@ release/userdao.o
 release/usermanager.o
 release/userservice.o
 release/qrc_res.o
+release/moc_NoCopyPasteLineEdit.o
 release/moc_cardperformance.o
 release/moc_cardwidget.o
 release/moc_clockservice.o

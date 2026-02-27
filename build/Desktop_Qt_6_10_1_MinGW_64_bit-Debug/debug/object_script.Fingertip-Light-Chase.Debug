@@ -21,6 +21,7 @@ debug/userdao.o
 debug/usermanager.o
 debug/userservice.o
 debug/qrc_res.o
+debug/moc_NoCopyPasteLineEdit.o
 debug/moc_cardperformance.o
 debug/moc_cardwidget.o
 debug/moc_clockservice.o

@@ -42,3 +42,65 @@ QList<Article> ArticleDao::getAllArticles()
 
     return list;
 }
+
+QString ArticleDao::getArticleById(int articleID)
+{
+    QSqlDatabase& db = DatabaseManager::instance().getDatabase();
+
+    if (!db.isOpen()) {
+        qCritical() << "数据库连接未打开！";
+        return "";
+    }
+
+    QSqlQuery query(db);
+
+    //查询
+    QString sql = "SELECT Content FROM articleinfo WHERE ArticleID = ?";
+
+    query.prepare(sql); // 推荐使用 prepare + bindValue 方式，更规范
+    query.addBindValue(articleID);
+
+    if (query.exec()) {
+        if (query.next()) {
+            return query.value("Content").toString();
+        } else {
+            // 执行成功但没有找到记录
+            qDebug() << "未找到 ID 为" << articleID << "的文章";
+        }
+    } else {
+        qDebug() << "ArticleDao Select Error:" << query.lastError().text();
+    }
+
+    return "";
+}
+
+QString ArticleDao::getArticleTitleById(int articleID)
+{
+    QSqlDatabase& db = DatabaseManager::instance().getDatabase();
+
+    if (!db.isOpen()) {
+        qCritical() << "数据库连接未打开！";
+        return "";
+    }
+
+    QSqlQuery query(db);
+
+    //查询
+    QString sql = "SELECT ArticleName FROM articleinfo WHERE ArticleID = ?";
+
+    query.prepare(sql); // 推荐使用 prepare + bindValue 方式，更规范
+    query.addBindValue(articleID);
+
+    if (query.exec()) {
+        if (query.next()) {
+            return query.value("ArticleName").toString();
+        } else {
+            // 执行成功但没有找到记录
+            qDebug() << "未找到 ID 为" << articleID << "的文章";
+        }
+    } else {
+        qDebug() << "ArticleDao Select Error:" << query.lastError().text();
+    }
+
+    return "";
+}
