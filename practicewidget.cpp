@@ -38,34 +38,19 @@ QStringList splitTextByWidth(
     return lines;
 }
 
-void PracticeWidget::onSetupReceived(int articleId, int practiceTime)
-{
-    qDebug() << "收到设置数据！ID:" << articleId << "时间:" << practiceTime;
-
-    m_currentArticleId = articleId;
-    m_practiceDuration = practiceTime;
-
-    //更改页面信息,显示的是文章名
-    //通过Service获取数据
-    ArticleService service;
-    QString articleTitle = service.getArticleTitleById(m_currentArticleId);
-    qDebug()<<articleTitle<<"11111111111111111111111111";
-    ui->ArticleLabel->setText(articleTitle);
-    //填充时间信息
-    ui->SetTime->setText(QString("%1 分钟").arg(m_practiceDuration));
-
-
-
-
-}
 
 PracticeWidget::PracticeWidget(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::PracticeWidget)
+    , m_clockService(nullptr) // 【关键】初始化指针为空
+    , m_currentArticleId(-1)
+    , m_practiceDuration(0)
+    , m_isTimeUp(false) // 初始化标记为 false
 {
     ui->setupUi(this);
+
     //连接，当时间管理类的时间更新启动的时候更新ui上的数据
-    //显示当前的时间
+    //显示当前的时间 系统北京时间
     auto timeService = new TimeService(this);
 
     connect(timeService,&TimeService::timeUpdated,this,[=](const QString &timeStr){
@@ -73,6 +58,40 @@ PracticeWidget::PracticeWidget(QWidget *parent)
     });
 
     timeService->start();
+
+    //初始化 ClockService (倒计时)
+    m_clockService = new ClockService(this);
+
+    //连接倒计时的显示信号 (负责格式化为 MM:SS)
+    // 注意：这里只负责“显示”，不负责“启动”或“设置时间”
+    connect(m_clockService, &ClockService::timeUpdated, this, [=](int totalSeconds){
+        int minutes = totalSeconds / 60;
+        int seconds = totalSeconds % 60;
+
+        // 格式化为两位数
+        QString timeString = QString("%1:%2")
+                                 .arg(minutes, 2, 10, QChar('0'))
+                                 .arg(seconds, 2, 10, QChar('0'));
+
+        ui->CountdownTimer->setText(timeString);
+
+        if(totalSeconds==0){
+
+            m_isTimeUp = true;
+
+            //自动暂停,防止变成负数
+            if(m_clockService){
+                m_clockService->pause();
+            }
+
+        }else{
+            m_isTimeUp = false;
+        }
+
+    });
+
+    // 4. 连接暂停按钮
+    connect(ui->StopBtn, &QPushButton::clicked, m_clockService, &ClockService::pause);
 
     //ui风格
     ui->PracticeRealWidget->setProperty("type","MainFeatures");
@@ -83,12 +102,62 @@ PracticeWidget::PracticeWidget(QWidget *parent)
     ui->ExitBtn->setProperty("type","danger");
     ui->SubmitBtn->setProperty("type","primary");
 
-
 }
 
 PracticeWidget::~PracticeWidget()
 {
     delete ui;
+}
+
+void PracticeWidget::onSetupReceived(int articleId, int practiceTime)
+{
+    qDebug() << "收到设置数据！ID:" << articleId << "时间:" << practiceTime;
+
+    m_currentArticleId = articleId;
+    m_practiceDuration = practiceTime;  // 这里存的是分钟
+
+    //更改页面信息,显示的是文章名
+    //通过Service获取数据
+    ArticleService service;
+    QString articleTitle = service.getArticleTitleById(m_currentArticleId);
+    // qDebug()<<articleTitle<<"11111111111111111111111111";
+    ui->ArticleLabel->setText(articleTitle);
+    //填充时间信息
+    ui->SetTime->setText(QString("%1 分钟").arg(m_practiceDuration));
+
+    emit GetChooseDataSignals();
+
+    // 3. 【核心修改】配置并启动倒计时
+    if (m_clockService) {
+        // A. 单位换算：分钟 -> 秒
+        int totalSeconds = m_practiceDuration * 60;
+
+        // B. 设置初始时间
+        m_clockService->setInitialSeconds(totalSeconds);
+
+        // C. 重置样式 (防止上次结束时是红色的)
+        //ui->CountdownTimer->setStyleSheet("");
+        ui->CountdownTimer->setText(QString("%1:%2")
+                                        .arg(m_practiceDuration, 2, 10, QChar('0'))
+                                        .arg(0, 2, 10, QChar('0')));
+
+        // D. 启动倒计时
+        m_clockService->start();
+
+        qDebug() << "倒计时已启动，总秒数:" << totalSeconds;
+    }
+
+    // 发射信号通知其他组件（如果需要）
+    emit GetChooseDataSignals();
+
+    // 如果界面还没初始化，强制刷新一次以加载文章
+    if (!isInitialized && isVisible()) {
+        loadArticleAndGenerateWidgets();
+        UpdateUIShow();
+        isInitialized = true;
+    }
+
+
 }
 
 void PracticeWidget::showEvent(QShowEvent *event)
@@ -247,5 +316,6 @@ void PracticeWidget::UpdateUIShow()
     }
 
 }
+
 
 

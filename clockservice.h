@@ -13,6 +13,9 @@ public:
     explicit ClockService(QObject *parent = nullptr);
     ~ClockService();
 
+    // 新增：设置倒计时初始值
+    void setInitialSeconds(int seconds);
+
     void start();
     void pause();
     void reset();

@@ -22,6 +22,14 @@ ClockService::~ClockService()
     thread->wait();
 }
 
+void ClockService::setInitialSeconds(int seconds)
+{
+    // 跨线程调用Worker的setInitialSeconds方法
+    QMetaObject::invokeMethod(worker, "setInitialSeconds",
+                              Qt::QueuedConnection,
+                              Q_ARG(int, seconds));
+}
+
 void ClockService::start()
 {
     QMetaObject::invokeMethod(worker, "start", Qt::QueuedConnection);
@@ -36,3 +44,7 @@ void ClockService::reset()
 {
     QMetaObject::invokeMethod(worker, "reset", Qt::QueuedConnection);
 }
+
+
+
+
