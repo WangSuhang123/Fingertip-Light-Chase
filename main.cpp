@@ -2,6 +2,7 @@
 #include "mainwidget.h"
 #include "practicesetupdialog.h"
 #include "practicewidget.h"
+#include "settlementdialog.h"
 #include "databasemanager.h"
 #include <QApplication>
 #include <QFile>
@@ -18,13 +19,20 @@ int main(int argc, char *argv[])
         a.setStyleSheet(qss.readAll());
         qss.close();
     }
+
+    /*qputenv("QT_DEBUG_PLUGINS", "1");
+
+    qDebug() << QCoreApplication::libraryPaths();*/
+
     // LoginWidget w;
     // w.show();
-    PracticeSetupDialog psd;
-    psd.show();
+    /*PracticeSetupDialog psd;
+    psd.show();*/
     // PracticeWidget pw;
     // pw.show();
-    // MainWidget mw;
-    // mw.show();
+    /*settlementDialog sd;
+    sd.show();*/
+     MainWidget mw;
+     mw.show();
     return a.exec();
 }

@@ -27,6 +27,7 @@ SOURCES += \
     practicewidget.cpp \
     registerwidget.cpp \
     retrievewidget.cpp \
+    settlementdialog.cpp \
     smtpclient.cpp \
     timeservice.cpp \
     timeworker.cpp \
@@ -53,6 +54,7 @@ HEADERS += \
     practicewidget.h \
     registerwidget.h \
     retrievewidget.h \
+    settlementdialog.h \
     smtpclient.h \
     timeservice.h \
     timeworker.h \
@@ -68,7 +70,8 @@ FORMS += \
     mainwidget.ui \
     practicewidget.ui \
     registerwidget.ui \
-    retrievewidget.ui
+    retrievewidget.ui \
+    settlementdialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

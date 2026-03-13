@@ -7,6 +7,8 @@
 #include "NoCopyPasteLineEdit.h"
 #include "usermanager.h"
 #include "articleservice.h"
+#include "settlementdialog.h"
+#include "mainwidget.h"
 
 QStringList splitTextByWidth(
     const QString &text,
@@ -46,6 +48,13 @@ PracticeWidget::PracticeWidget(QWidget *parent)
     , m_currentArticleId(-1)
     , m_practiceDuration(0)
     , m_isTimeUp(false) // 初始化标记为 false
+    , m_totalSeconds(0)
+    , m_remainingSeconds(0)
+    , m_totalChars(0)
+    , m_typedChars(0)
+    , m_errorChars(0)
+    , m_hasSubmitted(false)
+    , m_isPaused(false)
 {
     ui->setupUi(this);
 
@@ -65,6 +74,9 @@ PracticeWidget::PracticeWidget(QWidget *parent)
     //连接倒计时的显示信号 (负责格式化为 MM:SS)
     // 注意：这里只负责“显示”，不负责“启动”或“设置时间”
     connect(m_clockService, &ClockService::timeUpdated, this, [=](int totalSeconds){
+        // 记录当前剩余时间，供统计使用
+        m_remainingSeconds = totalSeconds;
+
         int minutes = totalSeconds / 60;
         int seconds = totalSeconds % 60;
 
@@ -75,23 +87,29 @@ PracticeWidget::PracticeWidget(QWidget *parent)
 
         ui->CountdownTimer->setText(timeString);
 
-        if(totalSeconds==0){
+        if (totalSeconds == 0) {
+            // 确保只触发一次超时逻辑
+            if (!m_isTimeUp) {
+                m_isTimeUp = true;
 
-            m_isTimeUp = true;
+                //自动暂停,防止变成负数
+                if (m_clockService) {
+                    m_clockService->pause();
+                }
 
-            //自动暂停,防止变成负数
-            if(m_clockService){
-                m_clockService->pause();
+                // 倒计时结束，统一走练习结束逻辑（供后续数据库写入）
+                handlePracticeFinished(true);
             }
-
-        }else{
+        } else {
             m_isTimeUp = false;
         }
 
     });
 
     // 4. 连接暂停按钮
-    connect(ui->StopBtn, &QPushButton::clicked, m_clockService, &ClockService::pause);
+    connect(ui->StopBtn, &QPushButton::clicked,this, &PracticeWidget::togglePause);
+
+    
 
     //ui风格
     ui->PracticeRealWidget->setProperty("type","MainFeatures");
@@ -107,6 +125,11 @@ PracticeWidget::PracticeWidget(QWidget *parent)
 PracticeWidget::~PracticeWidget()
 {
     delete ui;
+}
+
+bool PracticeWidget::isTimeUp() const
+{
+    return m_isTimeUp;
 }
 
 void PracticeWidget::onSetupReceived(int articleId, int practiceTime)
@@ -131,6 +154,8 @@ void PracticeWidget::onSetupReceived(int articleId, int practiceTime)
     if (m_clockService) {
         // A. 单位换算：分钟 -> 秒
         int totalSeconds = m_practiceDuration * 60;
+        m_totalSeconds = totalSeconds;
+        m_remainingSeconds = totalSeconds;
 
         // B. 设置初始时间
         m_clockService->setInitialSeconds(totalSeconds);
@@ -177,17 +202,20 @@ void PracticeWidget::resizeEvent(QResizeEvent *event)
     QWidget::resizeEvent(event);
 
     if (isInitialized) {
-        loadArticleAndGenerateWidgets();
+
+        QStringList oldInputs = collectUserInputs();
+
+        loadArticleAndGenerateWidgets(oldInputs);
     }
 }
 
 
-void PracticeWidget::loadArticleAndGenerateWidgets()
+void PracticeWidget::loadArticleAndGenerateWidgets(const QStringList &oldInputs)
 {
     // 【修改点】根据 ID 获取真实文本，而不是写死
     if (m_currentArticleId > 0) {
         ArticleService service;
-        QString articleContent = service.getArticleById(m_currentArticleId); // 假设你有这个函数
+        QString articleContent = service.getArticleById(m_currentArticleId); // 获取文章内容
         if (!articleContent.isEmpty()) {
             originalTargetText = articleContent;
         } else {
@@ -205,9 +233,6 @@ void PracticeWidget::loadArticleAndGenerateWidgets()
     //设置默认的宽度，如果太低就设置成900
     if (labelWidth < 200) labelWidth = 800;
 
-
-
-
     //设置字体 指定字体和大小
     QFont practiceFont;
     practiceFont.setPointSize(11);
@@ -220,6 +245,10 @@ void PracticeWidget::loadArticleAndGenerateWidgets()
         practiceFont
         );
 
+    // 记录分行文本以及目标总字数
+    splitLines.clear();
+    m_totalChars = 0;
+
     // 清理旧控件
     QLayoutItem *child;
     while ((child = ui->contentLayout_3->takeAt(0)) != nullptr) {
@@ -230,7 +259,12 @@ void PracticeWidget::loadArticleAndGenerateWidgets()
     editList.clear();
     //循环生成 Label 和 LineEdit
     for (int idx = 0; idx < lines.size(); ++idx) {
+
+
         const QString lineText = lines[idx];
+
+        splitLines.append(lineText);
+        m_totalChars += lineText.length();
 
         // Label 设置
         QLabel *label = new QLabel(lineText);
@@ -240,6 +274,12 @@ void PracticeWidget::loadArticleAndGenerateWidgets()
 
         // Edit 设置,不使用原生的lineedit类，使用自创的类来禁用复制粘贴等快捷键，同时取消右键菜单
         NoCopyPasteLineEdit *edit = new NoCopyPasteLineEdit;
+
+        if (idx < oldInputs.size()) {
+            edit->setText(oldInputs[idx]);
+        }
+
+
         edit->setFont(practiceFont);
         edit->setMaxLength(lineText.length());
 
@@ -267,6 +307,9 @@ void PracticeWidget::loadArticleAndGenerateWidgets()
                         && index + 1 < editList.size()) {
                         editList[index + 1]->setFocus();
                     }
+
+                    // 每次输入变化后实时更新统计指标
+                    updateTypingStats();
                 });
         // 结果回显
         connect(fontService, &FontService::matchResultReady, this,
@@ -285,6 +328,14 @@ void PracticeWidget::loadArticleAndGenerateWidgets()
     }
     //在底部添加一个弹簧，把内容顶上去
     ui->contentLayout_3->addStretch();
+
+    // 初始化统计相关 UI
+    ui->PracticeAllCharacters->setText(QString::number(m_totalChars) + " 字");
+    m_typedChars = 0;
+    m_errorChars = 0;
+    ui->ErrorCharacters->setText(QStringLiteral("0 字"));
+    ui->SpeedWPM->setText(QStringLiteral("0 WPM"));
+    ui->PracticeAccuracy->setText(QStringLiteral("100%"));
 }
 
 void PracticeWidget::UpdateUIShow()
@@ -317,5 +368,266 @@ void PracticeWidget::UpdateUIShow()
 
 }
 
+void PracticeWidget::updateTypingStats()
+{
+    int typed = 0;
+    int correct = 0;
+
+    const int lineCount = qMin(editList.size(), splitLines.size());
+
+    for (int i = 0; i < lineCount; ++i) {
+        const QString input = editList[i]->text();
+        const QString target = splitLines[i];
+
+        typed += input.length();
+
+        const int compareLen = qMin(input.length(), target.length());
+        for (int j = 0; j < compareLen; ++j) {
+            if (input.at(j) == target.at(j)) {
+                ++correct;
+            }
+        }
+    }
+
+    int errors = typed - correct;
+    if (errors < 0) {
+        errors = 0;
+    }
+
+    m_typedChars = typed;
+    m_errorChars = errors;
+
+    // 目标总字数
+    ui->PracticeAllCharacters->setText(QString::number(m_typedChars) + " 字");
+
+    // 错误字数
+    ui->ErrorCharacters->setText(QString::number(m_errorChars) + " 字");
+
+    // 准确率：以已输入字数为基准
+    double accuracy = 100.0;
+    if (m_typedChars > 0) {
+        accuracy = static_cast<double>(correct) * 100.0 / static_cast<double>(m_typedChars);
+    }
+    ui->PracticeAccuracy->setText(QString::number(accuracy, 'f', 1) + "%");
+
+    // 速度：以正确字数为基准计算 WPM
+    int usedSeconds = 0;
+    if (m_totalSeconds > 0) {
+        usedSeconds = m_totalSeconds - m_remainingSeconds;
+        if (usedSeconds < 0) {
+            usedSeconds = 0;
+        }
+    }
+
+    double wpm = 0.0;
+    if (usedSeconds > 0) {
+        wpm = static_cast<double>(correct) * 60.0 / static_cast<double>(usedSeconds);
+    }
+    ui->SpeedWPM->setText(QString::number(wpm, 'f', 1) + " WPM");
+}
+
+void PracticeWidget::handlePracticeFinished(bool byTimeout)
+{
+    // 防止重复提交（例如先时间到自动提交，再手动点提交）
+    if (m_hasSubmitted) {
+        return;
+    }
+    m_hasSubmitted = true;
+
+    // 最终再计算一次统计，确保数据最新
+    updateTypingStats();
+
+    // 计算本次实际用时
+    int usedSeconds = 0;
+    if (m_totalSeconds > 0) {
+        usedSeconds = m_totalSeconds - m_remainingSeconds;
+        if (usedSeconds < 0) {
+            usedSeconds = 0;
+        }
+    }
+
+    // 利用 m_typedChars 与 m_errorChars 反推正确字数与准确率
+    int correctChars = m_typedChars - m_errorChars;
+    if (correctChars < 0) {
+        correctChars = 0;
+    }
+
+    double accuracy = 0.0;
+    if (m_typedChars > 0) {
+        accuracy = static_cast<double>(correctChars) * 100.0 / static_cast<double>(m_typedChars);
+    }
+
+    double wpm = 0.0;
+    if (usedSeconds > 0) {
+        wpm = static_cast<double>(correctChars) * 60.0 / static_cast<double>(usedSeconds);
+    }
+
+    // 对外发出信号，供后续数据库写入使用
+    emit PracticeFinished(
+        m_currentArticleId,
+        usedSeconds,
+        m_totalChars,
+        m_typedChars,
+        m_errorChars,
+        accuracy,
+        wpm,
+        byTimeout
+        );
+}
+
+QStringList  PracticeWidget::collectUserInputs()
+{
+    QStringList inputs;
+
+    for (auto edit : editList) {
+        inputs << edit->text();
+    }
+
+    return inputs;
+}
+
+void PracticeWidget::togglePause()
+{
+    if (!m_clockService) return;
+
+    if (!m_isPaused) {
+
+        // m_clockService->pause();
+
+        // ui->StopBtn->setText("继续");
+        //调用模态窗口，阻塞主线程上的操作，包括倒计时吗，实现暂停功能
+        // 暂停倒计时
+        m_clockService->pause();
+        m_isPaused = true;
+
+        ui->StopBtn->setText("继续");
+
+        // 创建模态窗口
+        QDialog dialog(this);
+        dialog.setWindowTitle("已暂停");
+
+        //设置弹窗的大小
+        dialog.setFixedSize(350,170);
 
 
+        QVBoxLayout *layout = new QVBoxLayout(&dialog);
+
+
+        QLabel *label = new QLabel("练习已暂停");
+        label->setAlignment(Qt::AlignCenter);
+
+        // 天空蓝文字
+        label->setStyleSheet("color: skyblue; font-size: 32px;");
+
+        QPushButton *resumeBtn = new QPushButton("继续");
+        resumeBtn->setProperty("type","primary");
+
+
+
+        layout->addWidget(label);
+        layout->addWidget(resumeBtn);
+
+        // 点击继续关闭窗口
+        connect(resumeBtn, &QPushButton::clicked, &dialog, &QDialog::accept);
+
+        // 模态显示（阻塞这里）
+        dialog.exec();
+
+        // 用户点击继续后执行
+        m_clockService->start();
+        m_isPaused = false;
+
+        ui->StopBtn->setText("暂停");
+
+
+        // m_isPaused = true;
+
+    }
+}
+
+void PracticeWidget::on_ExitBtn_clicked()
+{
+    //返回到主界面
+    this->close();
+
+    this->deleteLater();
+
+}
+
+void PracticeWidget::on_SubmitBtn_clicked()
+{
+    // 用户主动点击提交时，优先暂停计时
+    if (m_clockService) {
+        m_clockService->pause();
+
+        //确保所有数据是新的
+        updateTypingStats();
+
+        //获取用户在打字过程中的所有数据，打印出来有速度，错误，输入的字数，和正确率
+        //并打印数据
+        // 计算实际用时
+        int usedSeconds = 0;
+        if (m_totalSeconds > 0) {
+            usedSeconds = m_totalSeconds - m_remainingSeconds;
+            if (usedSeconds < 0) {
+                usedSeconds = 0;
+            }
+        }
+
+        // 计算正确字数
+        int correctChars = m_typedChars - m_errorChars;
+        if (correctChars < 0) correctChars = 0;
+
+        // 计算准确率
+        double accuracy = 0.0;
+        if (m_typedChars > 0) {
+            accuracy = static_cast<double>(correctChars) * 100.0 / static_cast<double>(m_typedChars);
+        }
+
+        // 计算速度（WPM）
+        double wpm = 0.0;
+        if (usedSeconds > 0) {
+            wpm = static_cast<double>(correctChars) * 60.0 / static_cast<double>(usedSeconds);
+        }
+
+        // 打印数据
+        qDebug() << "用户输入的字数：" << m_typedChars;
+        qDebug() << "用户错误的字数：" << m_errorChars;
+        qDebug() << "用户输入的速度：" << wpm << " WPM";
+        qDebug() << "用户输入的准确率：" << accuracy << "%";
+        qDebug() << "总字数：" << m_totalChars;
+        qDebug() << "正确字数：" << correctChars;
+        qDebug() << "用时（秒）：" << usedSeconds;
+        
+        //点击提交，中断打字内容，保存数据，结束练习，练习模式数据不保存，弹窗出练习信息，并显示正确率，速度，错误率，输入字数，正确字数
+        //这里要新建ui窗口，后面可用复用
+        settlementDialog* settleDialog = new settlementDialog(this);
+        //接收结算弹窗发出的信号，关闭此界面
+        connect(settleDialog, &settlementDialog::requestClosePractice, this, [this]() {
+            this->close();
+            });
+
+        settleDialog->showData(m_totalChars, m_typedChars, correctChars, m_errorChars, accuracy, wpm, usedSeconds);
+        settleDialog->exec();
+        delete settleDialog;
+
+        //更好的写法没有 new没有 delete不会内存泄漏不会野指针
+        /*settlementDialog dialog(this);
+
+        connect(&dialog, &settlementDialog::requestClosePractice,
+            this, &PracticeWidget::close);
+
+        dialog.showData(m_totalChars, m_typedChars, correctChars,
+            m_errorChars, accuracy, wpm, usedSeconds);
+
+        dialog.exec();*/
+
+
+        
+
+
+
+    }
+
+    handlePracticeFinished(false);
+}

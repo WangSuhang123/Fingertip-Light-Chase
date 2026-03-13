@@ -1,0 +1,311 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;moc;h;def;odl;idl;res;</Extensions>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;moc;h;def;odl;idl;res;</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="articledao.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="articleservice.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cardperformance.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cardwidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="clockservice.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="clockworker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="databasemanager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fontservice.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fontworker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="loginwidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mainwidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="practicesetupdialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="practicewidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="registerwidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="retrievewidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="settlementdialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="smtpclient.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="timeservice.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="timeworker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="userdao.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="usermanager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="userservice.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Article.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <QtMoc Include="NoCopyPasteLineEdit.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <ClInclude Include="articledao.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="articleservice.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <QtMoc Include="cardperformance.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="cardwidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="clockservice.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="clockworker.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <ClInclude Include="databasemanager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <QtMoc Include="fontservice.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="fontworker.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="loginwidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="mainwidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="practicesetupdialog.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="practicewidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="registerwidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="retrievewidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="settlementdialog.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="smtpclient.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="timeservice.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="timeworker.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <ClInclude Include="userdao.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="usermanager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="userservice.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="debug\moc_predefs.h.cbt">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="release\moc_predefs.h.cbt">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="PracticeSetupDialog.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="cardperformance.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="loginwidget.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="mainwidget.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="practicewidget.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="registerwidget.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="retrievewidget.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="settlementdialog.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\Blizt.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Rank.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\RegisterPage.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\RetrievePage.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\ZYLoginPage.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\ant.qss">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icon\app.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\banner.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icon\danju.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icon\data.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icon\kefu.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\mainFeatures.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icon\pizhun.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\rakete.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icon\report.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <QtRcc Include="res.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
+    <None Include="res\icon\shenpi.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icon\shiyan.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icon\shouye.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icon\team.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icon\tongji.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icon\tongzhi.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icon\wenjianjia.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icon\xialajiantou.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icon\xialajiantou.svg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icon\xiaoxi.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icon\yibiao.png">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+</Project>
