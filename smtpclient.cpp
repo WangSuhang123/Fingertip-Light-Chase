@@ -1,9 +1,8 @@
-// smtpclient.cpp
 #include "smtpclient.h"
 #include <QDebug>
 #include <QDateTime>
 
-SmtpClient::SmtpClient(QObject *parent)
+SmtpClient::SmtpClient(QObject* parent)
     : QObject(parent)
     // 1. 初始化 QSslSocket 而非 QTcpSocket
     , m_socket(new QSslSocket(this))
@@ -19,24 +18,24 @@ SmtpClient::SmtpClient(QObject *parent)
     connect(m_socket, &QSslSocket::disconnected, this, &SmtpClient::socketDisconnected);
 }
 
-void SmtpClient::setSmtpServer(const QString &server, int port)
+void SmtpClient::setSmtpServer(const QString& server, int port)
 {
     m_smtpServer = server;
     m_smtpPort = port;
 }
 
-void SmtpClient::setSender(const QString &senderEmail, const QString &senderPassword)
+void SmtpClient::setSender(const QString& senderEmail, const QString& senderPassword)
 {
     m_senderEmail = senderEmail;
     m_senderPassword = senderPassword;
 }
 
-void SmtpClient::setRecipient(const QString &recipientEmail)
+void SmtpClient::setRecipient(const QString& recipientEmail)
 {
     m_recipientEmail = recipientEmail;
 }
 
-void SmtpClient::setMailContent(const QString &subject, const QString &body)
+void SmtpClient::setMailContent(const QString& subject, const QString& body)
 {
     m_mailSubject = subject;
     m_mailBody = body;
@@ -111,7 +110,8 @@ void SmtpClient::socketReadyRead()
             m_socket->write(QString("MAIL FROM: <%1>\r\n").arg(m_senderEmail).toUtf8());
             m_state = 7;
             m_response.clear();
-        } else {
+        }
+        else {
             emit mailSentFailed("邮箱授权码错误或SMTP服务未开启");
             m_socket->disconnectFromHost();
         }
@@ -133,7 +133,7 @@ void SmtpClient::socketReadyRead()
     case 9: // 发送邮件内容
         if (m_response.contains("354")) {
             QString mailContent = QString("From: %1\r\nTo: %2\r\nSubject: %3\r\n\r\n%4\r\n.\r\n")
-            .arg(m_senderEmail)
+                .arg(m_senderEmail)
                 .arg(m_recipientEmail)
                 .arg(m_mailSubject)
                 .arg(m_mailBody);
@@ -146,7 +146,8 @@ void SmtpClient::socketReadyRead()
         if (m_response.contains("250")) {
             emit mailSentSuccess();
             m_socket->write("QUIT\r\n");
-        } else {
+        }
+        else {
             emit mailSentFailed("邮件发送失败");
         }
         m_socket->disconnectFromHost();
@@ -167,7 +168,7 @@ void SmtpClient::encrypted()
 }
 
 // 4. 新增：SSL错误处理（忽略自签名证书错误，不影响QQ邮箱）
-void SmtpClient::sslErrors(const QList<QSslError> &errors)
+void SmtpClient::sslErrors(const QList<QSslError>& errors)
 {
     Q_UNUSED(errors);
     // 忽略SSL错误（生产环境可根据需要处理）

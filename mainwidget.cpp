@@ -4,6 +4,7 @@
 // 引入UserManager（保存用户信息）
 #include "usermanager.h"
 #include "practicesetupdialog.h"
+#include "uploadArticle.h"
 
 #include <QStyle>
 
@@ -83,7 +84,7 @@ void MainWidget::FunturesCardStyle()
     ui->PracticeFeature->setProperty("theme","lightblue");
     ui->CompetitionFeature->setProperty("theme","darkblue");
     ui->LeaderboardFeature->setProperty("theme","purple");
-    ui->CompetitionManagementFeature->setProperty("theme","lightgreen");
+    ui->InsertArticleFeature->setProperty("theme","lightgreen");
     ui->InfoManagerFeature->setProperty("theme","pink");
     ui->SettingFeature->setProperty("theme","lightyellow");
     ui->beiyong1->setProperty("theme","cyan");
@@ -93,7 +94,7 @@ void MainWidget::FunturesCardStyle()
     ui->PracticeFeature->style()->polish(ui->PracticeFeature);
     ui->CompetitionFeature->style()->polish(ui->CompetitionFeature);
     ui->LeaderboardFeature->style()->polish(ui->LeaderboardFeature);
-    ui->CompetitionManagementFeature->style()->polish(ui->CompetitionManagementFeature);
+    ui->InsertArticleFeature->style()->polish(ui->InsertArticleFeature);
     ui->InfoManagerFeature->style()->polish(ui->InfoManagerFeature);
     ui->SettingFeature->style()->polish(ui->SettingFeature);
     ui->beiyong1->style()->polish(ui->beiyong1);
@@ -113,25 +114,25 @@ void MainWidget::FunturesCardStyle()
     ui->LeaderboardFeature->setIcon(QPixmap(":/res/icon/data.png"));
     ui->LeaderboardFeature->setDescription("查看在本学校的排行榜");
     //第四个
-    ui->CompetitionManagementFeature->setTitle("比赛信息管理");
-    ui->CompetitionManagementFeature->setIcon(QPixmap(":/res/icon/app.png"));
-    ui->CompetitionManagementFeature->setDescription("管理员管理比赛信息");
+    ui->InsertArticleFeature->setTitle("新增文章");
+    ui->InsertArticleFeature->setIcon(QPixmap(":/res/icon/app.png"));
+    ui->InsertArticleFeature->setDescription("管理员新增文章");
     //第五个
-    ui->InfoManagerFeature->setTitle("用户信息管理");
+    ui->InfoManagerFeature->setTitle("文章管理");
     ui->InfoManagerFeature->setIcon(QPixmap(":/res/icon/team.png"));
-    ui->InfoManagerFeature->setDescription("管理员管理用户信息");
+    ui->InfoManagerFeature->setDescription("管理员文章管理");
     //第六个
     ui->SettingFeature->setTitle("设置");
     ui->SettingFeature->setIcon(QPixmap(":/res/icon/shiyan.png"));
     ui->SettingFeature->setDescription("系统设置");
     //第七个
-    ui->beiyong1->setTitle("统计");
+    ui->beiyong1->setTitle("成员管理");
     ui->beiyong1->setIcon(QPixmap(":/res/icon/tongji.png"));
     ui->beiyong1->setDescription("统计");
     //第八个
-    ui->beiyong2->setTitle("开发人员");
+    ui->beiyong2->setTitle("人员管理");
     ui->beiyong2->setIcon(QPixmap(":/res/icon/kefu.png"));
-    ui->beiyong2->setDescription("开发成员");
+    ui->beiyong2->setDescription("管理员人员管理");
     //第九个
     ui->beiyong3->setTitle("信息");
     ui->beiyong3->setIcon(QPixmap(":/res/icon/xiaoxi.png"));
@@ -215,4 +216,11 @@ void MainWidget::OpenPracticeFeature()
     PracticeSetupDialog *practiceDialog = new PracticeSetupDialog();
     practiceDialog->setAttribute(Qt::WA_DeleteOnClose);
     practiceDialog->show();
+}
+
+void MainWidget::on_InsertArticleFeature_clicked()
+{
+    uploadArticle *uploadarticle = new uploadArticle();
+    uploadarticle->setAttribute(Qt::WA_DeleteOnClose);
+    uploadarticle->show();
 }

@@ -30,6 +30,10 @@ private:
     //打开练习功能
     void OpenPracticeFeature();
 
+private slots:
+    //打开新增文章功能
+    void on_InsertArticleFeature_clicked();
+
 
 };
 

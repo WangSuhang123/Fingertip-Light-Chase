@@ -17,6 +17,9 @@ public:
     //通过id来查询文章标题
     QString getArticleTitleById(int articleID);
 
+    //插入articleinfo新文章
+    bool insertNewArticleInfo(const QString& title, const QString& author, const QString& content, const QString& date);
+
 private:
 
 };

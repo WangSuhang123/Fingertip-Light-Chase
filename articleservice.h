@@ -14,6 +14,9 @@ public:
 
     QString getArticleTitleById(int articleID);
 
+    //判断是否插入成功
+    bool isInsertNewArticleInfo(const QString& title, const QString& author, const QString& content, const QString& date);
+
 private:
     ArticleDao articleDao;
 

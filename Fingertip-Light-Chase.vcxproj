@@ -85,7 +85,8 @@
       <Optimization>MaxSpeed</Optimization>
       <PreprocessorDefinitions>_WINDOWS;UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;NDEBUG;QT_NO_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessToFile>false</PreprocessToFile>
-      <ProgramDataBaseFileName></ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>
+      </ProgramDataBaseFileName>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
@@ -219,9 +220,15 @@
     <ClCompile Include="registerwidget.cpp" />
     <ClCompile Include="retrievewidget.cpp" />
     <ClCompile Include="settlementdialog.cpp" />
-    <ClCompile Include="smtpclient.cpp" />
+    <ClCompile Include="smtpclient.cpp">
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).moc</QtMocFileName>
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
+    </ClCompile>
     <ClCompile Include="timeservice.cpp" />
     <ClCompile Include="timeworker.cpp" />
+    <ClCompile Include="uploadArticle.cpp" />
     <ClCompile Include="userdao.cpp" />
     <ClCompile Include="usermanager.cpp" />
     <ClCompile Include="userservice.cpp" />
@@ -248,6 +255,7 @@
     <QtMoc Include="smtpclient.h" />
     <QtMoc Include="timeservice.h" />
     <QtMoc Include="timeworker.h" />
+    <QtMoc Include="uploadArticle.h" />
     <ClInclude Include="userdao.h" />
     <ClInclude Include="usermanager.h" />
     <ClInclude Include="userservice.h" />
@@ -277,6 +285,7 @@
     <QtUic Include="registerwidget.ui" />
     <QtUic Include="retrievewidget.ui" />
     <QtUic Include="settlementdialog.ui" />
+    <QtUic Include="uploadArticle.ui" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\Blizt.png" />

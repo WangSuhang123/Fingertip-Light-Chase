@@ -81,7 +81,7 @@ bool UserService::isEMailExists(const QString &EMail)
 bool UserService::retrievePassword(const QString &UserName, const QString &Password, const QString &StudentID, const QString &SchoolName, const QString EMail, const QString VerCode)
 {
     //参数非空校验
-    // 【业务逻辑1：参数非空校验】（可以把UI层的非空校验移到这里，让UI层更轻）
+    // 【业务逻辑1：参数非空校验】（把UI层的非空校验移到这里，让UI层更轻）
     if (UserName.trimmed().isEmpty() || Password.trimmed().isEmpty() ||
         StudentID.trimmed().isEmpty() || SchoolName.trimmed().isEmpty() || VerCode.trimmed().isEmpty()) {
         qWarning() << "登录参数为空，校验失败";
