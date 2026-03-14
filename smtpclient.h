@@ -10,13 +10,13 @@ class SmtpClient : public QObject
 {
     Q_OBJECT
 public:
-    explicit SmtpClient(QObject *parent = nullptr);
+    explicit SmtpClient(QObject* parent = nullptr);
 
     // 设置邮件发送参数
-    void setSmtpServer(const QString &server, int port);
-    void setSender(const QString &senderEmail, const QString &senderPassword);
-    void setRecipient(const QString &recipientEmail);
-    void setMailContent(const QString &subject, const QString &body);
+    void setSmtpServer(const QString& server, int port);
+    void setSender(const QString& senderEmail, const QString& senderPassword);
+    void setRecipient(const QString& recipientEmail);
+    void setMailContent(const QString& subject, const QString& body);
 
     // 发送邮件
     void sendMail();
@@ -24,20 +24,20 @@ public:
 signals:
     // 邮件发送结果（成功/失败）
     void mailSentSuccess();
-    void mailSentFailed(const QString &errorMsg);
+    void mailSentFailed(const QString& errorMsg);
 
 private slots:
     void socketConnected();
     void socketReadyRead();
     // 2. 添加 TLS 加密握手完成的槽函数
-    void sslErrors(const QList<QSslError> &errors);
+    void sslErrors(const QList<QSslError>& errors);
     void encrypted();
     void socketError(QAbstractSocket::SocketError error);
     void socketDisconnected();
 
 private:
     // 3. 替换 QTcpSocket* 为 QSslSocket*
-    QSslSocket *m_socket;
+    QSslSocket* m_socket;
     QString m_smtpServer;
     int m_smtpPort;
     QString m_senderEmail;    // 发送方邮箱（比如你的QQ邮箱）

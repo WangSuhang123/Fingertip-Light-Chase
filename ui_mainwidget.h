@@ -21,8 +21,8 @@
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
-#include <cardperformance.h>
 #include <cardwidget.h>
+#include "cardperformance.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -75,7 +75,7 @@ public:
     CardWidget *beiyong3;
     CardWidget *beiyong1;
     CardWidget *SettingFeature;
-    CardWidget *CompetitionManagementFeature;
+    CardWidget *InsertArticleFeature;
     QWidget *TipsWidget;
     QVBoxLayout *verticalLayout_3;
     QLabel *label_4;
@@ -230,7 +230,7 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName("scrollAreaWidgetContents");
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 843, 751));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 846, 723));
         QSizePolicy sizePolicy3(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
         sizePolicy3.setHorizontalStretch(0);
         sizePolicy3.setVerticalStretch(0);
@@ -328,12 +328,12 @@ public:
 
         gridLayout->addWidget(SettingFeature, 3, 2, 1, 1);
 
-        CompetitionManagementFeature = new CardWidget(FuntureWidget);
-        CompetitionManagementFeature->setObjectName("CompetitionManagementFeature");
-        CompetitionManagementFeature->setFrameShape(QFrame::Shape::StyledPanel);
-        CompetitionManagementFeature->setFrameShadow(QFrame::Shadow::Raised);
+        InsertArticleFeature = new CardWidget(FuntureWidget);
+        InsertArticleFeature->setObjectName("InsertArticleFeature");
+        InsertArticleFeature->setFrameShape(QFrame::Shape::StyledPanel);
+        InsertArticleFeature->setFrameShadow(QFrame::Shadow::Raised);
 
-        gridLayout->addWidget(CompetitionManagementFeature, 3, 0, 1, 1);
+        gridLayout->addWidget(InsertArticleFeature, 3, 0, 1, 1);
 
 
         verticalLayout_4->addWidget(FuntureWidget);

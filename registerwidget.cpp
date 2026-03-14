@@ -8,7 +8,7 @@
 #include <QRegularExpressionValidator>
 #include <QRandomGenerator>
 #include <QTimer>
-RegisterWidget::RegisterWidget(QWidget *parent)
+RegisterWidget::RegisterWidget(QWidget* parent)
     : QWidget(parent)
     , ui(new Ui::RegisterWidget)
     , m_countdown(60)
@@ -17,10 +17,10 @@ RegisterWidget::RegisterWidget(QWidget *parent)
 {
     ui->setupUi(this);
     //设置控件ant风格
-    ui->widget->setProperty("type","frontPage");
-    ui->RegisterBtn->setProperty("type","primary");
-    ui->ReturnBtn->setProperty("type","text");
-    ui->GetCodeBtn->setProperty("type","primary");
+    ui->widget->setProperty("type", "frontPage");
+    ui->RegisterBtn->setProperty("type", "primary");
+    ui->ReturnBtn->setProperty("type", "text");
+    ui->GetCodeBtn->setProperty("type", "primary");
 
     //程序启动时，显示打开数据库
     DatabaseManager& dbMgr = DatabaseManager::instance();
@@ -38,7 +38,7 @@ RegisterWidget::RegisterWidget(QWidget *parent)
     //连接注册槽函数
     //connect(ui->RegisterBtn,&QPushButton::clicked,this,&RegisterWidget::RegisterFunction);
     //返回
-    connect(ui->ReturnBtn,&QPushButton::clicked,this,&RegisterWidget::BackToLoginPage);
+    connect(ui->ReturnBtn, &QPushButton::clicked, this, &RegisterWidget::BackToLoginPage);
     connect(ui->GetCodeBtn, &QPushButton::clicked, this, &RegisterWidget::onGetCodeClicked);
     connect(ui->RegisterBtn, &QPushButton::clicked, this, &RegisterWidget::onRegisterClicked);
     connect(m_countdownTimer, &QTimer::timeout, this, &RegisterWidget::updateCountdown);
@@ -67,34 +67,35 @@ void RegisterWidget::RegisterFunction()
     QString VerCode = ui->RegVerCodeEdit->text().trimmed();
 
     //判断输入是否有空
-    if(username.isEmpty() || password.isEmpty() || StudentID.isEmpty() || SchoolName.isEmpty() || EMail.isEmpty() || VerCode.isEmpty()){
-        QMessageBox::warning(this,"错误","输入项不能为空！");
+    if (username.isEmpty() || password.isEmpty() || StudentID.isEmpty() || SchoolName.isEmpty() || EMail.isEmpty() || VerCode.isEmpty()) {
+        QMessageBox::warning(this, "错误", "输入项不能为空！");
         return;
     }
 
     //判断用户是否已经存在，避免存在重复数据
-    bool isExists = m_userService.isUserExists(username,StudentID,SchoolName);
+    bool isExists = m_userService.isUserExists(username, StudentID, SchoolName);
 
     if (isExists) { // 用户已存在，直接提示并返回，不执行后续注册
-        QMessageBox::warning(this,"注册失败","用户已存在！");
+        QMessageBox::warning(this, "注册失败", "用户已存在！");
         return;
     }
 
     //进行注册操作，返回bool类型
-    bool registerSuccess = m_userService.registerUser(username,password,StudentID,SchoolName,EMail,VerCode);
+    bool registerSuccess = m_userService.registerUser(username, password, StudentID, SchoolName, EMail, VerCode);
 
     //注册结果判断
-    if(registerSuccess){
+    if (registerSuccess) {
         //做弹窗处理，随后返回到登录页面
-        QMessageBox::information(this,"注册成功","注册成功!");
+        QMessageBox::information(this, "注册成功", "注册成功!");
         //打开登录页面
-        LoginWidget *loginWidegt = new LoginWidget();
+        LoginWidget* loginWidegt = new LoginWidget();
         loginWidegt->setAttribute(Qt::WA_DeleteOnClose);// 自动释放内存
         loginWidegt->show();
         this->close();
         //emit registerSucceeded();
-    }else{
-        QMessageBox::information(this,"注册失败","注册失败!");
+    }
+    else {
+        QMessageBox::information(this, "注册失败", "注册失败!");
     }
 
 
@@ -103,7 +104,7 @@ void RegisterWidget::RegisterFunction()
 void RegisterWidget::BackToLoginPage()
 {
     //打开登录页面
-    LoginWidget *loginWidegt = new LoginWidget();
+    LoginWidget* loginWidegt = new LoginWidget();
     loginWidegt->setAttribute(Qt::WA_DeleteOnClose);// 自动释放内存
     loginWidegt->show();
     this->close();
@@ -114,14 +115,14 @@ void RegisterWidget::onGetCodeClicked()
 {
     QString email = ui->RegEMailEdit->text().trimmed();
     // 1. 验证邮箱是否输入合法
-    if(email.isEmpty() || !ui->RegEMailEdit->hasAcceptableInput()){
+    if (email.isEmpty() || !ui->RegEMailEdit->hasAcceptableInput()) {
         QMessageBox::warning(this, "提示", "请输入有效的邮箱地址！");
         return;
     }
 
     //判断邮箱唯一性
     bool emailExist = m_userService.isEMailExists(email);
-    if(emailExist){
+    if (emailExist) {
         QMessageBox::warning(this, "提示", "该邮箱已被注册！");
         return;
     }
@@ -160,7 +161,8 @@ void RegisterWidget::onRegisterClicked()
         RegisterFunction();
 
         m_verificationCode.clear();
-    } else {
+    }
+    else {
         QMessageBox::warning(this, "失败", "验证码错误，请重新输入！");
         ui->RegVerCodeEdit->clear();
     }
@@ -182,7 +184,7 @@ void RegisterWidget::onMailSentSuccess()
     QMessageBox::information(this, "提示", "验证码已发送到你的邮箱，请查收！");
 }
 // 邮件发送失败回调
-void RegisterWidget::onMailSentFailed(const QString &errorMsg)
+void RegisterWidget::onMailSentFailed(const QString& errorMsg)
 {
     QMessageBox::critical(this, "错误", QString("验证码发送失败：%1").arg(errorMsg));
     // 恢复按钮状态

@@ -5,30 +5,24 @@
 UserService::UserService() {}
 
 
-// 登录业务逻辑的核心实现
-bool UserService::login(const QString &userName, const QString &password, const QString &studentId, const QString &schoolName,int &userStatus)
+bool UserService::login(const QString& userName,const QString& password,const QString& studentId,const QString& schoolName,int& userId,int& userStatus)
 {
-    // 【业务逻辑1：参数非空校验】（可以把UI层的非空校验移到这里，让UI层更轻）
     if (userName.trimmed().isEmpty() || password.trimmed().isEmpty() ||
         studentId.trimmed().isEmpty() || schoolName.trimmed().isEmpty()) {
-        qWarning() << "登录参数为空，校验失败";
+        qWarning() << "登录参数为空";
         return false;
     }
 
-    // 【业务逻辑2：密码加密】（比如MD5加密，假设数据库中存的是加密后的密码）
+    // 密码加密
     QString encryptedPwd = encryptPassword(password);
 
-    // 【业务逻辑3：调用DAO层查询数据库，验证用户】
-    // 注意：这里调用的是DAO的verifyUser方法，//暂时没有实现 传入的是加密后的密码
-    bool verifySuccess = m_userDao.verifyUserInfo(userName, encryptedPwd, studentId, schoolName);
-
-    //如果验证成功，就获取用户的状态权限
-    if(verifySuccess){
-        userStatus = m_userDao.getUserStatus(userName,studentId,schoolName);
-    }
-
-    return verifySuccess;
-
+    // 调用DAO
+    return m_userDao.verifyUserInfo(userName,
+        encryptedPwd,
+        studentId,
+        schoolName,
+        userId,
+        userStatus);
 }
 
 // 封装用户存在性判断的业务逻辑
@@ -81,7 +75,7 @@ bool UserService::isEMailExists(const QString &EMail)
 bool UserService::retrievePassword(const QString &UserName, const QString &Password, const QString &StudentID, const QString &SchoolName, const QString EMail, const QString VerCode)
 {
     //参数非空校验
-    // 【业务逻辑1：参数非空校验】（可以把UI层的非空校验移到这里，让UI层更轻）
+    // 【业务逻辑1：参数非空校验】（把UI层的非空校验移到这里，让UI层更轻）
     if (UserName.trimmed().isEmpty() || Password.trimmed().isEmpty() ||
         StudentID.trimmed().isEmpty() || SchoolName.trimmed().isEmpty() || VerCode.trimmed().isEmpty()) {
         qWarning() << "登录参数为空，校验失败";
@@ -100,6 +94,17 @@ bool UserService::retrievePassword(const QString &UserName, const QString &Passw
     bool retrieveSuccess = m_userDao.retrieveUserPassword(UserName,encryptedPwd,StudentID,SchoolName,EMail);
 
     return retrieveSuccess;
+}
+
+int UserService::getUserStatus(const QString& UserName, const QString& StudentID, const QString& SchoolName)
+{
+    return m_userDao.getUserStatus(UserName, StudentID, SchoolName);
+}
+
+int UserService::getUserID(const QString& UserName, const QString& StudentID, const QString& SchoolName)
+{
+    // 调用DAO层的方法
+    return m_userDao.getUserID(UserName, StudentID, SchoolName);
 }
 
 

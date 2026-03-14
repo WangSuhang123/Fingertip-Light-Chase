@@ -16,7 +16,8 @@ public:
     UserManager& operator=(const UserManager&) = delete;
 
     // 对外暴露的接口（仅声明）
-    void setCurrentUser(const QString& userName, const QString& studentId, const QString& schoolName, int userStatus);
+    void setCurrentUser(int userID, const QString& userName, const QString& studentId, const QString& schoolName, int userStatus);
+    int getCurrentUserID() const;
     QString getUserName() const;
     QString getStudentId() const;
     QString getSchoolName() const;
@@ -28,6 +29,7 @@ private:
     UserManager();
 
     // 成员变量（依然是私有，封装不变）
+    int m_userID;
     QString m_userName;
     QString m_studentId;
     QString m_schoolName;

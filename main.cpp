@@ -4,8 +4,10 @@
 #include "practicewidget.h"
 #include "settlementdialog.h"
 #include "databasemanager.h"
+#include "uploadArticle.h"
 #include <QApplication>
 #include <QFile>
+//#include <QSslSocket>
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -20,19 +22,24 @@ int main(int argc, char *argv[])
         qss.close();
     }
 
+    /*qDebug() << QSslSocket::supportsSsl();
+    qDebug() << QSslSocket::supportsSsl();
+    qDebug() << QSslSocket::sslLibraryBuildVersionString();
+    qDebug() << QSslSocket::sslLibraryVersionString();*/
+
     /*qputenv("QT_DEBUG_PLUGINS", "1");
 
     qDebug() << QCoreApplication::libraryPaths();*/
 
-    // LoginWidget w;
-    // w.show();
+     LoginWidget w;
+     w.show();
     /*PracticeSetupDialog psd;
     psd.show();*/
     // PracticeWidget pw;
     // pw.show();
-    /*settlementDialog sd;
-    sd.show();*/
-     MainWidget mw;
-     mw.show();
+    /*uploadArticle upArticle;
+    upArticle.show();*/
+     /*MainWidget mw;
+     mw.show();*/
     return a.exec();
 }

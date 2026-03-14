@@ -17,8 +17,9 @@ UserManager::UserManager() : m_isLogin(false)
 }
 
 // 实现设置用户信息的方法
-void UserManager::setCurrentUser(const QString& userName, const QString& studentId, const QString& schoolName,int userStatus)
+void UserManager::setCurrentUser(int userID,const QString& userName, const QString& studentId, const QString& schoolName,int userStatus)
 {
+    m_userID = userID;
     m_userName = userName;
     m_studentId = studentId;
     m_schoolName = schoolName;
@@ -32,6 +33,10 @@ void UserManager::setCurrentUser(const QString& userName, const QString& student
 }
 
 // 实现获取用户信息的方法
+int UserManager::getCurrentUserID() const {
+    return m_userID;
+}
+
 QString UserManager::getUserName() const
 {
     return m_userName;
@@ -62,6 +67,7 @@ bool UserManager::isLogin() const
 // 实现退出登录的方法
 void UserManager::logout()
 {
+    m_userID = 0;
     m_userName.clear();
     m_studentId.clear();
     m_schoolName.clear();

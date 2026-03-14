@@ -8,8 +8,9 @@ class UserService
 public:
     UserService();
 
-    //用户登录验证（业务逻辑入口），return 登录是否成功
-    bool login(const QString &userName, const QString &password, const QString &studentId, const QString &schoolName,int &userStatus);
+    // 登录验证（只查询一次数据库）
+// 返回是否登录成功，同时返回 userId 和 userStatus
+    bool login(const QString& userName,const QString& password, const QString& studentId,const QString& schoolName,int& userId,int& userStatus);
 
     //判断用户是否存在（业务层封装） @return 用户是否存在
     bool isUserExists(const QString &userName, const QString &studentId, const QString &schoolName);
@@ -21,6 +22,11 @@ public:
     //判断是否修改密码成功  return是否成功
     bool retrievePassword(const QString &UserName, const QString &Password, const QString &StudentID, const QString &SchoolName, const QString EMail,const QString VerCode);
 
+    //获取用户的权限和id号
+    int getUserStatus(const QString& UserName, const QString& StudentID, const QString& SchoolName);
+
+    //获取用户id
+    int getUserID(const QString& UserName, const QString& StudentID, const QString& SchoolName);
 private:
     //密码加密（业务逻辑示例，比如MD5加密） return 加密后的密码字符串
     QString encryptPassword(const QString &rawPwd);

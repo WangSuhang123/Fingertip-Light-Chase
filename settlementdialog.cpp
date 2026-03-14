@@ -26,6 +26,9 @@ void settlementDialog::showData(int totalChars, int typedChars, int correctChars
     ui->settleAllchar->setText(QString::number(totalChars) + "字");
     ui->settleInputchar->setText(QString::number(typedChars) + "字");
     ui->settleErrChar->setText(QString::number(errorChars) + "字");
+
+    //将练习数据传输到数据库
+
 }
 
 void settlementDialog::antStyle()
@@ -37,8 +40,7 @@ void settlementDialog::antStyle()
 }
 
 void settlementDialog::on_ConfirmBtn_clicked()
-{
-    //点击确认后，返回到主页面mainwidget,
+{   
     //关闭当前窗口
     emit requestClosePractice();    //发送信号，通知practicewidget关闭当前窗口
     //this->close();  //关闭弹窗

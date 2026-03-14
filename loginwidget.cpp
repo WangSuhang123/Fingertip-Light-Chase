@@ -49,6 +49,48 @@ LoginWidget::~LoginWidget()
 
 
 
+//void LoginWidget::LoginFunction()
+//{
+//    QString username = ui->usernameEdit->text().trimmed();
+//    QString password = ui->PasswordEdit->text().trimmed();
+//    QString StudentID = ui->StudentIDEdit->text().trimmed();
+//    QString SchoolName = ui->SchoolNameEdit->text().trimmed();
+//
+//    if(username.isEmpty() || password.isEmpty() || StudentID.isEmpty() || SchoolName.isEmpty()){
+//        QMessageBox::warning(this,"错误","输入项不能为空！");
+//        return;
+//    }
+//
+//
+//    //定义一个变量接收状态权限
+//    int userStatus = 0;
+//
+//
+//    //操作登录是否成功和whether存在数据
+//    bool loginSuccess = m_userService.login(username, password, StudentID, SchoolName,userStatus);
+//    bool isExists = m_userService.isUserExists(username,StudentID,SchoolName);
+//
+//    if(isExists){
+//        //如果存在，做登录判断
+//        if(loginSuccess){
+//            //登录成功后，获取用户的userStatus
+//            //查询用户的id号
+//            int userId = m_userService.getUserID(username, StudentID, SchoolName);
+//
+//
+//            // 保存当前用户信息到全局单例，包括用户的状态，普通用户或管理员等，
+//            UserManager::instance().setCurrentUser(userId,username, StudentID, SchoolName, userStatus);
+//            //打开主窗口
+//            OpenMainWidget();
+//        }else{
+//            QMessageBox::warning(this, "失败", "用户名或密码错误！");
+//        }
+//    }else{
+//        QMessageBox::warning(this,"错误","用户不存在！");
+//        return;
+//    }
+//}
+
 void LoginWidget::LoginFunction()
 {
     QString username = ui->usernameEdit->text().trimmed();
@@ -56,34 +98,41 @@ void LoginWidget::LoginFunction()
     QString StudentID = ui->StudentIDEdit->text().trimmed();
     QString SchoolName = ui->SchoolNameEdit->text().trimmed();
 
-    if(username.isEmpty() || password.isEmpty() || StudentID.isEmpty() || SchoolName.isEmpty()){
-        QMessageBox::warning(this,"错误","输入项不能为空！");
+    if (username.isEmpty() || password.isEmpty() || StudentID.isEmpty() || SchoolName.isEmpty()) {
+        QMessageBox::warning(this, "错误", "输入项不能为空！");
         return;
     }
 
-    //定义一个变量接收状态权限
+    int userId = 0;
     int userStatus = 0;
 
+    bool loginSuccess = m_userService.login(
+        username,
+        password,
+        StudentID,
+        SchoolName,
+        userId,
+        userStatus
+    );
 
-    //操作登录是否成功和whether存在数据
-    bool loginSuccess = m_userService.login(username, password, StudentID, SchoolName,userStatus);
-    bool isExists = m_userService.isUserExists(username,StudentID,SchoolName);
+    if (loginSuccess) {
 
-    if(isExists){
-        //如果存在，做登录判断
-        if(loginSuccess){
-            //登录成功后，获取用户的userStatus
+        UserManager::instance().setCurrentUser(
+            userId,
+            username,
+            StudentID,
+            SchoolName,
+            userStatus
+        );
 
-            // 保存当前用户信息到全局单例，包括用户的状态，普通用户或管理员等，
-            UserManager::instance().setCurrentUser(username, StudentID, SchoolName, userStatus);
-            //打开主窗口
-            OpenMainWidget();
-        }else{
-            QMessageBox::warning(this, "失败", "用户名或密码错误！");
-        }
-    }else{
-        QMessageBox::warning(this,"错误","用户不存在！");
-        return;
+        //打印当前获取的用户的信息
+        qDebug() << "Login success, user id: " << userId << ", username: " << username << ", StudentID: " << StudentID << ", SchoolName: " << SchoolName << ", userStatus: " << userStatus;
+
+        OpenMainWidget();
+
+    }
+    else {
+        QMessageBox::warning(this, "登录失败", "用户名或密码错误！");
     }
 }
 

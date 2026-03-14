@@ -98,9 +98,6 @@
     <ClCompile Include="settlementdialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="smtpclient.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="timeservice.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -114,6 +111,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="userservice.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="uploadArticle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="smtpclient.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="practiceRecordsDao.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="practiceRecordsService.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -224,6 +233,9 @@
     <QtUic Include="settlementdialog.ui">
       <Filter>Form Files</Filter>
     </QtUic>
+    <QtUic Include="uploadArticle.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\Blizt.png">
@@ -307,5 +319,16 @@
     <None Include="res\icon\yibiao.png">
       <Filter>Resource Files</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="uploadArticle.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="practiceRecordsDao.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="practiceRecordsService.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
 </Project>

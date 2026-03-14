@@ -7,39 +7,53 @@
 
 UserDao::UserDao() {}
 
-//验证用户信息，登录
-bool UserDao::verifyUserInfo(const QString &UserName, const QString &Password, const QString &StudentID, const QString &SchoolName)
+bool UserDao::verifyUserInfo(const QString& UserName,
+    const QString& Password,
+    const QString& StudentID,
+    const QString& SchoolName,
+    int& userId,
+    int& userStatus)
 {
-    //获取数据库databaseManager的单例连接（引用连接
     QSqlDatabase& db = DatabaseManager::instance().getDatabase();
 
-    //检查数据库连接是否有效
     if (!db.isOpen()) {
-        qCritical() << "数据库连接未打开！";
+        qCritical() << "数据库未连接";
         return false;
     }
 
-    //显示指定连接创建QSqlQuery,不再默认的空参构造
-    QSqlQuery query(db);    //QSqlQuery 自动使用「默认连接」
-    //设置sql语句
-    bool prepareOk = query.prepare("SELECT Password FROM userinfo WHERE UserName = ? AND StudentID =? AND SchoolName = ?");
-    if (!prepareOk) {
-        qCritical() << "SQL语句预处理失败：" << query.lastError().text();
-        return false;
-    }
-    //填充数据
+    QSqlQuery query(db);
+
+    query.prepare(
+        "SELECT userID, Password, userStatus "
+        "FROM userinfo "
+        "WHERE UserName = ? AND StudentID = ? AND SchoolName = ?"
+    );
+
     query.addBindValue(UserName);
     query.addBindValue(StudentID);
     query.addBindValue(SchoolName);
 
-    query.exec();
-
-    if (!query.next()){
+    if (!query.exec()) {
+        qDebug() << "SQL执行失败:" << query.lastError().text();
         return false;
     }
 
-    return query.value(0).toString() == Password;
+    if (!query.next()) {
+        return false;
+    }
 
+    QString dbPassword = query.value("Password").toString();
+
+    // 验证密码
+    if (dbPassword != Password) {
+        return false;
+    }
+
+    // 获取ID和权限
+    userId = query.value("userID").toInt();
+    userStatus = query.value("userStatus").toInt();
+
+    return true;
 }
 
 //判断用户是否存在，通过姓名，学号，学校名称
@@ -159,3 +173,22 @@ int UserDao::getUserStatus(const QString &UserName, const QString &StudentID, co
     }
     return 0; // 默认返回普通用户状态
 }
+
+int UserDao::getUserID(const QString& UserName, const QString& StudentID, const QString& SchoolName)
+{
+    QSqlDatabase& db = DatabaseManager::instance().getDatabase();
+    QSqlQuery query(db);
+    // 数据库表 userinfo 中有一个字段叫 userStatus (INT类型)
+    query.prepare("SELECT userID FROM userinfo WHERE UserName = ? AND StudentID = ? AND SchoolName = ?");
+    query.addBindValue(UserName);
+    query.addBindValue(StudentID);
+    query.addBindValue(SchoolName);
+
+    if (query.exec() && query.next()) {
+        return query.value(0).toInt();
+    }
+    return 0; 
+}
+
+
+

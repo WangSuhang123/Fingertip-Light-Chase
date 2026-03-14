@@ -9,6 +9,7 @@
 #include "articleservice.h"
 #include "settlementdialog.h"
 #include "mainwidget.h"
+#include "practiceRecordsService.h"
 
 QStringList splitTextByWidth(
     const QString &text,
@@ -599,7 +600,25 @@ void PracticeWidget::on_SubmitBtn_clicked()
         qDebug() << "正确字数：" << correctChars;
         qDebug() << "用时（秒）：" << usedSeconds;
         
-        //点击提交，中断打字内容，保存数据，结束练习，练习模式数据不保存，弹窗出练习信息，并显示正确率，速度，错误率，输入字数，正确字数
+        //点击提交，中断打字内容，保存数据，结束练习，弹窗出练习信息，并显示正确率，速度，错误率，输入字数，正确字数等
+        //将练习数据保存到数据库
+        //1获取当前用户登录的id
+        //通过 instance() 获取那个唯一的实例
+        UserManager& userMgr = UserManager::instance();
+        int userID = userMgr.getCurrentUserID();
+        //调用practiceRecordsService中的方法，将数据保存到数据库中
+        practiceRecordsService* practiceRecords = new practiceRecordsService(this);
+        bool isSuccess = practiceRecords->insertPracticeRecordsService(userID, m_totalChars, m_typedChars, correctChars, m_errorChars, wpm, usedSeconds, accuracy);
+        //判断是否插入成功
+        if (isSuccess)
+        {
+            qDebug() << "保存练习记录成功";
+        }
+        else {
+            qDebug() << "保存练习记录失败";
+        }
+
+
         //这里要新建ui窗口，后面可用复用
         settlementDialog* settleDialog = new settlementDialog(this);
         //接收结算弹窗发出的信号，关闭此界面
@@ -611,7 +630,7 @@ void PracticeWidget::on_SubmitBtn_clicked()
         settleDialog->exec();
         delete settleDialog;
 
-        //更好的写法没有 new没有 delete不会内存泄漏不会野指针
+        //更好的写法没有new 没有delete 不会内存泄漏不会野指针
         /*settlementDialog dialog(this);
 
         connect(&dialog, &settlementDialog::requestClosePractice,
@@ -621,12 +640,6 @@ void PracticeWidget::on_SubmitBtn_clicked()
             m_errorChars, accuracy, wpm, usedSeconds);
 
         dialog.exec();*/
-
-
-        
-
-
-
     }
 
     handlePracticeFinished(false);

@@ -202,16 +202,16 @@ font: 700 12pt &quot;微软雅黑&quot;;</string>
               <number>40</number>
              </property>
              <item>
-              <widget class="CardPerformance" name="typeSpeed" native="true"/>
+              <widget class="CardPerformance" name="typeSpeed"/>
              </item>
              <item>
-              <widget class="CardPerformance" name="Accuracy" native="true"/>
+              <widget class="CardPerformance" name="Accuracy"/>
              </item>
              <item>
-              <widget class="CardPerformance" name="Competitions" native="true"/>
+              <widget class="CardPerformance" name="Competitions"/>
              </item>
              <item>
-              <widget class="CardPerformance" name="Rank" native="true"/>
+              <widget class="CardPerformance" name="Rank"/>
              </item>
             </layout>
            </widget>
@@ -253,8 +253,8 @@ font: 700 12pt &quot;微软雅黑&quot;;</string>
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>843</width>
-               <height>751</height>
+               <width>846</width>
+               <height>723</height>
               </rect>
              </property>
              <property name="sizePolicy">
@@ -427,7 +427,7 @@ font: 700 12pt &quot;微软雅黑&quot;;</string>
                      </widget>
                     </item>
                     <item row="3" column="0">
-                     <widget class="CardWidget" name="CompetitionManagementFeature">
+                     <widget class="CardWidget" name="InsertArticleFeature">
                       <property name="frameShape">
                        <enum>QFrame::Shape::StyledPanel</enum>
                       </property>
@@ -487,7 +487,7 @@ Join competitions to challenge yourself and track progress</string>
   <customwidget>
    <class>CardPerformance</class>
    <extends>QWidget</extends>
-   <header location="global">cardperformance.h</header>
+   <header>cardperformance.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
