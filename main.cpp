@@ -1,10 +1,10 @@
 #include "loginwidget.h"
 #include "mainwidget.h"
-#include "practicesetupdialog.h"
 #include "practicewidget.h"
 #include "settlementdialog.h"
 #include "databasemanager.h"
-#include "uploadArticle.h"
+#include "CompetitionLobbyWidget.h"
+#include "CompetitionPublish.h"
 #include <QApplication>
 #include <QFile>
 //#include <QSslSocket>
@@ -33,12 +33,12 @@ int main(int argc, char *argv[])
 
      LoginWidget w;
      w.show();
-    /*PracticeSetupDialog psd;
-    psd.show();*/
+     /*CompetitionLobbyWidget comlobby;
+     comlobby.show();*/
+     /*CompetitionPublish cp;
+     cp.show();*/
     // PracticeWidget pw;
     // pw.show();
-    /*uploadArticle upArticle;
-    upArticle.show();*/
      /*MainWidget mw;
      mw.show();*/
     return a.exec();

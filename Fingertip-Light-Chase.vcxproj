@@ -209,6 +209,10 @@
     <ClCompile Include="cardwidget.cpp" />
     <ClCompile Include="clockservice.cpp" />
     <ClCompile Include="clockworker.cpp" />
+    <ClCompile Include="CompetitionDao.cpp" />
+    <ClCompile Include="CompetitionLobbyWidget.cpp" />
+    <ClCompile Include="CompetitionPublish.cpp" />
+    <ClCompile Include="CompetitionService.cpp" />
     <ClCompile Include="databasemanager.cpp" />
     <ClCompile Include="fontservice.cpp" />
     <ClCompile Include="fontworker.cpp" />
@@ -244,6 +248,10 @@
     <QtMoc Include="cardwidget.h" />
     <QtMoc Include="clockservice.h" />
     <QtMoc Include="clockworker.h" />
+    <QtMoc Include="CompetitionLobbyWidget.h" />
+    <QtMoc Include="CompetitionPublish.h" />
+    <QtMoc Include="CompetitionService.h" />
+    <QtMoc Include="CompetitionDao.h" />
     <ClInclude Include="databasemanager.h" />
     <QtMoc Include="fontservice.h" />
     <QtMoc Include="fontworker.h" />
@@ -281,6 +289,8 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <QtUic Include="CompetitionLobbyWidget.ui" />
+    <QtUic Include="CompetitionPublish.ui" />
     <QtUic Include="PracticeSetupDialog.ui" />
     <QtUic Include="cardperformance.ui" />
     <QtUic Include="loginwidget.ui" />

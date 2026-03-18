@@ -5,6 +5,8 @@
 #include "usermanager.h"
 #include "practicesetupdialog.h"
 #include "uploadArticle.h"
+#include "CompetitionLobbyWidget.h"
+#include "CompetitionPublish.h"
 
 #include <QStyle>
 
@@ -106,9 +108,9 @@ void MainWidget::FunturesCardStyle()
     ui->PracticeFeature->setIcon(QPixmap(":/res/icon/danju.png"));
     ui->PracticeFeature->setDescription("提高你的打字速度和准确性");
     //第二个
-    ui->CompetitionFeature->setTitle("比赛");
+    ui->CompetitionFeature->setTitle("比赛大厅");
     ui->CompetitionFeature->setIcon(QPixmap(":/res/icon/report.png"));
-    ui->CompetitionFeature->setDescription("参加现场比赛");
+    ui->CompetitionFeature->setDescription("参加在线比赛");
     //第三个
     ui->LeaderboardFeature->setTitle("排行榜");
     ui->LeaderboardFeature->setIcon(QPixmap(":/res/icon/data.png"));
@@ -126,9 +128,9 @@ void MainWidget::FunturesCardStyle()
     ui->SettingFeature->setIcon(QPixmap(":/res/icon/shiyan.png"));
     ui->SettingFeature->setDescription("系统设置");
     //第七个
-    ui->beiyong1->setTitle("成员管理");
+    ui->beiyong1->setTitle("比赛发布");
     ui->beiyong1->setIcon(QPixmap(":/res/icon/tongji.png"));
-    ui->beiyong1->setDescription("统计");
+    ui->beiyong1->setDescription("管理员发布比赛");
     //第八个
     ui->beiyong2->setTitle("人员管理");
     ui->beiyong2->setIcon(QPixmap(":/res/icon/kefu.png"));
@@ -216,6 +218,21 @@ void MainWidget::OpenPracticeFeature()
     PracticeSetupDialog *practiceDialog = new PracticeSetupDialog();
     practiceDialog->setAttribute(Qt::WA_DeleteOnClose);
     practiceDialog->show();
+}
+
+void MainWidget::on_CompetitionFeature_clicked()
+{
+    CompetitionLobbyWidget *competitionLobby = new CompetitionLobbyWidget();
+    competitionLobby->setAttribute(Qt::WA_DeleteOnClose);
+    competitionLobby->show();
+}
+
+void MainWidget::on_beiyong1_clicked()
+{
+    CompetitionPublish *competitionPublish = new CompetitionPublish();
+    competitionPublish->setAttribute(Qt::WA_DeleteOnClose);
+    competitionPublish->show();
+
 }
 
 void MainWidget::on_InsertArticleFeature_clicked()

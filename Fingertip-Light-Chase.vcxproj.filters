@@ -125,6 +125,18 @@
     <ClCompile Include="practiceRecordsService.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CompetitionLobbyWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CompetitionPublish.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CompetitionService.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CompetitionDao.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Article.h">
@@ -236,6 +248,12 @@
     <QtUic Include="uploadArticle.ui">
       <Filter>Form Files</Filter>
     </QtUic>
+    <QtUic Include="CompetitionLobbyWidget.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="CompetitionPublish.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\Blizt.png">
@@ -328,6 +346,18 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="practiceRecordsService.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="CompetitionLobbyWidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="CompetitionPublish.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="CompetitionService.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="CompetitionDao.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

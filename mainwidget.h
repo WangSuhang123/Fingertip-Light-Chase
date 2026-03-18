@@ -29,11 +29,15 @@ private:
     void OpenLoginWidget();
     //打开练习功能
     void OpenPracticeFeature();
+    
 
 private slots:
     //打开新增文章功能
     void on_InsertArticleFeature_clicked();
-
+    //打开赛事大厅
+    void on_CompetitionFeature_clicked();
+    //打开赛事发布功能
+    void on_beiyong1_clicked();
 
 };
 

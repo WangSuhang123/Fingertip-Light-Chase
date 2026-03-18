@@ -15,38 +15,31 @@ QWidget[type="frontPage"] {
 
 QWidget[type="PerformanceWidget"] {
     background-color: #ebf5fc;
-    color: #262626;
 }
 
 QWidget[type="MainFeatures"] {
     background-color: #ffffff;
-    color: #262626;
 }
 
 QWidget[type="StatusWidget"] {
     background-color: #218edb;
-    color: #262626;
 }
 
-QDialog[type="DialogPage"]{
+QWidget[type="DialogPage"] {
     background-color: #e3efff;
-    color: #262626;
 }
 
 QWidget[type="TitleWidget"] {
     background-color: #227ff7;
-    color: #262626;
 }
 
 QWidget[type="typingWidget"] {
     background-color: #e9f0f9;
-    color: #262626;
     border-radius: 20px;
 }
 
 QWidget[type="typingState"] {
     background-color: #eae9f9;
-    color: #262626;
     border-radius: 20px;
 }
 
@@ -990,3 +983,166 @@ CardWidget[theme="amber"][state="pressed"] {
     border-color: #d97706;
 }
 
+/* ===================== TimeEdit ===================== */
+QTimeEdit {
+    min-height: 32px;
+    padding: 4px 12px;
+    border-radius: 6px;
+    border: 1px solid #d9d9d9;
+    background-color: #ffffff;
+    font-size: 14px;
+}
+
+QTimeEdit:hover {
+    border-color: #4096ff;
+}
+
+QTimeEdit:focus {
+    border-color: #1677ff;
+}
+
+QTimeEdit:disabled {
+    background-color: #f5f5f5;
+    color: #bfbfbf;
+}
+
+/* 上下按钮（小时/分钟调节） */
+QTimeEdit::up-button,
+QTimeEdit::down-button {
+    width: 20px;
+    border: none;
+    background: transparent;
+}
+
+QTimeEdit::up-button:hover,
+QTimeEdit::down-button:hover {
+    background-color: #f0f0f0;
+}
+
+/* ===================== DateEdit ===================== */
+QDateEdit {
+    min-height: 32px;
+    padding: 4px 12px;
+    padding-right: 36px; /* 给右侧按钮留空间 */
+    border-radius: 6px;
+    border: 1px solid #d9d9d9;
+    background-color: #ffffff;
+    font-size: 14px;
+}
+
+QDateEdit:hover {
+    border-color: #4096ff;
+}
+
+QDateEdit:focus {
+    border-color: #1677ff;
+}
+
+QDateEdit:disabled {
+    background-color: #f5f5f5;
+    color: #bfbfbf;
+}
+
+/* 右侧下拉按钮（关键优化） */
+QDateEdit::drop-down {
+    width: 28px;
+    border: none;
+    background-color: transparent;
+}
+
+/* 让按钮 hover 有反馈 */
+QDateEdit::drop-down:hover {
+    background-color: #f5f5f5;
+    border-radius: 4px;
+}
+
+/* 去掉默认丑箭头 */
+QDateEdit::down-arrow {
+    width: 0px;
+    height: 0px;
+}
+
+/* ===================== DateTimeEdit（修复版） ===================== */
+QDateTimeEdit {
+    min-height: 32px;
+    padding: 4px 12px;
+    padding-right: 36px;
+    border-radius: 6px;
+    border: 1px solid #d9d9d9;
+    background-color: #ffffff;
+    font-size: 14px;
+}
+
+QDateTimeEdit:hover {
+    border-color: #4096ff;
+}
+
+QDateTimeEdit:focus {
+    border-color: #1677ff;
+}
+
+/* 右侧按钮 */
+QDateTimeEdit::drop-down {
+    width: 28px;
+    border: none;
+    background-color: transparent;
+    margin: 2px;
+    border-radius: 4px;
+}
+
+/* hover */
+QDateTimeEdit::drop-down:hover {
+    background-color: #f0f0f0;
+}
+
+/* pressed */
+QDateTimeEdit::drop-down:pressed {
+    background-color: #e6f4ff;
+}
+
+/* ⭐ 关键：用边框画箭头（不用图片） */
+QDateTimeEdit::down-arrow {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 4px solid #218EDB;
+    margin-right: 8px;
+}
+
+/* hover箭头变蓝 */
+QDateTimeEdit::drop-down:hover QDateTimeEdit::down-arrow {
+    border-color: #8c8c8c;
+}
+
+/* ===================== Calendar Popup ===================== */
+QCalendarWidget {
+    background-color: #ffffff;
+    border: 1px solid #d9d9d9;
+    border-radius: 6px;
+}
+
+/* 头部（月份选择） */
+QCalendarWidget QToolButton {
+    color: #262626;
+    background-color: transparent;
+    border: none;
+    padding: 4px;
+}
+
+QCalendarWidget QToolButton:hover {
+    color: #1677ff;
+}
+
+/* 日期单元格 */
+QCalendarWidget QAbstractItemView {
+    selection-background-color: #1677ff;
+    selection-color: #ffffff;
+    alternate-background-color: #fafafa;
+}
+
+/* today */
+QCalendarWidget QWidget#qt_calendar_today {
+    border: 1px solid #1677ff;
+    border-radius: 4px;
+}
