@@ -4,7 +4,9 @@
 
 CompetitionService::CompetitionService(QObject *parent)
 	: QObject(parent)
-{}
+{
+
+}
 
 CompetitionService::~CompetitionService()
 {}
@@ -30,12 +32,16 @@ bool CompetitionService::insertCompetition(const QString& competitionName, int a
     }
 
     // 插入数据
-    return m_competitionDao->insertCompetition(competitionName, articleId, creatorId, targetSchool, startTime, endTime, DurationMinutes);
+    return m_competitionDao.insertCompetition(competitionName, articleId, creatorId, targetSchool, startTime, endTime, DurationMinutes);
 }
 
 QList<QVariantMap> CompetitionService::getCompetitionList(const QString& school)
 {
-    return m_competitionDao->getCompetitionsBySchool(school);
+    return m_competitionDao.getCompetitionsBySchool(school);
 }
 
 
+QVariantMap CompetitionService::getCompetitionById(int compId)
+{
+    return m_competitionDao.getCompetitionById(compId);
+}

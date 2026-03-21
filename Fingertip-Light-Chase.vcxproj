@@ -71,6 +71,12 @@
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Fingertip-Light-Chase</TargetName>
     <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</IgnoreImportLibrary>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <EnableMicrosoftCodeAnalysis>false</EnableMicrosoftCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <EnableMicrosoftCodeAnalysis>false</EnableMicrosoftCodeAnalysis>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>GeneratedFiles\$(ConfigurationName);GeneratedFiles;.;release;/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -212,6 +218,8 @@
     <ClCompile Include="CompetitionDao.cpp" />
     <ClCompile Include="CompetitionLobbyWidget.cpp" />
     <ClCompile Include="CompetitionPublish.cpp" />
+    <ClCompile Include="CompetitionRecordsDao.cpp" />
+    <ClCompile Include="CompetitionRecordsService.cpp" />
     <ClCompile Include="CompetitionService.cpp" />
     <ClCompile Include="databasemanager.cpp" />
     <ClCompile Include="fontservice.cpp" />
@@ -252,6 +260,8 @@
     <QtMoc Include="CompetitionPublish.h" />
     <QtMoc Include="CompetitionService.h" />
     <QtMoc Include="CompetitionDao.h" />
+    <QtMoc Include="CompetitionRecordsService.h" />
+    <QtMoc Include="CompetitionRecordsDao.h" />
     <ClInclude Include="databasemanager.h" />
     <QtMoc Include="fontservice.h" />
     <QtMoc Include="fontworker.h" />

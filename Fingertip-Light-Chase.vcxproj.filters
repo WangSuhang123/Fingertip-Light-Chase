@@ -137,6 +137,12 @@
     <ClCompile Include="CompetitionDao.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CompetitionRecordsService.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CompetitionRecordsDao.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Article.h">
@@ -358,6 +364,12 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="CompetitionDao.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="CompetitionRecordsService.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="CompetitionRecordsDao.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

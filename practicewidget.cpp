@@ -9,7 +9,7 @@
 #include "articleservice.h"
 #include "settlementdialog.h"
 #include "mainwidget.h"
-#include "practiceRecordsService.h"
+#include <QMessageBox>
 
 QStringList splitTextByWidth(
     const QString &text,
@@ -63,6 +63,9 @@ PracticeWidget::PracticeWidget(QWidget *parent)
     //显示当前的时间 系统北京时间
     auto timeService = new TimeService(this);
 
+    m_competitionRecordsService = new CompetitionRecordsService(this);
+    m_practiceRecordsService = new practiceRecordsService(this);
+
     connect(timeService,&TimeService::timeUpdated,this,[=](const QString &timeStr){
         ui->ClockLabel->setText(timeStr);
     });
@@ -108,7 +111,17 @@ PracticeWidget::PracticeWidget(QWidget *parent)
     });
 
     // 4. 连接暂停按钮
-    connect(ui->StopBtn, &QPushButton::clicked,this, &PracticeWidget::togglePause);
+    //connect(ui->StopBtn, &QPushButton::clicked,this, &PracticeWidget::togglePause);
+    connect(ui->StopBtn, &QPushButton::clicked, this, [=]() {
+
+        if (m_mode == CompetitionMode)
+        {
+            QMessageBox::warning(this, "提示", "比赛模式禁止暂停！");
+            return;
+        }
+
+        togglePause();
+        });
 
     
 
@@ -133,8 +146,26 @@ bool PracticeWidget::isTimeUp() const
     return m_isTimeUp;
 }
 
-void PracticeWidget::onSetupReceived(int articleId, int practiceTime)
+void PracticeWidget::onSetupReceived(int articleId, int practiceTime, Mode mode, int compId)
 {
+
+    m_mode = mode;
+    m_competitionId = compId;
+
+    qDebug() << "模式:" << (m_mode == PracticeMode ? "练习" : "比赛")
+        << "compId:" << m_competitionId;
+
+    m_currentArticleId = articleId;
+    m_practiceDuration = practiceTime;
+
+    // ⭐ UI差异（比赛模式）
+    if (m_mode == CompetitionMode)
+    {
+        ui->mode->setText("比赛模式");
+        ui->ExitBtn->hide();     // 禁止退出（可选）
+        ui->StopBtn->hide();     // 禁止暂停（强烈建议）
+    }
+
     qDebug() << "收到设置数据！ID:" << articleId << "时间:" << practiceTime;
 
     m_currentArticleId = articleId;
@@ -144,7 +175,7 @@ void PracticeWidget::onSetupReceived(int articleId, int practiceTime)
     //通过Service获取数据
     ArticleService service;
     QString articleTitle = service.getArticleTitleById(m_currentArticleId);
-    // qDebug()<<articleTitle<<"11111111111111111111111111";
+
     ui->ArticleLabel->setText(articleTitle);
     //填充时间信息
     ui->SetTime->setText(QString("%1 分钟").arg(m_practiceDuration));
@@ -463,6 +494,15 @@ void PracticeWidget::handlePracticeFinished(bool byTimeout)
         wpm = static_cast<double>(correctChars) * 60.0 / static_cast<double>(usedSeconds);
     }
 
+    // 新增：比赛模式超时未打完字的提示
+    if (byTimeout && m_mode == CompetitionMode && m_typedChars != m_totalChars) {
+        QMessageBox::critical(this, "比赛结束", "时间已到！你未完成全部字符输入，本次比赛无效！");
+        // 关闭页面或重置
+        this->close();
+        this->deleteLater();
+        return;
+    }
+
     // 对外发出信号，供后续数据库写入使用
     emit PracticeFinished(
         m_currentArticleId,
@@ -548,6 +588,14 @@ void PracticeWidget::togglePause()
 
 void PracticeWidget::on_ExitBtn_clicked()
 {
+    //如果是比赛模式，不让退出
+    if (m_mode == CompetitionMode)
+    {
+        QMessageBox::warning(this, "提示", "比赛中不能退出！");
+        return;
+    }
+
+
     //返回到主界面
     this->close();
 
@@ -591,6 +639,14 @@ void PracticeWidget::on_SubmitBtn_clicked()
             wpm = static_cast<double>(correctChars) * 60.0 / static_cast<double>(usedSeconds);
         }
 
+        //综合评分计算 
+        double finalScore = 0.0;
+
+        // 特殊情况处理：如果还没开始打字，得分为 0
+        if (m_typedChars > 0) {
+            finalScore = wpm * (accuracy / 100.0);
+        }
+
         // 打印数据
         qDebug() << "用户输入的字数：" << m_typedChars;
         qDebug() << "用户错误的字数：" << m_errorChars;
@@ -599,6 +655,7 @@ void PracticeWidget::on_SubmitBtn_clicked()
         qDebug() << "总字数：" << m_totalChars;
         qDebug() << "正确字数：" << correctChars;
         qDebug() << "用时（秒）：" << usedSeconds;
+        qDebug() << "综合评分计算结果:" << finalScore;
         
         //点击提交，中断打字内容，保存数据，结束练习，弹窗出练习信息，并显示正确率，速度，错误率，输入字数，正确字数等
         //将练习数据保存到数据库
@@ -606,18 +663,58 @@ void PracticeWidget::on_SubmitBtn_clicked()
         //通过 instance() 获取那个唯一的实例
         UserManager& userMgr = UserManager::instance();
         int userID = userMgr.getCurrentUserID();
-        //调用practiceRecordsService中的方法，将数据保存到数据库中
-        practiceRecordsService* practiceRecords = new practiceRecordsService(this);
-        bool isSuccess = practiceRecords->insertPracticeRecordsService(userID, m_totalChars, m_typedChars, correctChars, m_errorChars, wpm, usedSeconds, accuracy);
-        //判断是否插入成功
-        if (isSuccess)
-        {
-            qDebug() << "保存练习记录成功";
-        }
-        else {
-            qDebug() << "保存练习记录失败";
-        }
 
+        if (m_mode == CompetitionMode)
+        {
+            //只有输入完全部字符才能提交
+            if (m_typedChars == m_totalChars) {
+                qDebug() << "比赛模式,保存比赛成绩";
+                //比赛模式,保存比赛成绩
+                bool success = m_competitionRecordsService->insertCompetitionRecords(
+                    m_competitionId,
+                    userID,
+                    wpm,
+                    accuracy,
+                    usedSeconds,
+                    correctChars,
+                    m_errorChars,
+                    finalScore
+                );
+
+                if (success)
+                    qDebug() << "比赛成绩提交成功";
+                else
+                    qDebug() << "比赛成绩提交失败";
+            }
+            else
+            {
+                QMessageBox::warning(this, "提示", "比赛中，请确保输入完全部字符！");
+                // 重新启动倒计时
+                if (m_clockService && !m_isTimeUp) {
+                    m_clockService->start(); 
+                }
+                return;
+            }
+        }
+        else
+        {
+            //练习逻辑
+            bool isSuccess = m_practiceRecordsService->insertPracticeRecordsService(
+                userID,
+                m_totalChars,
+                m_typedChars,
+                correctChars,
+                m_errorChars,
+                wpm,
+                usedSeconds,
+                accuracy
+            );
+
+            if (isSuccess)
+                qDebug() << "保存练习记录成功";
+            else
+                qDebug() << "保存练习记录失败";
+        }
 
         //这里要新建ui窗口，后面可用复用
         settlementDialog* settleDialog = new settlementDialog(this);

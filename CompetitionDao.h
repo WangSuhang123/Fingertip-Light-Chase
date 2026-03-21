@@ -22,6 +22,9 @@ public:
     //通过学校来查询比赛信息
     QList<QVariantMap> getCompetitionsBySchool(const QString& school);
 
+    //通过比赛id来查询比赛信息
+    QVariantMap getCompetitionById(int compId);
+
 
 private:
 

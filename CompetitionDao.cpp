@@ -84,3 +84,26 @@ QList<QVariantMap> CompetitionDao::getCompetitionsBySchool(const QString& school
 
     return list;
 }
+
+QVariantMap CompetitionDao::getCompetitionById(int compId)
+{
+    QSqlQuery query;
+
+    query.prepare(R"(
+        SELECT ArticleID, DurationMinutes
+        FROM competitions
+        WHERE CompID = :id
+    )");
+
+    query.bindValue(":id", compId);
+
+    QVariantMap map;
+
+    if (query.exec() && query.next())
+    {
+        map["articleId"] = query.value("ArticleID");
+        map["duration"] = query.value("DurationMinutes");
+    }
+
+    return map;
+}

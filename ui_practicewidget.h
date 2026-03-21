@@ -31,6 +31,7 @@ public:
     QWidget *TitleWidget;
     QHBoxLayout *horizontalLayout;
     QLabel *UserInfoLabel;
+    QLabel *mode;
     QSpacerItem *horizontalSpacer_3;
     QLabel *ClockLabel;
     QSpacerItem *horizontalSpacer;
@@ -110,6 +111,15 @@ public:
 
         horizontalLayout->addWidget(UserInfoLabel);
 
+        mode = new QLabel(TitleWidget);
+        mode->setObjectName("mode");
+        mode->setStyleSheet(QString::fromUtf8("font-family: \"Microsoft YaHei\";\n"
+"font-weight: bold;\n"
+"font-size: 25px;\n"
+"color: rgb(255, 170, 0);"));
+
+        horizontalLayout->addWidget(mode);
+
         horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
 
         horizontalLayout->addItem(horizontalSpacer_3);
@@ -185,7 +195,7 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents_3 = new QWidget();
         scrollAreaWidgetContents_3->setObjectName("scrollAreaWidgetContents_3");
-        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 697, 576));
+        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 703, 582));
         verticalLayout_8 = new QVBoxLayout(scrollAreaWidgetContents_3);
         verticalLayout_8->setObjectName("verticalLayout_8");
         contentWidget_3 = new QWidget(scrollAreaWidgetContents_3);
@@ -460,6 +470,7 @@ public:
     {
         PracticeWidget->setWindowTitle(QCoreApplication::translate("PracticeWidget", "Form", nullptr));
         UserInfoLabel->setText(QCoreApplication::translate("PracticeWidget", "\347\224\250\346\210\267\344\277\241\346\201\257", nullptr));
+        mode->setText(QCoreApplication::translate("PracticeWidget", "\347\273\203\344\271\240\346\250\241\345\274\217", nullptr));
         ClockLabel->setText(QCoreApplication::translate("PracticeWidget", "2025-12-12 12:12:12", nullptr));
         label->setText(QCoreApplication::translate("PracticeWidget", "\346\226\207\347\253\240\345\220\215\347\247\260\357\274\232", nullptr));
         ArticleLabel->setText(QCoreApplication::translate("PracticeWidget", "\346\226\207\347\253\240\345\220\215", nullptr));

@@ -6,6 +6,8 @@
 #include <QLabel>
 #include <QDialog>
 #include <QLineEdit>
+#include "practiceRecordsService.h"
+#include "CompetitionRecordsService.h"
 
 
 //前向声明 ClockService，避免包含头文件导致循环依赖或编译变慢
@@ -23,12 +25,22 @@ public:
     explicit PracticeWidget(QWidget *parent = nullptr);
     ~PracticeWidget();
 
+    // 设置比赛模式，代码复用
+    enum Mode {
+        PracticeMode,
+        CompetitionMode
+    };
+
+    
     //获取用户选择的文章id和时间
-    void onSetupReceived(int articleId, int practiceTime);
+    /*void onSetupReceived(int articleId, int practiceTime);*/
+    void onSetupReceived(int articleId, int practiceTime, Mode mode = PracticeMode, int compId = -1);
 
     // 接口函数：判断时间是否已到
     // 返回 true 表示时间已耗尽 (00:00)，false 表示还有时间
     bool isTimeUp() const;
+
+    
 
 protected:
     // 【新增】重写显示事件，确保获取真实宽度
@@ -38,6 +50,10 @@ protected:
 
 private:
     Ui::PracticeWidget *ui;
+
+    Mode m_mode = PracticeMode;   // 默认练习模式
+    int m_competitionId = -1;     // 比赛ID（练习模式用不到）
+
 
     QString originalTargetText;//初始化目标变量
     QVector<QString> splitLines;          // 分行后的文本（与 label/edit 一一对应）
@@ -49,13 +65,17 @@ private:
     int m_currentArticleId = -1;
     int m_practiceDuration = 0;
 
-    // 【核心修改】将 ClockService 声明为成员变量
+    // 将 ClockService 声明为成员变量
     ClockService *m_clockService;
+    //练习、比赛声明为成员变量
+    practiceRecordsService *m_practiceRecordsService;
+    CompetitionRecordsService *m_competitionRecordsService;
 
-    // 【新增】标记位，记录时间是否已到
+
+    // 标记位，记录时间是否已到
     bool m_isTimeUp;
 
-    // 【新增】练习过程统计相关
+    // 过程统计相关
     int m_totalSeconds = 0;      // 本次练习总秒数
     int m_remainingSeconds = 0;  // 当前剩余秒数
     int m_totalChars = 0;        // 目标总字数
@@ -65,7 +85,6 @@ private:
     bool m_isPaused = false;    //是否暂停
 
     // 私有工具函数
-    void loadArticleContentById(int id);
     void loadArticleAndGenerateWidgets(const QStringList &oldInputs = {}); //将生成逻辑封装成函数
     void UpdateUIShow();                  //更新ui界面
     void updateTypingStats();             // 根据当前输入实时计算指标并刷新 UI

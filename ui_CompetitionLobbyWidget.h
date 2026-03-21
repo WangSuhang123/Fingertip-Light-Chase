@@ -48,7 +48,7 @@ public:
     {
         if (CompetitionLobbyWidgetClass->objectName().isEmpty())
             CompetitionLobbyWidgetClass->setObjectName("CompetitionLobbyWidgetClass");
-        CompetitionLobbyWidgetClass->resize(442, 477);
+        CompetitionLobbyWidgetClass->resize(802, 477);
         centralWidget = new QWidget(CompetitionLobbyWidgetClass);
         centralWidget->setObjectName("centralWidget");
         verticalLayout_3 = new QVBoxLayout(centralWidget);

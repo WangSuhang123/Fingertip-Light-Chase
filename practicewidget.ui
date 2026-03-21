@@ -55,6 +55,19 @@ color: rgb(255, 255, 255);</string>
           </widget>
          </item>
          <item>
+          <widget class="QLabel" name="mode">
+           <property name="styleSheet">
+            <string notr="true">font-family: &quot;Microsoft YaHei&quot;;
+font-weight: bold;
+font-size: 25px;
+color: rgb(255, 170, 0);</string>
+           </property>
+           <property name="text">
+            <string>练习模式</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <spacer name="horizontalSpacer_3">
            <property name="orientation">
             <enum>Qt::Orientation::Horizontal</enum>
@@ -195,8 +208,8 @@ color: rgb(255, 255, 255);</string>
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>697</width>
-                 <height>576</height>
+                 <width>703</width>
+                 <height>582</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_8">

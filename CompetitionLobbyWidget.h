@@ -7,6 +7,7 @@
 #include <QMessageBox>
 
 #include "CompetitionService.h"
+#include "CompetitionRecordsService.h"
 #include "usermanager.h"
 
 QT_BEGIN_NAMESPACE
@@ -37,6 +38,7 @@ private:
     Ui::CompetitionLobbyWidgetClass* ui;
 
     CompetitionService competitionService;
+    CompetitionRecordsService competitionrecordsservice;
 
     //更新ui样式
     void updataUiShow();
@@ -48,7 +50,7 @@ private:
     void loadCompetitions();
 
     //添加操作按钮
-    void addOperateButton(int row, int compId, QString status);
+    void addOperateButton(int row, int compId, QString status, bool hasJoined);
 
     //按钮点击逻辑
     void onCompetitionClicked(int compId, QString status);

@@ -2,6 +2,7 @@
 #define MAINWIDGET_H
 
 #include <QMainWindow>
+#include "CompetitionService.h"
 
 namespace Ui {
 class MainWidget;
@@ -17,6 +18,9 @@ public:
 
 private:
     Ui::MainWidget *ui;
+
+    CompetitionService* competitionService;
+
     void widgetStyle();
     void CardPerformanceStyle();
     void FunturesCardStyle();
@@ -29,15 +33,19 @@ private:
     void OpenLoginWidget();
     //打开练习功能
     void OpenPracticeFeature();
-    
 
 private slots:
+    void onEnterCompetition(int compId);
     //打开新增文章功能
     void on_InsertArticleFeature_clicked();
     //打开赛事大厅
     void on_CompetitionFeature_clicked();
     //打开赛事发布功能
     void on_beiyong1_clicked();
+
+
+    
+
 
 };
 

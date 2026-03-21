@@ -21,8 +21,9 @@ public:
         int DurationMinutes);
 
     QList<QVariantMap> getCompetitionList(const QString& school);
+    QVariantMap getCompetitionById(int compId);
 
 private:
-    CompetitionDao* m_competitionDao;
+    CompetitionDao m_competitionDao;
 };
 

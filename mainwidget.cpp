@@ -7,6 +7,7 @@
 #include "uploadArticle.h"
 #include "CompetitionLobbyWidget.h"
 #include "CompetitionPublish.h"
+#include "practicewidget.h"
 
 #include <QStyle>
 
@@ -15,6 +16,9 @@ MainWidget::MainWidget(QWidget *parent)
     , ui(new Ui::MainWidget)
 {
     ui->setupUi(this);
+
+    competitionService = new CompetitionService(this);
+    
     //Style样式
     widgetStyle();
     CardPerformanceStyle();
@@ -30,6 +34,8 @@ MainWidget::MainWidget(QWidget *parent)
     connect(ui->LogOutBtn,&QPushButton::clicked,this,&MainWidget::Logout);
     //连接练习功能
     connect(ui->PracticeFeature,&CardWidget::clicked,this,&MainWidget::OpenPracticeFeature);
+
+    
 
 }
 
@@ -223,6 +229,9 @@ void MainWidget::OpenPracticeFeature()
 void MainWidget::on_CompetitionFeature_clicked()
 {
     CompetitionLobbyWidget *competitionLobby = new CompetitionLobbyWidget();
+    //连接信号，从比赛大厅连接进入比赛
+    connect(competitionLobby, &CompetitionLobbyWidget::enterCompetition,
+        this, &MainWidget::onEnterCompetition);
     competitionLobby->setAttribute(Qt::WA_DeleteOnClose);
     competitionLobby->show();
 }
@@ -233,6 +242,30 @@ void MainWidget::on_beiyong1_clicked()
     competitionPublish->setAttribute(Qt::WA_DeleteOnClose);
     competitionPublish->show();
 
+}
+
+void MainWidget::onEnterCompetition(int compId)
+{
+    // 查比赛详情
+    QVariantMap comp = competitionService->getCompetitionById(compId);
+
+    int articleId = comp["articleId"].toInt();
+    int duration = comp["duration"].toInt();
+
+    // 创建练习界面
+    PracticeWidget* practice = new PracticeWidget;
+
+    //传数据（复用你现有接口）
+    /*practice->onSetupReceived(articleId, duration);*/
+    practice->onSetupReceived(
+        articleId,
+        duration,
+        PracticeWidget::CompetitionMode,
+        compId
+    );
+
+    // 显示
+    practice->show();
 }
 
 void MainWidget::on_InsertArticleFeature_clicked()
