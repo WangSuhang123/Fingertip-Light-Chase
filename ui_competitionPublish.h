@@ -65,6 +65,7 @@ public:
     {
         if (CompetitionPublishClass->objectName().isEmpty())
             CompetitionPublishClass->setObjectName("CompetitionPublishClass");
+        CompetitionPublishClass->setWindowModality(Qt::WindowModality::ApplicationModal);
         CompetitionPublishClass->resize(326, 368);
         competitionPubilshWidget = new QWidget(CompetitionPublishClass);
         competitionPubilshWidget->setObjectName("competitionPubilshWidget");

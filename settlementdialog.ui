@@ -2,11 +2,14 @@
 <ui version="4.0">
  <class>settlementDialog</class>
  <widget class="QDialog" name="settlementDialog">
+  <property name="windowModality">
+   <enum>Qt::WindowModality::ApplicationModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>399</width>
+    <width>409</width>
     <height>297</height>
    </rect>
   </property>

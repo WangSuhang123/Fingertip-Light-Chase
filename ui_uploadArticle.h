@@ -54,6 +54,7 @@ public:
     {
         if (uploadArticleClass->objectName().isEmpty())
             uploadArticleClass->setObjectName("uploadArticleClass");
+        uploadArticleClass->setWindowModality(Qt::WindowModality::ApplicationModal);
         uploadArticleClass->resize(448, 494);
         verticalLayout_3 = new QVBoxLayout(uploadArticleClass);
         verticalLayout_3->setSpacing(6);

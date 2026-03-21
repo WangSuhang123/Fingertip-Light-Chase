@@ -69,7 +69,8 @@ public:
     {
         if (settlementDialog->objectName().isEmpty())
             settlementDialog->setObjectName("settlementDialog");
-        settlementDialog->resize(399, 297);
+        settlementDialog->setWindowModality(Qt::WindowModality::ApplicationModal);
+        settlementDialog->resize(409, 297);
         settlementDialog->setMaximumSize(QSize(409, 300));
         verticalLayout_2 = new QVBoxLayout(settlementDialog);
         verticalLayout_2->setSpacing(0);

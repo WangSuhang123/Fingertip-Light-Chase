@@ -48,6 +48,7 @@ public:
     {
         if (CompetitionLobbyWidgetClass->objectName().isEmpty())
             CompetitionLobbyWidgetClass->setObjectName("CompetitionLobbyWidgetClass");
+        CompetitionLobbyWidgetClass->setWindowModality(Qt::WindowModality::ApplicationModal);
         CompetitionLobbyWidgetClass->resize(802, 477);
         centralWidget = new QWidget(CompetitionLobbyWidgetClass);
         centralWidget->setObjectName("centralWidget");

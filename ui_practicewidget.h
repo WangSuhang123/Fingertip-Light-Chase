@@ -89,6 +89,7 @@ public:
     {
         if (PracticeWidget->objectName().isEmpty())
             PracticeWidget->setObjectName("PracticeWidget");
+        PracticeWidget->setWindowModality(Qt::WindowModality::ApplicationModal);
         PracticeWidget->resize(1080, 700);
         verticalLayout = new QVBoxLayout(PracticeWidget);
         verticalLayout->setObjectName("verticalLayout");
