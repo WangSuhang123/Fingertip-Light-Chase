@@ -1,6 +1,19 @@
 #pragma once
 
 #include <QObject>
+#include <QPointF>
+
+struct CompetitionFullRecord
+{
+	QString compName;
+	QString articleName;
+	int wpm;
+	double accuracy;
+	int correctCount;
+	int errorCount;
+	double finalScore;
+	int timeUsed;
+};
 
 class CompetitionRecordsDao  : public QObject
 {
@@ -15,5 +28,23 @@ public:
 
 	//判断用户是否已经参加过某场比赛，返回bool值
 	bool existsRecord(int compId, int userId);
+
+
+	//数据可视化信息
+	// 比赛数据
+	//获取用户的wpm信息
+	QVector<QPointF> getWPMData(int userId);
+	//获取正确率
+	QVector<QPointF> getAccuracyData(int userId);
+	//获取finalScore，需要返回两个类型的值，使用了“&”，表示引用传递，直接操作外面的变量
+	bool getFinalScoreBarData(int userId,QStringList& categories,QVector<double>& values);
+	//数据可视化表格
+	QVector<CompetitionFullRecord> getFullRecords(int userId);
+	//获取字数（正确和错误）
+	bool getCharCountData(int userId,int& totalCorrect,int& totalError);
+
+	
+
+
 };
 

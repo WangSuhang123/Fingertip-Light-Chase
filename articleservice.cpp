@@ -28,7 +28,7 @@ bool ArticleService::isInsertNewArticleInfo(const QString& title, const QString&
 	if (title.isEmpty() || author.isEmpty() || content.isEmpty() || date.isEmpty())
 	{
 		//提示不能为空
-		qWarning() << "提示", "标题、作者、文章内容不能为空！";
+		qWarning() << "提示" << "标题、作者、文章内容不能为空！";
 		return false;
 	}
 	else

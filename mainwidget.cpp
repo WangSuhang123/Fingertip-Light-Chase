@@ -8,6 +8,7 @@
 #include "CompetitionLobbyWidget.h"
 #include "CompetitionPublish.h"
 #include "practicewidget.h"
+#include "DataVisualization.h"
 
 #include <QStyle>
 
@@ -130,9 +131,9 @@ void MainWidget::FunturesCardStyle()
     ui->InfoManagerFeature->setIcon(QPixmap(":/res/icon/team.png"));
     ui->InfoManagerFeature->setDescription("管理员文章管理");
     //第六个
-    ui->SettingFeature->setTitle("设置");
+    ui->SettingFeature->setTitle("数据可视化");
     ui->SettingFeature->setIcon(QPixmap(":/res/icon/shiyan.png"));
-    ui->SettingFeature->setDescription("系统设置");
+    ui->SettingFeature->setDescription("数据可视化");
     //第七个
     ui->beiyong1->setTitle("比赛发布");
     ui->beiyong1->setIcon(QPixmap(":/res/icon/tongji.png"));
@@ -242,6 +243,13 @@ void MainWidget::on_beiyong1_clicked()
     competitionPublish->setAttribute(Qt::WA_DeleteOnClose);
     competitionPublish->show();
 
+}
+
+void MainWidget::on_SettingFeature_clicked()
+{
+    DataVisualization *dataVisualization = new DataVisualization();
+    dataVisualization->setAttribute(Qt::WA_DeleteOnClose);
+    dataVisualization->show();
 }
 
 void MainWidget::onEnterCompetition(int compId)

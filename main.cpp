@@ -7,6 +7,7 @@
 #include "CompetitionPublish.h"
 #include <QApplication>
 #include <QFile>
+#include "DataVisualization.h"
 //#include <QSslSocket>
 int main(int argc, char *argv[])
 {
@@ -31,8 +32,8 @@ int main(int argc, char *argv[])
 
     qDebug() << QCoreApplication::libraryPaths();*/
 
-     LoginWidget w;
-     w.show();
+     /*LoginWidget w;
+     w.show();*/
      /*CompetitionLobbyWidget comlobby;
      comlobby.show();*/
      /*CompetitionPublish cp;
@@ -41,5 +42,7 @@ int main(int argc, char *argv[])
     // pw.show();
      /*MainWidget mw;
      mw.show();*/
+    DataVisualization data;
+    data.show();
     return a.exec();
 }

@@ -20,4 +20,31 @@ bool CompetitionRecordsService::hasUserJoined(int compId, int userId)
 	return competitionrecordsdao.existsRecord(compId, userId);
 }
 
+QVector<QPointF> CompetitionRecordsService::getWPMData(int userId)
+{
+	return competitionrecordsdao.getWPMData(userId);
+}
+
+QVector<QPointF> CompetitionRecordsService::getAccuracyData(int userId)
+{
+	return competitionrecordsdao.getAccuracyData(userId);
+}
+
+bool CompetitionRecordsService::getFinalScoreBarData(int userId, QStringList& categories, QVector<double>& values)
+{
+	return competitionrecordsdao.getFinalScoreBarData(userId, categories, values);
+}
+
+bool CompetitionRecordsService::getCharCountData(int userId, int& totalCorrect, int& totalError)
+{
+	return competitionrecordsdao.getCharCountData(userId, totalCorrect, totalError);
+}
+
+QVector<CompetitionFullRecord> CompetitionRecordsService::getFullRecords(int userId)
+{
+	return competitionrecordsdao.getFullRecords(userId);
+}
+
+
+
 

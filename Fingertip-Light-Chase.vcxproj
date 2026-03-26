@@ -41,11 +41,11 @@
   <Import Project="$(QtMsBuild)\qt_defaults.props" Condition="Exists('$(QtMsBuild)\qt_defaults.props')" />
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <QtInstall>6.10.1_msvc2022_64</QtInstall>
-    <QtModules>core;gui;network;widgets;sql</QtModules>
+    <QtModules>core;gui;network;widgets;sql;charts</QtModules>
   </PropertyGroup>
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <QtInstall>6.10.1_msvc2022_64</QtInstall>
-    <QtModules>core;gui;network;widgets;sql</QtModules>
+    <QtModules>core;gui;network;widgets;sql;charts</QtModules>
   </PropertyGroup>
   <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') OR !Exists('$(QtMsBuild)\Qt.props')">
     <Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
@@ -74,10 +74,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <EnableMicrosoftCodeAnalysis>false</EnableMicrosoftCodeAnalysis>
     <EnableClangTidyCodeAnalysis>true</EnableClangTidyCodeAnalysis>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <EnableMicrosoftCodeAnalysis>false</EnableMicrosoftCodeAnalysis>
     <EnableClangTidyCodeAnalysis>true</EnableClangTidyCodeAnalysis>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -215,6 +217,7 @@
     <ClCompile Include="articleservice.cpp" />
     <ClCompile Include="cardperformance.cpp" />
     <ClCompile Include="cardwidget.cpp" />
+    <ClCompile Include="ChartService.cpp" />
     <ClCompile Include="clockservice.cpp" />
     <ClCompile Include="clockworker.cpp" />
     <ClCompile Include="CompetitionDao.cpp" />
@@ -224,6 +227,7 @@
     <ClCompile Include="CompetitionRecordsService.cpp" />
     <ClCompile Include="CompetitionService.cpp" />
     <ClCompile Include="databasemanager.cpp" />
+    <ClCompile Include="DataVisualization.cpp" />
     <ClCompile Include="fontservice.cpp" />
     <ClCompile Include="fontworker.cpp" />
     <ClCompile Include="loginwidget.cpp" />
@@ -264,6 +268,7 @@
     <QtMoc Include="CompetitionDao.h" />
     <QtMoc Include="CompetitionRecordsService.h" />
     <QtMoc Include="CompetitionRecordsDao.h" />
+    <QtMoc Include="ChartService.h" />
     <ClInclude Include="databasemanager.h" />
     <QtMoc Include="fontservice.h" />
     <QtMoc Include="fontworker.h" />
@@ -280,6 +285,7 @@
     <QtMoc Include="uploadArticle.h" />
     <QtMoc Include="practiceRecordsDao.h" />
     <QtMoc Include="practiceRecordsService.h" />
+    <QtMoc Include="DataVisualization.h" />
     <ClInclude Include="userdao.h" />
     <ClInclude Include="usermanager.h" />
     <ClInclude Include="userservice.h" />
@@ -303,6 +309,7 @@
   <ItemGroup>
     <QtUic Include="CompetitionLobbyWidget.ui" />
     <QtUic Include="CompetitionPublish.ui" />
+    <QtUic Include="DataVisualization.ui" />
     <QtUic Include="PracticeSetupDialog.ui" />
     <QtUic Include="cardperformance.ui" />
     <QtUic Include="loginwidget.ui" />

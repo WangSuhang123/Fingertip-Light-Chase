@@ -143,6 +143,12 @@
     <ClCompile Include="CompetitionRecordsDao.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DataVisualization.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ChartService.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Article.h">
@@ -260,6 +266,9 @@
     <QtUic Include="CompetitionPublish.ui">
       <Filter>Form Files</Filter>
     </QtUic>
+    <QtUic Include="DataVisualization.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\Blizt.png">
@@ -370,6 +379,12 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="CompetitionRecordsDao.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="DataVisualization.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="ChartService.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

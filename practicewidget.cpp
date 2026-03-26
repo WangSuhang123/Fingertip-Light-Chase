@@ -11,6 +11,7 @@
 #include "mainwidget.h"
 #include <QMessageBox>
 
+
 QStringList splitTextByWidth(
     const QString &text,
     int maxWidth,
@@ -45,9 +46,9 @@ QStringList splitTextByWidth(
 PracticeWidget::PracticeWidget(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::PracticeWidget)
-    , m_clockService(nullptr) // 【关键】初始化指针为空
     , m_currentArticleId(-1)
     , m_practiceDuration(0)
+    , m_clockService(nullptr) // 【关键】初始化指针为空
     , m_isTimeUp(false) // 初始化标记为 false
     , m_totalSeconds(0)
     , m_remainingSeconds(0)
@@ -707,7 +708,8 @@ void PracticeWidget::on_SubmitBtn_clicked()
                 m_errorChars,
                 wpm,
                 usedSeconds,
-                accuracy
+                accuracy,
+                m_currentArticleId
             );
 
             if (isSuccess)

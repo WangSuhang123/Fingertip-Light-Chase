@@ -42,6 +42,8 @@ private slots:
     void on_CompetitionFeature_clicked();
     //打开赛事发布功能
     void on_beiyong1_clicked();
+    //打卡数据可视化功能
+    void on_SettingFeature_clicked();
 
 
     

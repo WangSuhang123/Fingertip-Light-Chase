@@ -1,5 +1,5 @@
 #include "practicesetupdialog.h"
-#include "ui_practicesetupdialog.h"
+#include "ui_PracticeSetupDialog.h"
 #include <QMouseEvent>
 #include <QGraphicsDropShadowEffect>
 #include "practicewidget.h"
