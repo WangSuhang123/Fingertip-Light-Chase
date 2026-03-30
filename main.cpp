@@ -7,8 +7,7 @@
 #include "CompetitionPublish.h"
 #include <QApplication>
 #include <QFile>
-#include "DataVisualization.h"
-#include "ComprehensiveManagement.h"
+#include "LeaderboardFeature.h"
 //#include <QSslSocket>
 int main(int argc, char *argv[])
 {
@@ -35,18 +34,11 @@ int main(int argc, char *argv[])
 
      /*LoginWidget w;
      w.show();*/
-     /*CompetitionLobbyWidget comlobby;
-     comlobby.show();*/
-     /*CompetitionPublish cp;
-     cp.show();*/
-    // PracticeWidget pw;
-    // pw.show();
      /*MainWidget mw;
      mw.show();*/
-    /*DataVisualization data;
-    data.show();*/
-    ComprehensiveManagement cm;
-    cm.show();
+    LeaderboardFeature lf;
+    lf.show();
+
 
     return a.exec();
 }

@@ -10,6 +10,7 @@
 #include "practicewidget.h"
 #include "DataVisualization.h"
 #include "ComprehensiveManagement.h"
+#include "LeaderboardFeature.h"
 
 #include <QStyle>
 
@@ -294,6 +295,36 @@ void MainWidget::on_ComprehensiveManagementFeature_clicked()
     comprehensiveManagement->show();
 }
 
+//关于我们
+void MainWidget::on_AboutUs_clicked()
+{
+    QMessageBox::about(this, "关于我们 - 指尖逐光",
+        "Fingertip-Light-Chase（指尖逐光）\n"
+        "一个基于 Qt 开发的跨平台打字测速与比赛系统\n\n"
+
+        "📌 软件介绍\n"
+        "本系统集打字练习、赛事发布、在线比赛、成绩统计、数据可视化于一体，\n"
+        "致力于为用户提供高效、专业、有趣的打字训练环境。\n\n"
+
+        "🔧 核心功能\n"
+        "• 标准打字练习与实时速度检测\n"
+        "• 赛事发布、比赛大厅、在线参赛\n"
+        "• 个人成绩记录与全局排行榜\n"
+        "• 完整后台管理系统（用户/比赛/文章）\n"
+        "• 数据可视化统计展示\n\n"
+
+        "👨‍💻 开发者信息\n"
+        "GitHub：WangSuhang123\n"
+        "邮箱：wangsuhang7984@foxmail.com\n\n"
+
+        "💡 寄语\n"
+        "指尖生花，逐光而行；\n"
+        "愿每一次敲击，都成为你进步的力量。"
+    );
+}
+
+
+
 void MainWidget::onEnterCompetition(int compId)
 {
     // 查比赛详情
@@ -323,4 +354,13 @@ void MainWidget::on_InsertArticleFeature_clicked()
     uploadArticle *uploadarticle = new uploadArticle();
     uploadarticle->setAttribute(Qt::WA_DeleteOnClose);
     uploadarticle->show();
+    
+}
+
+//排行榜
+void MainWidget::on_LeaderboardFeature_clicked()
+{
+    LeaderboardFeature* leaderboard = new LeaderboardFeature();
+    leaderboard->setAttribute(Qt::WA_DeleteOnClose);
+    leaderboard->show();
 }

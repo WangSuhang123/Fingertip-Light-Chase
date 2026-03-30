@@ -54,5 +54,12 @@ public:
 	QSqlQueryModel* queryAllCompScoresBySchool(const QString& schoolName);
 
 
+	// 查询指定比赛的排行榜（按分数倒序）
+	QSqlQueryModel* getRankingByCompName(const QString& compName);
+
+	// 查询所有比赛的总排行榜（全局）
+	QSqlQueryModel* getGlobalRanking();
+
+
 };
 

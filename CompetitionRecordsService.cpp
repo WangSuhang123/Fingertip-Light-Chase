@@ -62,4 +62,14 @@ QSqlQueryModel* CompetitionRecordsService::queryAllCompScoresBySchool(const QStr
 
 
 
+QSqlQueryModel* CompetitionRecordsService::getRankingByCompName(const QString& compName)
+{
+	return competitionrecordsdao.getRankingByCompName(compName);
+}
+
+QSqlQueryModel* CompetitionRecordsService::getGlobalRanking()
+{
+	return competitionrecordsdao.getGlobalRanking();
+}
+
 

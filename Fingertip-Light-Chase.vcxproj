@@ -231,6 +231,7 @@
     <ClCompile Include="DataVisualization.cpp" />
     <ClCompile Include="fontservice.cpp" />
     <ClCompile Include="fontworker.cpp" />
+    <ClCompile Include="LeaderboardFeature.cpp" />
     <ClCompile Include="loginwidget.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mainwidget.cpp" />
@@ -288,6 +289,7 @@
     <QtMoc Include="practiceRecordsDao.h" />
     <QtMoc Include="practiceRecordsService.h" />
     <QtMoc Include="DataVisualization.h" />
+    <QtMoc Include="LeaderboardFeature.h" />
     <ClInclude Include="userdao.h" />
     <ClInclude Include="usermanager.h" />
     <QtMoc Include="userservice.h" />
@@ -313,6 +315,7 @@
     <QtUic Include="CompetitionPublish.ui" />
     <QtUic Include="ComprehensiveManagement.ui" />
     <QtUic Include="DataVisualization.ui" />
+    <QtUic Include="LeaderboardFeature.ui" />
     <QtUic Include="PracticeSetupDialog.ui" />
     <QtUic Include="cardperformance.ui" />
     <QtUic Include="loginwidget.ui" />

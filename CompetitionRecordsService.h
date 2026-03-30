@@ -45,6 +45,10 @@ public:
 	//比赛成绩查询-全部
 	QSqlQueryModel* queryAllCompScoresBySchool(const QString& schoolName);
 
+	//排行榜
+	QSqlQueryModel* getRankingByCompName(const QString& compName);
+	QSqlQueryModel* getGlobalRanking();
+
 private:
 	CompetitionRecordsDao competitionrecordsdao;
 

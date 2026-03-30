@@ -389,3 +389,54 @@ QSqlQueryModel* CompetitionRecordsDao::queryAllCompScoresBySchool(const QString&
     model->setQuery(query);
     return model;
 }
+
+// 按比赛ID查排行榜
+QSqlQueryModel* CompetitionRecordsDao::getRankingByCompName(const QString& compName)
+{
+    QSqlQueryModel* model = new QSqlQueryModel;
+
+    // 三表联查：成绩表 + 用户表 + 比赛表
+    QString sql = R"(
+        SELECT
+            u.UserName,
+            u.StudentID,
+            cr.WPM,
+            cr.Accuracy,
+            cr.FinalScore
+        FROM competition_records cr
+        JOIN userinfo u ON cr.UserID = u.UserID
+        JOIN competitions c ON cr.CompID = c.CompID
+        WHERE c.CompName = ?
+        ORDER BY cr.FinalScore DESC
+    )";
+
+    QSqlQuery query;
+    query.prepare(sql);
+    query.addBindValue(compName);  // 传入比赛名称
+    query.exec();
+
+    model->setQuery(query);
+    return model;
+}
+
+// 全局总排行榜
+QSqlQueryModel* CompetitionRecordsDao::getGlobalRanking()
+{
+    QSqlQueryModel* model = new QSqlQueryModel;
+
+    QString sql = R"(
+        SELECT
+            u.UserName,
+            u.StudentID,
+            MAX(cr.WPM) AS WPM,
+            MAX(cr.Accuracy) AS Accuracy,
+            MAX(cr.FinalScore) AS FinalScore
+        FROM competition_records cr
+        JOIN userinfo u ON cr.UserID = u.UserID
+        GROUP BY cr.UserID
+        ORDER BY FinalScore DESC
+    )";
+
+    model->setQuery(sql);
+    return model;
+}

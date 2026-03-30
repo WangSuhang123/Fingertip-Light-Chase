@@ -53,6 +53,11 @@ private slots:
     //综合管理
     void on_ComprehensiveManagementFeature_clicked();
 
+    //关于我们
+    void on_AboutUs_clicked();
+    //排行榜
+    void on_LeaderboardFeature_clicked();
+
 
     
 
