@@ -32,12 +32,12 @@ int main(int argc, char *argv[])
 
     qDebug() << QCoreApplication::libraryPaths();*/
 
-     /*LoginWidget w;
-     w.show();*/
+     LoginWidget w;
+     w.show();
      /*MainWidget mw;
      mw.show();*/
-    LeaderboardFeature lf;
-    lf.show();
+    /*LeaderboardFeature lf;
+    lf.show();*/
 
 
     return a.exec();

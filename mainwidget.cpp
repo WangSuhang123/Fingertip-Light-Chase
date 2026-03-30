@@ -39,9 +39,7 @@ MainWidget::MainWidget(QWidget *parent)
     //连接退出登录按钮
     connect(ui->LogOutBtn,&QPushButton::clicked,this,&MainWidget::Logout);
     //连接练习功能
-    connect(ui->PracticeFeature,&CardWidget::clicked,this,&MainWidget::OpenPracticeFeature);
-
-    
+    connect(ui->PracticeFeature,&CardWidget::clicked,this,&MainWidget::OpenPracticeFeature);    
 
 }
 
@@ -274,9 +272,20 @@ void MainWidget::on_CompetitionFeature_clicked()
 
 void MainWidget::on_Publishcomp_clicked()
 {
-    CompetitionPublish *competitionPublish = new CompetitionPublish();
-    competitionPublish->setAttribute(Qt::WA_DeleteOnClose);
-    competitionPublish->show();
+    UserManager& userMgr = UserManager::instance();
+    int userStatus = userMgr.getUserStatus();
+
+    if (userStatus == 1)
+    {
+        CompetitionPublish* competitionPublish = new CompetitionPublish();
+        competitionPublish->setAttribute(Qt::WA_DeleteOnClose);
+        competitionPublish->show();
+    }
+    else
+    {
+        //弹窗警告权限不够
+        QMessageBox::warning(this, "警告", "权限不够，请联系管理员");
+    }
 
 }
 //数据可视化
@@ -290,9 +299,20 @@ void MainWidget::on_DataVisualization_clicked()
 // 跳转到管理界面
 void MainWidget::on_ComprehensiveManagementFeature_clicked()
 {
-    ComprehensiveManagement* comprehensiveManagement = new ComprehensiveManagement();
-    comprehensiveManagement->setAttribute(Qt::WA_DeleteOnClose);
-    comprehensiveManagement->show();
+    UserManager& userMgr = UserManager::instance();
+    int userStatus = userMgr.getUserStatus();
+
+    if (userStatus == 1)
+    {
+        ComprehensiveManagement* comprehensiveManagement = new ComprehensiveManagement();
+        comprehensiveManagement->setAttribute(Qt::WA_DeleteOnClose);
+        comprehensiveManagement->show();
+    }
+    else
+    {
+        //弹窗警告权限不够
+        QMessageBox::warning(this, "警告", "权限不够，请联系管理员");
+    }
 }
 
 //关于我们
@@ -351,10 +371,20 @@ void MainWidget::onEnterCompetition(int compId)
 
 void MainWidget::on_InsertArticleFeature_clicked()
 {
-    uploadArticle *uploadarticle = new uploadArticle();
-    uploadarticle->setAttribute(Qt::WA_DeleteOnClose);
-    uploadarticle->show();
-    
+    UserManager& userMgr = UserManager::instance();
+    int userStatus = userMgr.getUserStatus();
+
+    if (userStatus == 1)
+    {
+        uploadArticle* uploadarticle = new uploadArticle();
+        uploadarticle->setAttribute(Qt::WA_DeleteOnClose);
+        uploadarticle->show();
+    }
+    else
+    {
+        //弹窗警告权限不够
+        QMessageBox::warning(this, "警告", "权限不够，请联系管理员");
+    }
 }
 
 //排行榜
