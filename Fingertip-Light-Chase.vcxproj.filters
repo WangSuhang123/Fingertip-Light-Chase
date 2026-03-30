@@ -149,6 +149,9 @@
     <ClCompile Include="ChartService.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ComprehensiveManagement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Article.h">
@@ -220,9 +223,6 @@
     <ClInclude Include="usermanager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="userservice.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="debug\moc_predefs.h.cbt">
@@ -267,6 +267,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="DataVisualization.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="ComprehensiveManagement.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
@@ -386,6 +389,12 @@
     </QtMoc>
     <QtMoc Include="ChartService.h">
       <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="ComprehensiveManagement.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="userservice.h">
+      <Filter>Generated Files</Filter>
     </QtMoc>
   </ItemGroup>
 </Project>

@@ -73,12 +73,12 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <EnableMicrosoftCodeAnalysis>false</EnableMicrosoftCodeAnalysis>
-    <EnableClangTidyCodeAnalysis>true</EnableClangTidyCodeAnalysis>
+    <EnableClangTidyCodeAnalysis>false</EnableClangTidyCodeAnalysis>
     <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <EnableMicrosoftCodeAnalysis>false</EnableMicrosoftCodeAnalysis>
-    <EnableClangTidyCodeAnalysis>true</EnableClangTidyCodeAnalysis>
+    <EnableClangTidyCodeAnalysis>false</EnableClangTidyCodeAnalysis>
     <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -226,6 +226,7 @@
     <ClCompile Include="CompetitionRecordsDao.cpp" />
     <ClCompile Include="CompetitionRecordsService.cpp" />
     <ClCompile Include="CompetitionService.cpp" />
+    <ClCompile Include="ComprehensiveManagement.cpp" />
     <ClCompile Include="databasemanager.cpp" />
     <ClCompile Include="DataVisualization.cpp" />
     <ClCompile Include="fontservice.cpp" />
@@ -269,6 +270,7 @@
     <QtMoc Include="CompetitionRecordsService.h" />
     <QtMoc Include="CompetitionRecordsDao.h" />
     <QtMoc Include="ChartService.h" />
+    <QtMoc Include="ComprehensiveManagement.h" />
     <ClInclude Include="databasemanager.h" />
     <QtMoc Include="fontservice.h" />
     <QtMoc Include="fontworker.h" />
@@ -288,7 +290,7 @@
     <QtMoc Include="DataVisualization.h" />
     <ClInclude Include="userdao.h" />
     <ClInclude Include="usermanager.h" />
-    <ClInclude Include="userservice.h" />
+    <QtMoc Include="userservice.h" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="debug\moc_predefs.h.cbt">
@@ -309,6 +311,7 @@
   <ItemGroup>
     <QtUic Include="CompetitionLobbyWidget.ui" />
     <QtUic Include="CompetitionPublish.ui" />
+    <QtUic Include="ComprehensiveManagement.ui" />
     <QtUic Include="DataVisualization.ui" />
     <QtUic Include="PracticeSetupDialog.ui" />
     <QtUic Include="cardperformance.ui" />

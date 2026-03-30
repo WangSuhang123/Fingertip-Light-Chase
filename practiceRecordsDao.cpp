@@ -258,4 +258,3 @@ bool practiceRecordsDao::getCharCountPracticeData(int userId, int& totalCorrect,
 
     return false;
 }
-

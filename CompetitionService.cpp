@@ -45,3 +45,18 @@ QVariantMap CompetitionService::getCompetitionById(int compId)
 {
     return m_competitionDao.getCompetitionById(compId);
 }
+
+QSqlQueryModel* CompetitionService::selectAllCompetitions(const QString& schoolName)
+{
+    return m_competitionDao.selectAllCompetitions(schoolName);
+}
+
+QSqlQueryModel* CompetitionService::queryCompByDynamicField(const QString& schoolName, const QString& fieldName, const QString& keyword)
+{
+    return m_competitionDao.queryCompByDynamicField(schoolName, fieldName, keyword);
+}
+
+bool CompetitionService::deleteCompetition(int compId)
+{
+    return m_competitionDao.deleteCompetition(compId);
+}

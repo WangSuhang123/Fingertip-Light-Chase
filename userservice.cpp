@@ -2,8 +2,13 @@
 #include <QCryptographicHash> // Qt的加密库，用于MD5加密
 #include <QDebug>
 #include <QMessageBox>
-UserService::UserService() {}
 
+UserService::UserService(QObject* parent)
+    : QObject(parent) 
+{}
+
+UserService::~UserService()
+{}
 
 bool UserService::login(const QString& userName,const QString& password,const QString& studentId,const QString& schoolName,int& userId,int& userStatus)
 {
@@ -107,6 +112,26 @@ int UserService::getUserID(const QString& UserName, const QString& StudentID, co
     return m_userDao.getUserID(UserName, StudentID, SchoolName);
 }
 
+
+QSqlQueryModel* UserService::selectAllInfoFromUserInfo(const QString& schoolName)
+{
+    return m_userDao.selectAllInfoFromUserInfo(schoolName);
+}
+
+QSqlQueryModel* UserService::queryUserByDynamicField(const QString& schoolName, const QString& fieldName, const QString& keyword)
+{
+    return m_userDao.queryUserByDynamicField(schoolName, fieldName, keyword);
+}
+
+bool UserService::updateUserField(int userId, const QString& fieldName, const QString& newValue)
+{
+    return m_userDao.updateUserField(userId, fieldName, newValue);
+}
+
+bool UserService::deleteUser(int userId)
+{
+    return m_userDao.deleteUser(userId);
+}
 
 // 密码加密：MD5加密（Qt自带的QCryptographicHash实现）
 QString UserService::encryptPassword(const QString &rawPwd)

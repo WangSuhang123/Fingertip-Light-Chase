@@ -8,6 +8,7 @@
 #include <QApplication>
 #include <QFile>
 #include "DataVisualization.h"
+#include "ComprehensiveManagement.h"
 //#include <QSslSocket>
 int main(int argc, char *argv[])
 {
@@ -42,7 +43,10 @@ int main(int argc, char *argv[])
     // pw.show();
      /*MainWidget mw;
      mw.show();*/
-    DataVisualization data;
-    data.show();
+    /*DataVisualization data;
+    data.show();*/
+    ComprehensiveManagement cm;
+    cm.show();
+
     return a.exec();
 }

@@ -2,6 +2,8 @@
 #define USERDAO_H
 
 #include <QString>
+#include <QSqlQueryModel>
+#include <QSqlTableModel>
 
 class UserDao
 {
@@ -30,6 +32,16 @@ public:
     
     //获取用的id号
     int getUserID(const QString& UserName, const QString& StudentID, const QString& SchoolName);
+
+    //管理系统操作
+    //查询登录管理员学校内的所有成员
+    QSqlQueryModel* selectAllInfoFromUserInfo(const QString& SchoolName);
+    //条件查询
+    QSqlQueryModel* queryUserByDynamicField(const QString& schoolName,const QString& fieldName,const QString& keyword);
+    //修改
+    bool updateUserField(int userId, const QString& fieldName, const QString& newValue);
+    //删除
+    bool deleteUser(int userId);
 
 };
 

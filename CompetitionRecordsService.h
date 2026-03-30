@@ -4,6 +4,7 @@
 #include "CompetitionRecordsDao.h"
 #include <QVector>
 #include <QPointF>
+#include <QSqlQueryModel>
 
 class CompetitionRecordsService  : public QObject
 {
@@ -32,6 +33,17 @@ public:
 	bool getCharCountData(int userId, int& totalCorrect, int& totalError);
 	//数据表格
 	QVector<CompetitionFullRecord> getFullRecords(int userId);
+
+
+	//查询最近成绩
+	QVector<CompetitionFullRecord> getRecentRecords(int userId);
+
+	//比赛成绩表
+	QSqlQueryModel* queryCompScoreByDynamicField(const QString& fieldName, const QString& keyword);
+
+
+	//比赛成绩查询-全部
+	QSqlQueryModel* queryAllCompScoresBySchool(const QString& schoolName);
 
 private:
 	CompetitionRecordsDao competitionrecordsdao;

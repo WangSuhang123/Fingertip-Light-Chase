@@ -283,3 +283,109 @@ QVector<CompetitionFullRecord> CompetitionRecordsDao::getFullRecords(int userId)
 
     return list;
 }
+
+//查询最近成绩
+QVector<CompetitionFullRecord> CompetitionRecordsDao::getRecentRecords(int userId)
+{
+    QVector<CompetitionFullRecord> list;
+    QSqlQuery query;
+
+    // SQL：查当前用户 最新 1 条比赛记录（按提交时间倒序）
+    query.prepare(R"(
+        SELECT WPM, Accuracy, TimeUsed, FinalScore
+        FROM competition_records
+        WHERE UserID = ?
+        ORDER BY SubmitTime DESC
+        LIMIT 1
+    )");
+
+    query.addBindValue(userId);
+
+    if (query.exec() && query.next()) {
+        CompetitionFullRecord record;
+
+        // 读取字段
+        record.wpm = query.value("WPM").toInt();
+        record.accuracy = query.value("Accuracy").toDouble();
+        record.timeUsed = query.value("TimeUsed").toInt();
+        record.finalScore = query.value("FinalScore").toDouble();
+
+        list.append(record);
+    }
+
+    return list;
+}
+
+QSqlQueryModel* CompetitionRecordsDao::queryCompScoreByDynamicField(const QString& fieldName, const QString& keyword)
+{
+    QSqlDatabase db = DatabaseManager::instance().getDatabase();
+    QSqlQueryModel* model = new QSqlQueryModel;
+
+    // 三表连查：成绩 + 比赛 + 文章
+    QString sql = R"(
+        SELECT
+            cr.RecordID,
+            c.CompName,
+            a.ArticleName,
+            u.UserName,
+            u.StudentID,
+            cr.WPM,
+            cr.Accuracy,
+            cr.TimeUsed,
+            cr.FinalScore,
+            cr.SubmitTime
+        FROM competition_records cr
+        JOIN competitions c ON cr.CompID = c.CompID
+        JOIN articleinfo a ON c.ArticleID = a.ArticleID
+        JOIN userinfo u ON cr.UserID = u.UserID
+        WHERE )" + fieldName + R"( LIKE ?
+        ORDER BY cr.FinalScore DESC
+    )";
+
+    QSqlQuery query;
+    query.prepare(sql);
+    query.addBindValue("%" + keyword + "%");
+
+    if (!query.exec()) {
+        qDebug() << "比赛成绩查询失败：" << query.lastError().text();
+    }
+
+    model->setQuery(query);
+    return model;
+}
+
+QSqlQueryModel* CompetitionRecordsDao::queryAllCompScoresBySchool(const QString& schoolName)
+{
+    QSqlDatabase db = DatabaseManager::instance().getDatabase();
+    QSqlQueryModel* model = new QSqlQueryModel;
+
+    // 四表连查 + 按学校筛选
+    QString sql = R"(
+        SELECT
+            cr.RecordID,
+            c.CompName,
+            a.ArticleName,
+            u.UserName,
+            u.StudentID,
+            u.SchoolName,
+            cr.WPM,
+            cr.Accuracy,
+            cr.TimeUsed,
+            cr.FinalScore,
+            cr.SubmitTime
+        FROM competition_records cr
+        JOIN competitions c ON cr.CompID = c.CompID
+        JOIN articleinfo a ON c.ArticleID = a.ArticleID
+        JOIN userinfo u ON cr.UserID = u.UserID
+        WHERE u.SchoolName = ?
+        ORDER BY cr.FinalScore DESC
+    )";
+
+    QSqlQuery query(db);
+    query.prepare(sql);
+    query.addBindValue(schoolName);  // 按学校查询
+    query.exec();
+
+    model->setQuery(query);
+    return model;
+}

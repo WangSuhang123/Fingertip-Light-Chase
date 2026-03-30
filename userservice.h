@@ -1,12 +1,16 @@
 #ifndef USERSERVICE_H
 #define USERSERVICE_H
+#include <QObject>
 // 引入DAO层，Service层依赖DAO层
 #include "userdao.h"
 
-class UserService
+class UserService : public QObject
 {
+    Q_OBJECT
+
 public:
-    UserService();
+    UserService(QObject* parent = nullptr);
+    ~UserService();
 
     // 登录验证（只查询一次数据库）
 // 返回是否登录成功，同时返回 userId 和 userStatus
@@ -27,6 +31,19 @@ public:
 
     //获取用户id
     int getUserID(const QString& UserName, const QString& StudentID, const QString& SchoolName);
+
+
+    //管理系统操作
+    //查询登录管理员学校内的所有成员
+    QSqlQueryModel* selectAllInfoFromUserInfo(const QString& schoolName);
+    //条件查询
+    QSqlQueryModel* queryUserByDynamicField(const QString& schoolName,const QString& fieldName,const QString& keyword);
+    //修改
+    bool updateUserField(int userId, const QString& fieldName, const QString& newValue);
+    //删除
+    bool deleteUser(int userId);
+
+
 private:
     //密码加密（业务逻辑示例，比如MD5加密） return 加密后的密码字符串
     QString encryptPassword(const QString &rawPwd);

@@ -53,8 +53,8 @@ public:
     QVBoxLayout *verticalLayout;
     CardPerformance *typeSpeed;
     CardPerformance *Accuracy;
-    CardPerformance *Competitions;
-    CardPerformance *Rank;
+    CardPerformance *usedTime;
+    CardPerformance *finalScore;
     QWidget *MainFunturesWidget;
     QVBoxLayout *verticalLayout_5;
     QScrollArea *scrollArea;
@@ -68,14 +68,14 @@ public:
     QWidget *FuntureWidget;
     QGridLayout *gridLayout;
     CardWidget *LeaderboardFeature;
-    CardWidget *InfoManagerFeature;
-    CardWidget *beiyong2;
+    CardWidget *InsertArticleFeature;
     CardWidget *CompetitionFeature;
     CardWidget *PracticeFeature;
-    CardWidget *beiyong3;
-    CardWidget *beiyong1;
-    CardWidget *SettingFeature;
-    CardWidget *InsertArticleFeature;
+    CardWidget *Feedback;
+    CardWidget *Publishcomp;
+    CardWidget *DataVisualization;
+    CardWidget *ComprehensiveManagementFeature;
+    CardWidget *AboutUs;
     QWidget *TipsWidget;
     QVBoxLayout *verticalLayout_3;
     QLabel *label_4;
@@ -200,15 +200,15 @@ public:
 
         verticalLayout->addWidget(Accuracy);
 
-        Competitions = new CardPerformance(widget);
-        Competitions->setObjectName("Competitions");
+        usedTime = new CardPerformance(widget);
+        usedTime->setObjectName("usedTime");
 
-        verticalLayout->addWidget(Competitions);
+        verticalLayout->addWidget(usedTime);
 
-        Rank = new CardPerformance(widget);
-        Rank->setObjectName("Rank");
+        finalScore = new CardPerformance(widget);
+        finalScore->setObjectName("finalScore");
 
-        verticalLayout->addWidget(Rank);
+        verticalLayout->addWidget(finalScore);
 
 
         verticalLayout_2->addWidget(widget);
@@ -279,19 +279,12 @@ public:
 
         gridLayout->addWidget(LeaderboardFeature, 0, 2, 1, 1);
 
-        InfoManagerFeature = new CardWidget(FuntureWidget);
-        InfoManagerFeature->setObjectName("InfoManagerFeature");
-        InfoManagerFeature->setFrameShape(QFrame::Shape::StyledPanel);
-        InfoManagerFeature->setFrameShadow(QFrame::Shadow::Raised);
+        InsertArticleFeature = new CardWidget(FuntureWidget);
+        InsertArticleFeature->setObjectName("InsertArticleFeature");
+        InsertArticleFeature->setFrameShape(QFrame::Shape::StyledPanel);
+        InsertArticleFeature->setFrameShadow(QFrame::Shadow::Raised);
 
-        gridLayout->addWidget(InfoManagerFeature, 3, 1, 1, 1);
-
-        beiyong2 = new CardWidget(FuntureWidget);
-        beiyong2->setObjectName("beiyong2");
-        beiyong2->setFrameShape(QFrame::Shape::StyledPanel);
-        beiyong2->setFrameShadow(QFrame::Shadow::Raised);
-
-        gridLayout->addWidget(beiyong2, 4, 1, 1, 1);
+        gridLayout->addWidget(InsertArticleFeature, 4, 1, 1, 1);
 
         CompetitionFeature = new CardWidget(FuntureWidget);
         CompetitionFeature->setObjectName("CompetitionFeature");
@@ -307,33 +300,40 @@ public:
 
         gridLayout->addWidget(PracticeFeature, 0, 0, 1, 1);
 
-        beiyong3 = new CardWidget(FuntureWidget);
-        beiyong3->setObjectName("beiyong3");
-        beiyong3->setFrameShape(QFrame::Shape::StyledPanel);
-        beiyong3->setFrameShadow(QFrame::Shadow::Raised);
+        Feedback = new CardWidget(FuntureWidget);
+        Feedback->setObjectName("Feedback");
+        Feedback->setFrameShape(QFrame::Shape::StyledPanel);
+        Feedback->setFrameShadow(QFrame::Shadow::Raised);
 
-        gridLayout->addWidget(beiyong3, 4, 2, 1, 1);
+        gridLayout->addWidget(Feedback, 4, 2, 1, 1);
 
-        beiyong1 = new CardWidget(FuntureWidget);
-        beiyong1->setObjectName("beiyong1");
-        beiyong1->setFrameShape(QFrame::Shape::StyledPanel);
-        beiyong1->setFrameShadow(QFrame::Shadow::Raised);
+        Publishcomp = new CardWidget(FuntureWidget);
+        Publishcomp->setObjectName("Publishcomp");
+        Publishcomp->setFrameShape(QFrame::Shape::StyledPanel);
+        Publishcomp->setFrameShadow(QFrame::Shadow::Raised);
 
-        gridLayout->addWidget(beiyong1, 4, 0, 1, 1);
+        gridLayout->addWidget(Publishcomp, 4, 0, 1, 1);
 
-        SettingFeature = new CardWidget(FuntureWidget);
-        SettingFeature->setObjectName("SettingFeature");
-        SettingFeature->setFrameShape(QFrame::Shape::StyledPanel);
-        SettingFeature->setFrameShadow(QFrame::Shadow::Raised);
+        DataVisualization = new CardWidget(FuntureWidget);
+        DataVisualization->setObjectName("DataVisualization");
+        DataVisualization->setFrameShape(QFrame::Shape::StyledPanel);
+        DataVisualization->setFrameShadow(QFrame::Shadow::Raised);
 
-        gridLayout->addWidget(SettingFeature, 3, 2, 1, 1);
+        gridLayout->addWidget(DataVisualization, 3, 2, 1, 1);
 
-        InsertArticleFeature = new CardWidget(FuntureWidget);
-        InsertArticleFeature->setObjectName("InsertArticleFeature");
-        InsertArticleFeature->setFrameShape(QFrame::Shape::StyledPanel);
-        InsertArticleFeature->setFrameShadow(QFrame::Shadow::Raised);
+        ComprehensiveManagementFeature = new CardWidget(FuntureWidget);
+        ComprehensiveManagementFeature->setObjectName("ComprehensiveManagementFeature");
+        ComprehensiveManagementFeature->setFrameShape(QFrame::Shape::StyledPanel);
+        ComprehensiveManagementFeature->setFrameShadow(QFrame::Shadow::Raised);
 
-        gridLayout->addWidget(InsertArticleFeature, 3, 0, 1, 1);
+        gridLayout->addWidget(ComprehensiveManagementFeature, 3, 0, 1, 1);
+
+        AboutUs = new CardWidget(FuntureWidget);
+        AboutUs->setObjectName("AboutUs");
+        AboutUs->setFrameShape(QFrame::Shape::StyledPanel);
+        AboutUs->setFrameShadow(QFrame::Shadow::Raised);
+
+        gridLayout->addWidget(AboutUs, 3, 1, 1, 1);
 
 
         verticalLayout_4->addWidget(FuntureWidget);
@@ -391,13 +391,13 @@ public:
         label_6->setText(QCoreApplication::translate("MainWidget", "Fingertip-Light-Chase", nullptr));
         label_5->setText(QCoreApplication::translate("MainWidget", "Welcome USERNAME!!!", nullptr));
         LogOutBtn->setText(QCoreApplication::translate("MainWidget", "LogOut", nullptr));
-        label->setText(QCoreApplication::translate("MainWidget", "Your Performance", nullptr));
+        label->setText(QCoreApplication::translate("MainWidget", "\346\234\200\350\277\221\346\210\220\347\273\251", nullptr));
         label_2->setText(QString());
         label_4->setText(QCoreApplication::translate("MainWidget", "Tips:", nullptr));
-        label_3->setText(QCoreApplication::translate("MainWidget", "Practice daily for 15-20 minutes to improve your speed. \n"
-"Focus on accuracy first, speed will follow naturally \n"
-"Use proper finger placement on home row keys \n"
-"Join competitions to challenge yourself and track progress", nullptr));
+        label_3->setText(QCoreApplication::translate("MainWidget", "\346\257\217\345\244\251\347\273\203\344\271\240 15-20 \345\210\206\351\222\237\357\274\214\346\217\220\345\215\207\346\211\223\345\255\227\351\200\237\345\272\246\343\200\202\n"
+"\345\205\210\344\270\223\346\263\250\346\255\243\347\241\256\347\216\207\357\274\214\351\200\237\345\272\246\350\207\252\347\204\266\344\274\232\351\232\217\344\271\213\346\217\220\345\215\207\343\200\202\n"
+"\345\237\272\345\207\206\351\224\256\344\275\215\344\275\277\347\224\250\346\255\243\347\241\256\347\232\204\346\214\207\346\263\225\346\221\206\346\224\276\343\200\202\n"
+"\345\217\202\344\270\216\350\265\233\344\272\213\346\214\221\346\210\230\350\207\252\346\210\221\357\274\214\350\256\260\345\275\225\346\210\220\351\225\277\350\277\233\345\272\246\343\200\202", nullptr));
     } // retranslateUi
 
 };

@@ -179,7 +179,7 @@ font: 700 12pt &quot;微软雅黑&quot;;</string>
              <item>
               <widget class="QLabel" name="label">
                <property name="text">
-                <string>Your Performance</string>
+                <string>最近成绩</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignmentFlag::AlignBottom|Qt::AlignmentFlag::AlignHCenter</set>
@@ -208,10 +208,10 @@ font: 700 12pt &quot;微软雅黑&quot;;</string>
               <widget class="CardPerformance" name="Accuracy"/>
              </item>
              <item>
-              <widget class="CardPerformance" name="Competitions"/>
+              <widget class="CardPerformance" name="usedTime"/>
              </item>
              <item>
-              <widget class="CardPerformance" name="Rank"/>
+              <widget class="CardPerformance" name="finalScore"/>
              </item>
             </layout>
            </widget>
@@ -356,18 +356,8 @@ font: 700 12pt &quot;微软雅黑&quot;;</string>
                       </property>
                      </widget>
                     </item>
-                    <item row="3" column="1">
-                     <widget class="CardWidget" name="InfoManagerFeature">
-                      <property name="frameShape">
-                       <enum>QFrame::Shape::StyledPanel</enum>
-                      </property>
-                      <property name="frameShadow">
-                       <enum>QFrame::Shadow::Raised</enum>
-                      </property>
-                     </widget>
-                    </item>
                     <item row="4" column="1">
-                     <widget class="CardWidget" name="beiyong2">
+                     <widget class="CardWidget" name="InsertArticleFeature">
                       <property name="frameShape">
                        <enum>QFrame::Shape::StyledPanel</enum>
                       </property>
@@ -397,7 +387,7 @@ font: 700 12pt &quot;微软雅黑&quot;;</string>
                      </widget>
                     </item>
                     <item row="4" column="2">
-                     <widget class="CardWidget" name="beiyong3">
+                     <widget class="CardWidget" name="Feedback">
                       <property name="frameShape">
                        <enum>QFrame::Shape::StyledPanel</enum>
                       </property>
@@ -407,7 +397,7 @@ font: 700 12pt &quot;微软雅黑&quot;;</string>
                      </widget>
                     </item>
                     <item row="4" column="0">
-                     <widget class="CardWidget" name="beiyong1">
+                     <widget class="CardWidget" name="Publishcomp">
                       <property name="frameShape">
                        <enum>QFrame::Shape::StyledPanel</enum>
                       </property>
@@ -417,7 +407,7 @@ font: 700 12pt &quot;微软雅黑&quot;;</string>
                      </widget>
                     </item>
                     <item row="3" column="2">
-                     <widget class="CardWidget" name="SettingFeature">
+                     <widget class="CardWidget" name="DataVisualization">
                       <property name="frameShape">
                        <enum>QFrame::Shape::StyledPanel</enum>
                       </property>
@@ -427,7 +417,17 @@ font: 700 12pt &quot;微软雅黑&quot;;</string>
                      </widget>
                     </item>
                     <item row="3" column="0">
-                     <widget class="CardWidget" name="InsertArticleFeature">
+                     <widget class="CardWidget" name="ComprehensiveManagementFeature">
+                      <property name="frameShape">
+                       <enum>QFrame::Shape::StyledPanel</enum>
+                      </property>
+                      <property name="frameShadow">
+                       <enum>QFrame::Shadow::Raised</enum>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="3" column="1">
+                     <widget class="CardWidget" name="AboutUs">
                       <property name="frameShape">
                        <enum>QFrame::Shape::StyledPanel</enum>
                       </property>
@@ -457,10 +457,10 @@ border-radius:10px;</string>
                     <item>
                      <widget class="QLabel" name="label_3">
                       <property name="text">
-                       <string>Practice daily for 15-20 minutes to improve your speed. 
-Focus on accuracy first, speed will follow naturally 
-Use proper finger placement on home row keys 
-Join competitions to challenge yourself and track progress</string>
+                       <string>每天练习 15-20 分钟，提升打字速度。
+先专注正确率，速度自然会随之提升。
+基准键位使用正确的指法摆放。
+参与赛事挑战自我，记录成长进度。</string>
                       </property>
                      </widget>
                     </item>

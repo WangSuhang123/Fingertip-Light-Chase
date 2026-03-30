@@ -4,6 +4,8 @@
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QSqlDatabase>
+#include <QSqlQueryModel>
+#include <QSqlTableModel>
 
 UserDao::UserDao() {}
 
@@ -190,5 +192,100 @@ int UserDao::getUserID(const QString& UserName, const QString& StudentID, const 
     return 0; 
 }
 
+//返回除密码列的所有信息
+//查询登录管理员学校内的所有成员
+QSqlQueryModel* UserDao::selectAllInfoFromUserInfo(const QString& SchoolName)
+{
+    QSqlDatabase& db = DatabaseManager::instance().getDatabase();
+
+    // 1. 创建并绑定参数
+    QSqlQuery query(db);
+    query.prepare("SELECT UserID, UserName, StudentID, SchoolName, EMail, UserStatus FROM userinfo WHERE SchoolName = ?");
+    query.addBindValue(SchoolName);  // 绑定学校名称
+
+    // 执行查询
+    if (!query.exec()) {
+        qCritical() << "查询userinfo失败：" << query.lastError().text();
+        return nullptr;
+    }
+
+    // 将结果交给 model
+    QSqlQueryModel* model = new QSqlQueryModel();
+    model->setQuery(std::move(query));  // Qt5.14+ 支持移动语义，效率更高
+
+    // 4. 错误检查
+    if (model->lastError().isValid()) {
+        qCritical() << "Model设置查询失败：" << model->lastError().text();
+    }
+
+    return model;
+
+}
+
+QSqlQueryModel* UserDao::queryUserByDynamicField(const QString& schoolName, const QString& fieldName, const QString& keyword)
+{
+    QSqlDatabase db = DatabaseManager::instance().getDatabase();
+
+    QSqlQueryModel* model = new QSqlQueryModel;
+
+    // 一条 SQL 动态适配 3 个字段
+    QString sql = R"(SELECT UserID, UserName, StudentID, SchoolName, EMail, UserStatus FROM userinfo WHERE SchoolName = ? AND )" + fieldName + R"( LIKE ?)";
+
+    QSqlQuery query(db);
+    query.prepare(sql);
+    query.addBindValue(schoolName);
+    query.addBindValue("%" + keyword + "%");
+    if (!query.exec()) {
+        qDebug() << "SQL 执行失败：" << query.lastError().text();
+        qDebug() << "SQL 语句：" << query.executedQuery();
+    }
+
+    model->setQuery(query);
+    return model;
+}
 
 
+bool UserDao::updateUserField(int userId, const QString& fieldName, const QString& newValue)
+{
+    QString realField;
+
+    // 只允许修改这 3 个！
+    if (fieldName == "用户名")       realField = "UserName";
+    else if (fieldName == "学号")    realField = "StudentID";
+    else if (fieldName == "EMail")   realField = "EMail";
+
+    // 学校、权限 直接 return false，不处理
+    else return false;
+
+    QSqlDatabase db = DatabaseManager::instance().getDatabase();
+    QSqlQuery query(db);
+
+    QString sql = QString("UPDATE userinfo SET %1 = ? WHERE UserID = ?").arg(realField);
+    query.prepare(sql);
+    query.addBindValue(newValue);
+    query.addBindValue(userId);
+
+    if (!query.exec()) {
+        qDebug() << "用户修改失败：" << query.lastError().text();
+        return false;
+    }
+
+    return true;
+}
+
+bool UserDao::deleteUser(int userId)
+{
+    QSqlDatabase db = DatabaseManager::instance().getDatabase();
+
+    QSqlQuery query(db);
+
+    query.prepare("DELETE FROM userinfo WHERE UserID = ?");
+
+    query.addBindValue(userId);
+
+    if (!query.exec()) {
+        qDebug() << "用户删除失败：" << query.lastError().text();
+        return false;
+    }
+    return true;
+}

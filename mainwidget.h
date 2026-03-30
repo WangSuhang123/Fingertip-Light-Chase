@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "CompetitionService.h"
+#include "CompetitionRecordsService.h"
 
 namespace Ui {
 class MainWidget;
@@ -20,6 +21,7 @@ private:
     Ui::MainWidget *ui;
 
     CompetitionService* competitionService;
+    CompetitionRecordsService* competitionRecordsService;
 
     void widgetStyle();
     void CardPerformanceStyle();
@@ -34,6 +36,9 @@ private:
     //打开练习功能
     void OpenPracticeFeature();
 
+    //展示最近的比赛成绩
+    void ShowRecentCompetitionResult();
+
 private slots:
     void onEnterCompetition(int compId);
     //打开新增文章功能
@@ -41,9 +46,12 @@ private slots:
     //打开赛事大厅
     void on_CompetitionFeature_clicked();
     //打开赛事发布功能
-    void on_beiyong1_clicked();
+    void on_Publishcomp_clicked();
     //打卡数据可视化功能
-    void on_SettingFeature_clicked();
+    void on_DataVisualization_clicked();
+
+    //综合管理
+    void on_ComprehensiveManagementFeature_clicked();
 
 
     

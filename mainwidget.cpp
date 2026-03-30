@@ -9,6 +9,7 @@
 #include "CompetitionPublish.h"
 #include "practicewidget.h"
 #include "DataVisualization.h"
+#include "ComprehensiveManagement.h"
 
 #include <QStyle>
 
@@ -19,6 +20,7 @@ MainWidget::MainWidget(QWidget *parent)
     ui->setupUi(this);
 
     competitionService = new CompetitionService(this);
+    competitionRecordsService= new CompetitionRecordsService(this);
     
     //Style样式
     widgetStyle();
@@ -26,6 +28,8 @@ MainWidget::MainWidget(QWidget *parent)
     FunturesCardStyle();
     //设置用户登录的欢迎横幅（用户名-学校-权限
     UpdateWidgetTitle();
+    //个人最近成绩
+    ShowRecentCompetitionResult();
     // 连接点击信号
     connect(ui->typeSpeed, &CardPerformance::clicked, this, []{
         qDebug() << "Type Speed Card Clicked!";
@@ -57,33 +61,33 @@ void MainWidget::CardPerformanceStyle()
 {
     ui->typeSpeed->setProperty("theme","blue");
     ui->Accuracy->setProperty("theme","green");
-    ui->Competitions->setProperty("theme","orange");
+    ui->usedTime->setProperty("theme","orange");
 
     ui->typeSpeed->style()->polish(ui->typeSpeed);
     ui->Accuracy->style()->polish(ui->Accuracy);
-    ui->Competitions->style()->polish(ui->Competitions);
+    ui->usedTime->style()->polish(ui->usedTime);
 
     //默认内容显示
     //第一个，value通过别的进行设置，先给一个null值
-    ui->typeSpeed->setTitle("Typing Speed");
+    ui->typeSpeed->setTitle("WPM");
     ui->typeSpeed->setValue("null");
     ui->typeSpeed->setDescription("words per minute");
     ui->typeSpeed->setIcon(QPixmap(":/res/Blizt.png"));
     //第二个
-    ui->Accuracy->setTitle("Accuracy");
+    ui->Accuracy->setTitle("正确率");
     ui->Accuracy->setValue("null");
-    ui->Accuracy->setDescription("average accuracy");
+    ui->Accuracy->setDescription("accuracy");
     ui->Accuracy->setIcon(QPixmap(":/res/rakete.png"));
     //第三个
-    ui->Competitions->setTitle("Competitions");
-    ui->Competitions->setValue("null");
-    ui->Competitions->setDescription("participated");
-    ui->Competitions->setIcon(QPixmap(":/res/Rank.png"));
+    ui->usedTime->setTitle("使用时间");
+    ui->usedTime->setValue("null");
+    ui->usedTime->setDescription("used time");
+    ui->usedTime->setIcon(QPixmap(":/res/Rank.png"));
     //第四个
-    ui->Rank->setTitle("Your Rank");
-    ui->Rank->setValue("null");
-    ui->Rank->setDescription("global ranking");
-    ui->Rank->setIcon(QPixmap(":/res/banner.png"));
+    ui->finalScore->setTitle("综合评分");
+    ui->finalScore->setValue("null");
+    ui->finalScore->setDescription("Overall Score");
+    ui->finalScore->setIcon(QPixmap(":/res/banner.png"));
 
 }
 
@@ -93,21 +97,21 @@ void MainWidget::FunturesCardStyle()
     ui->PracticeFeature->setProperty("theme","lightblue");
     ui->CompetitionFeature->setProperty("theme","darkblue");
     ui->LeaderboardFeature->setProperty("theme","purple");
-    ui->InsertArticleFeature->setProperty("theme","lightgreen");
-    ui->InfoManagerFeature->setProperty("theme","pink");
-    ui->SettingFeature->setProperty("theme","lightyellow");
-    ui->beiyong1->setProperty("theme","cyan");
-    ui->beiyong2->setProperty("theme","amber");
+    ui->ComprehensiveManagementFeature->setProperty("theme","lightgreen");
+    ui->AboutUs->setProperty("theme","pink");
+    ui->DataVisualization->setProperty("theme","lightyellow");
+    ui->Publishcomp->setProperty("theme","cyan");
+    ui->InsertArticleFeature->setProperty("theme","amber");
     //备用三是默认白色
     //刷新样式
     ui->PracticeFeature->style()->polish(ui->PracticeFeature);
     ui->CompetitionFeature->style()->polish(ui->CompetitionFeature);
     ui->LeaderboardFeature->style()->polish(ui->LeaderboardFeature);
     ui->InsertArticleFeature->style()->polish(ui->InsertArticleFeature);
-    ui->InfoManagerFeature->style()->polish(ui->InfoManagerFeature);
-    ui->SettingFeature->style()->polish(ui->SettingFeature);
-    ui->beiyong1->style()->polish(ui->beiyong1);
-    ui->beiyong2->style()->polish(ui->beiyong2);
+    ui->Feedback->style()->polish(ui->Feedback);
+    ui->DataVisualization->style()->polish(ui->DataVisualization);
+    ui->Publishcomp->style()->polish(ui->Publishcomp);
+    ui->ComprehensiveManagementFeature->style()->polish(ui->ComprehensiveManagementFeature);
 
     //设置默认卡片控件显示内容
     //第一个
@@ -123,29 +127,29 @@ void MainWidget::FunturesCardStyle()
     ui->LeaderboardFeature->setIcon(QPixmap(":/res/icon/data.png"));
     ui->LeaderboardFeature->setDescription("查看在本学校的排行榜");
     //第四个
-    ui->InsertArticleFeature->setTitle("新增文章");
-    ui->InsertArticleFeature->setIcon(QPixmap(":/res/icon/app.png"));
-    ui->InsertArticleFeature->setDescription("管理员新增文章");
+    ui->ComprehensiveManagementFeature->setTitle("综合管理");
+    ui->ComprehensiveManagementFeature->setIcon(QPixmap(":/res/icon/app.png"));
+    ui->ComprehensiveManagementFeature->setDescription("综合管理");
     //第五个
-    ui->InfoManagerFeature->setTitle("文章管理");
-    ui->InfoManagerFeature->setIcon(QPixmap(":/res/icon/team.png"));
-    ui->InfoManagerFeature->setDescription("管理员文章管理");
+    ui->AboutUs->setTitle("关于我们");
+    ui->AboutUs->setIcon(QPixmap(":/res/icon/team.png"));
+    ui->AboutUs->setDescription("关于我们");
     //第六个
-    ui->SettingFeature->setTitle("数据可视化");
-    ui->SettingFeature->setIcon(QPixmap(":/res/icon/shiyan.png"));
-    ui->SettingFeature->setDescription("数据可视化");
+    ui->DataVisualization->setTitle("数据可视化");
+    ui->DataVisualization->setIcon(QPixmap(":/res/icon/shiyan.png"));
+    ui->DataVisualization->setDescription("数据可视化");
     //第七个
-    ui->beiyong1->setTitle("比赛发布");
-    ui->beiyong1->setIcon(QPixmap(":/res/icon/tongji.png"));
-    ui->beiyong1->setDescription("管理员发布比赛");
+    ui->Publishcomp->setTitle("比赛发布");
+    ui->Publishcomp->setIcon(QPixmap(":/res/icon/tongji.png"));
+    ui->Publishcomp->setDescription("管理员发布比赛");
     //第八个
-    ui->beiyong2->setTitle("人员管理");
-    ui->beiyong2->setIcon(QPixmap(":/res/icon/kefu.png"));
-    ui->beiyong2->setDescription("管理员人员管理");
+    ui->InsertArticleFeature->setTitle("新增文章");
+    ui->InsertArticleFeature->setIcon(QPixmap(":/res/icon/kefu.png"));
+    ui->InsertArticleFeature->setDescription("新增文章");
     //第九个
-    ui->beiyong3->setTitle("信息");
-    ui->beiyong3->setIcon(QPixmap(":/res/icon/xiaoxi.png"));
-    ui->beiyong3->setDescription("消息");
+    ui->Feedback->setTitle("反馈");
+    ui->Feedback->setIcon(QPixmap(":/res/icon/xiaoxi.png"));
+    ui->Feedback->setDescription("畅所欲言");
 }
 
 void MainWidget::Logout()
@@ -226,6 +230,36 @@ void MainWidget::OpenPracticeFeature()
     practiceDialog->setAttribute(Qt::WA_DeleteOnClose);
     practiceDialog->show();
 }
+//最近比赛成绩展示
+void MainWidget::ShowRecentCompetitionResult()
+{
+    //获取用户id
+    UserManager& userMgr = UserManager::instance();
+    int userID = userMgr.getCurrentUserID();
+    
+    // 获取最近的比赛
+    QVector<CompetitionFullRecord> records = competitionRecordsService->getRecentRecords(userID);
+
+    if (records.isEmpty()) {
+        ui->typeSpeed->setValue("未参加比赛");
+        ui->Accuracy->setValue("未参加比赛");
+        ui->usedTime->setValue("未参加比赛");
+        ui->finalScore->setValue("未参加比赛");
+        return;
+    }
+
+    // 获取最新的比赛
+    CompetitionFullRecord record = records.first();
+
+    // 显示数据
+    ui->typeSpeed->setValue(QString::number(record.wpm));
+    ui->Accuracy->setValue(QString::number(record.accuracy));
+    ui->usedTime->setValue(QString::number(record.timeUsed));
+    ui->finalScore->setValue(QString::number(record.finalScore));
+
+
+
+}
 
 void MainWidget::on_CompetitionFeature_clicked()
 {
@@ -237,19 +271,27 @@ void MainWidget::on_CompetitionFeature_clicked()
     competitionLobby->show();
 }
 
-void MainWidget::on_beiyong1_clicked()
+void MainWidget::on_Publishcomp_clicked()
 {
     CompetitionPublish *competitionPublish = new CompetitionPublish();
     competitionPublish->setAttribute(Qt::WA_DeleteOnClose);
     competitionPublish->show();
 
 }
-
-void MainWidget::on_SettingFeature_clicked()
+//数据可视化
+void MainWidget::on_DataVisualization_clicked()
 {
     DataVisualization *dataVisualization = new DataVisualization();
     dataVisualization->setAttribute(Qt::WA_DeleteOnClose);
     dataVisualization->show();
+}
+
+// 跳转到管理界面
+void MainWidget::on_ComprehensiveManagementFeature_clicked()
+{
+    ComprehensiveManagement* comprehensiveManagement = new ComprehensiveManagement();
+    comprehensiveManagement->setAttribute(Qt::WA_DeleteOnClose);
+    comprehensiveManagement->show();
 }
 
 void MainWidget::onEnterCompetition(int compId)

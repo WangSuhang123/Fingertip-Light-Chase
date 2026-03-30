@@ -1,6 +1,9 @@
 #pragma once
 
 #include <QObject>
+#include <QSqlQueryModel>
+#include <QSqlTableModel>
+
 
 class CompetitionDao  : public QObject
 {
@@ -26,6 +29,16 @@ public:
     QVariantMap getCompetitionById(int compId);
 
     
+    //综合管理比赛表
+    //全查询
+    QSqlQueryModel* selectAllCompetitions(const QString& schoolName);
+    //条件查询
+    QSqlQueryModel* queryCompByDynamicField(const QString& schoolName, const QString& fieldName, const QString& keyword);
+
+    //删除
+    bool deleteCompetition(int compId);
+
+
 
 
 private:

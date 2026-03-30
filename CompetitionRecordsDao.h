@@ -2,6 +2,7 @@
 
 #include <QObject>
 #include <QPointF>
+#include <QSqlQueryModel>
 
 struct CompetitionFullRecord
 {
@@ -43,7 +44,14 @@ public:
 	//获取字数（正确和错误）
 	bool getCharCountData(int userId,int& totalCorrect,int& totalError);
 
+	//查询最近成绩
+	QVector<CompetitionFullRecord> getRecentRecords(int userId);
 	
+	//比赛成绩表-条件查询
+	QSqlQueryModel* queryCompScoreByDynamicField(const QString& fieldName, const QString& keyword);
+
+	//比赛成绩查询-全部
+	QSqlQueryModel* queryAllCompScoresBySchool(const QString& schoolName);
 
 
 };

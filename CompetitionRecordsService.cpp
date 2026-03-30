@@ -45,6 +45,21 @@ QVector<CompetitionFullRecord> CompetitionRecordsService::getFullRecords(int use
 	return competitionrecordsdao.getFullRecords(userId);
 }
 
+QVector<CompetitionFullRecord> CompetitionRecordsService::getRecentRecords(int userId)
+{
+	return competitionrecordsdao.getRecentRecords(userId);
+}
+
+QSqlQueryModel* CompetitionRecordsService::queryCompScoreByDynamicField(const QString& fieldName, const QString& keyword)
+{
+	return competitionrecordsdao.queryCompScoreByDynamicField(fieldName, keyword);
+}
+
+QSqlQueryModel* CompetitionRecordsService::queryAllCompScoresBySchool(const QString& schoolName)
+{
+	return competitionrecordsdao.queryAllCompScoresBySchool(schoolName);
+}
+
 
 
 

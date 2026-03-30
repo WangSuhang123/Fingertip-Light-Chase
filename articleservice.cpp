@@ -2,7 +2,11 @@
 #include <QDebug>
 #include <QMessageBox>
 
-ArticleService::ArticleService() {}
+ArticleService::ArticleService(QObject* parent) : QObject(parent) {}
+
+ArticleService::~ArticleService()
+{
+}
 
 QList<Article> ArticleService::getArticleListForDropdown()
 {
@@ -77,4 +81,29 @@ bool ArticleService::isInsertNewArticleInfo(const QString& title, const QString&
 		}
 
 	}
+}
+
+QSqlQueryModel* ArticleService::selectAllArticleInfo()
+{
+	return articleDao.selectAllArticleInfo();
+}
+
+QSqlQueryModel* ArticleService::selectArticleInfoByArticleName(const QString& articleName)
+{
+	return articleDao.selectArticleInfoByArticleName(articleName);
+}
+
+QSqlQueryModel* ArticleService::selectArticleInfoByAuthor(const QString& author)
+{
+	return articleDao.selectArticleInfoByAuthor(author);
+}
+
+bool ArticleService::deleteArticleInfoByArticleId(int articleID)
+{
+	return articleDao.deleteArticleInfoByArticleId(articleID);
+}
+
+bool ArticleService::updateArticleField(int articleId, const QString& fieldName, const QString& newValue)
+{
+	return articleDao.updateArticleField(articleId, fieldName, newValue);
 }

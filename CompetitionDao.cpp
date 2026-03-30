@@ -109,3 +109,91 @@ QVariantMap CompetitionDao::getCompetitionById(int compId)
     return map;
 }
 
+QSqlQueryModel* CompetitionDao::selectAllCompetitions(const QString& schoolName)
+{
+    QSqlDatabase& db = DatabaseManager::instance().getDatabase();
+
+    QSqlQuery query(db);
+    query.prepare(R"(
+        SELECT
+            c.CompID,
+            c.CompName,
+            a.ArticleName,
+            u.UserName,
+            c.TargetSchool,
+            c.StartTime,
+            c.EndTime,
+            c.CreatedAt,
+            c.DurationMinutes
+        FROM competitions c
+        JOIN articleinfo a ON c.ArticleID = a.ArticleID
+        JOIN userinfo u ON c.CreatorID = u.UserID
+        WHERE c.TargetSchool = ?
+    )");
+
+    query.addBindValue(schoolName);
+
+    if (!query.exec()) {
+        qCritical() << "查询比赛失败：" << query.lastError().text();
+        return nullptr;
+    }
+
+    QSqlQueryModel* model = new QSqlQueryModel();
+    model->setQuery(std::move(query));
+    return model;
+}
+
+QSqlQueryModel* CompetitionDao::queryCompByDynamicField(const QString& schoolName, const QString& fieldName, const QString& keyword)
+{
+    QSqlDatabase db = DatabaseManager::instance().getDatabase();
+    QSqlQueryModel* model = new QSqlQueryModel;
+
+    // 正确的连表查询 + 动态字段
+    QString sql = R"(
+        SELECT
+            c.CompID,
+            c.CompName,
+            a.ArticleName,
+            u.UserName AS Creator,
+            c.TargetSchool,
+            c.StartTime,
+            c.EndTime,
+            c.CreatedAt,
+            c.DurationMinutes
+        FROM competitions c
+        JOIN articleinfo a ON c.ArticleID = a.ArticleID
+        JOIN userinfo u ON c.CreatorID = u.UserID
+        WHERE c.TargetSchool = ? AND )" + fieldName + R"( LIKE ?
+    )";
+
+    QSqlQuery query(db);
+    query.prepare(sql);
+
+    query.addBindValue(schoolName);
+    query.addBindValue("%" + keyword + "%");
+
+    if (!query.exec()) {
+        qDebug() << "比赛查询失败：" << query.lastError().text();
+        qDebug() << "SQL：" << query.executedQuery();
+    }
+
+    model->setQuery(query);
+    return model;
+}
+
+bool CompetitionDao::deleteCompetition(int compId)
+{
+    QSqlDatabase db = DatabaseManager::instance().getDatabase();
+    QSqlQuery query(db);
+    query.prepare(R"(DELETE FROM competitions WHERE CompID = :id)");
+
+    query.bindValue(":id", compId);
+
+    if (!query.exec()) {
+        qDebug() << "删除比赛失败：" << query.lastError().text();
+        return false;
+    };
+
+    return true;
+}
+
