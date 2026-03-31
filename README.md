@@ -121,7 +121,9 @@ Fingertip-Light-Chase/
 
 ## 📄 项目展示
 
-![登录页面](:/res/login.png)
+![登录页面]
+(:/res/login.png)
 
 
-![操作主页面](:/res/main.png)
+![操作主页面]
+(:/res/main.png)
