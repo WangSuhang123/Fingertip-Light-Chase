@@ -39,9 +39,9 @@
 ## 🛠️ 技术架构
 
 ### 技术栈
-- **前端框架**：Qt 5.15+
+- **前端框架**：Qt 6.10.1
 - **UI 设计**：Qt Designer
-- **数据库**：SQLite
+- **数据库**：MYSQL
 - **网络通信**：Qt Network
 - **数据可视化**：Qt Charts
 
@@ -77,7 +77,7 @@ Fingertip-Light-Chase/
 ### 环境要求
 - Qt 5.15+ 开发环境
 - C++11 兼容编译器
-- Windows 7+ / macOS / Linux
+- Windows 10+ / macOS / Linux
 
 ### 构建步骤
 1. 克隆项目到本地
@@ -118,3 +118,10 @@ Fingertip-Light-Chase/
 ## 📄 许可证
 
 本项目采用 MIT 许可证，详情请查看 LICENSE 文件。
+
+## 📄 项目展示
+
+![登录页面](:/res/login.png)
+
+
+![操作主页面](:/res/main.png)

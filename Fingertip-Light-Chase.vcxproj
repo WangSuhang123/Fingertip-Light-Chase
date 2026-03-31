@@ -355,6 +355,10 @@
     <None Include="res\icon\xiaoxi.png" />
     <None Include="res\icon\yibiao.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="E:\Desktop\login.png" />
+    <Image Include="E:\Desktop\main.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <Import Project="$(QtMsBuild)\qt.targets" Condition="Exists('$(QtMsBuild)\qt.targets')" />
   <ImportGroup Label="ExtensionTargets" />

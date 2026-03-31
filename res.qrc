@@ -26,5 +26,7 @@
         <file>res/icon/yibiao.png</file>
         <file>res/icon/xialajiantou.png</file>
         <file>res/icon/xialajiantou.svg</file>
+        <file>res/login.png</file>
+        <file>res/main.png</file>
     </qresource>
 </RCC>
