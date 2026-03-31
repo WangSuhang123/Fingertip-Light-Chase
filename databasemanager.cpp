@@ -54,3 +54,5 @@ bool DatabaseManager::openDatabase(){
 QSqlDatabase& DatabaseManager::getDatabase(){
     return db;
 }
+
+

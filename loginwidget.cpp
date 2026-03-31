@@ -29,6 +29,7 @@ LoginWidget::LoginWidget(QWidget *parent)
         // 连接失败时禁用登录/注册按钮
         ui->LoginBtn->setEnabled(false);
         ui->registerBtn->setEnabled(false);
+        ui->forgotBtn->setEnabled(false);
     }
 
     //连接登录槽函数
