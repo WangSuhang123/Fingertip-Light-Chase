@@ -228,7 +228,7 @@
                    <set>Qt::InputMethodHint::ImhNone</set>
                   </property>
                   <property name="placeholderText">
-                   <string>Enter Username</string>
+                   <string>输入真实姓名</string>
                   </property>
                  </widget>
                 </item>
@@ -256,7 +256,7 @@
                    <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                   <property name="placeholderText">
-                   <string>Enter Password</string>
+                   <string>输入登录密码</string>
                   </property>
                   <property name="cursorMoveStyle">
                    <enum>Qt::CursorMoveStyle::LogicalMoveStyle</enum>
@@ -275,7 +275,7 @@
                 <item>
                  <widget class="QLineEdit" name="StudentIDEdit">
                   <property name="placeholderText">
-                   <string>Enter Student ID</string>
+                   <string>输入学号</string>
                   </property>
                  </widget>
                 </item>
@@ -291,7 +291,7 @@
                 <item>
                  <widget class="QLineEdit" name="SchoolNameEdit">
                   <property name="placeholderText">
-                   <string>Enter School Name</string>
+                   <string>输入学校名称（全称）</string>
                   </property>
                  </widget>
                 </item>

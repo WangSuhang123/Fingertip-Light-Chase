@@ -197,7 +197,7 @@
             <item>
              <widget class="QGroupBox" name="groupBox">
               <property name="title">
-               <string>Username</string>
+               <string>UserName</string>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_4">
                <item>
@@ -206,7 +206,7 @@
                   <set>Qt::InputMethodHint::ImhNone</set>
                  </property>
                  <property name="placeholderText">
-                  <string>Enter Username</string>
+                  <string>输入真实姓名</string>
                  </property>
                 </widget>
                </item>
@@ -234,7 +234,7 @@
                   <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                  </property>
                  <property name="placeholderText">
-                  <string>Enter Password</string>
+                  <string>输入密码</string>
                  </property>
                  <property name="cursorMoveStyle">
                   <enum>Qt::CursorMoveStyle::LogicalMoveStyle</enum>
@@ -253,7 +253,7 @@
                <item>
                 <widget class="QLineEdit" name="RegStudentIDEdit">
                  <property name="placeholderText">
-                  <string>Enter Student ID</string>
+                  <string>输入学号</string>
                  </property>
                 </widget>
                </item>
@@ -269,7 +269,7 @@
                <item>
                 <widget class="QLineEdit" name="RegSchoolNameEdit">
                  <property name="placeholderText">
-                  <string>Enter School Name</string>
+                  <string>输入学校全称</string>
                  </property>
                 </widget>
                </item>
@@ -285,7 +285,7 @@
                <item>
                 <widget class="QLineEdit" name="RegEMailEdit">
                  <property name="placeholderText">
-                  <string>Enter Your E-Mail</string>
+                  <string>输入邮箱</string>
                  </property>
                 </widget>
                </item>
@@ -301,7 +301,7 @@
                <item>
                 <widget class="QLineEdit" name="RegVerCodeEdit">
                  <property name="placeholderText">
-                  <string>Enter Code</string>
+                  <string>验证码</string>
                  </property>
                 </widget>
                </item>

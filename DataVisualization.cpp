@@ -72,11 +72,9 @@ void DataVisualization::updatelineChartsData()
 {
     
     //获取当前用户id
-    /*UserManager& userMgr = UserManager::instance();
-    int userID = userMgr.getCurrentUserID();*/
+    UserManager& userMgr = UserManager::instance();
+    int userID = userMgr.getCurrentUserID();
 
-    //临时测试
-    int userID = 1;
 
     QVector<QPointF> data = m_competitionRecordsService->getWPMData(userID);
 
@@ -98,11 +96,9 @@ void DataVisualization::updatelineChartsData()
 void DataVisualization::updatesplineChartsData()
 {
     //获取当前用户id
-    /*UserManager& userMgr = UserManager::instance();
-    int userID = userMgr.getCurrentUserID();*/
+    UserManager& userMgr = UserManager::instance();
+    int userID = userMgr.getCurrentUserID();
 
-    //临时测试
-    int userID = 1;
 
     QVector<QPointF> data = m_competitionRecordsService->getAccuracyData(userID);
 
@@ -126,11 +122,9 @@ void DataVisualization::updatebarChartsData()
     QVector<double> values;
 
     //获取当前用户id
-    /*UserManager& userMgr = UserManager::instance();
-    int userID = userMgr.getCurrentUserID();*/
+    UserManager& userMgr = UserManager::instance();
+    int userID = userMgr.getCurrentUserID();
 
-    //临时测试
-    int userID = 1;
 
     if (!m_competitionRecordsService->getFinalScoreBarData(userID, categories, values)) {
         
@@ -150,10 +144,9 @@ void DataVisualization::updatepieChartsData()
     int error = 0;
 
     //获取当前用户id
-    /*UserManager& userMgr = UserManager::instance();
-    int userID = userMgr.getCurrentUserID();*/
+    UserManager& userMgr = UserManager::instance();
+    int userID = userMgr.getCurrentUserID();
 
-    int userID = 1;
 
     if (!m_competitionRecordsService->getCharCountData(userID, correct, error)) {
         
@@ -179,10 +172,8 @@ void DataVisualization::updatepieChartsData()
 void DataVisualization::updateTableView()
 {
 
-    /*UserManager& userMgr = UserManager::instance();
-    int userID = userMgr.getCurrentUserID();*/
-
-    int userID = 1; // 改成当前用户
+    UserManager& userMgr = UserManager::instance();
+    int userID = userMgr.getCurrentUserID();
 
     auto records = m_competitionRecordsService->getFullRecords(userID);
 
@@ -229,11 +220,9 @@ void DataVisualization::updateTableView()
 void DataVisualization::updatelineChartsDataPractice()
 {
     //获取当前用户id
-    /*UserManager& userMgr = UserManager::instance();
-    int userID = userMgr.getCurrentUserID();*/
+    UserManager& userMgr = UserManager::instance();
+    int userID = userMgr.getCurrentUserID();
 
-    //临时测试
-    int userID = 1;
 
     QVector<QPointF> data = m_practiceRecordsService->getWPMPracticeData(userID);
 
@@ -256,11 +245,9 @@ void DataVisualization::updatelineChartsDataPractice()
 void DataVisualization::updatesplineChartsDataPractice()
 {
     //获取当前用户id
-    /*UserManager& userMgr = UserManager::instance();
-    int userID = userMgr.getCurrentUserID();*/
+    UserManager& userMgr = UserManager::instance();
+    int userID = userMgr.getCurrentUserID();
 
-    //临时测试
-    int userID = 1;
 
     QVector<QPointF> data = m_practiceRecordsService->getAccuracyPracticeData(userID);
 
@@ -284,11 +271,9 @@ void DataVisualization::updatebarChartsDataPractice()
     QVector<double> values;
 
     //获取当前用户id
-    /*UserManager& userMgr = UserManager::instance();
-    int userID = userMgr.getCurrentUserID();*/
+    UserManager& userMgr = UserManager::instance();
+    int userID = userMgr.getCurrentUserID();
 
-    //临时测试
-    int userID = 1;
 
     if (!m_practiceRecordsService->getFinalScoreBarPracticeData(userID, categories, values)) {
 
@@ -308,10 +293,8 @@ void DataVisualization::updatepieChartsDataPractice()
     int error = 0;
 
     //获取当前用户id
-    /*UserManager& userMgr = UserManager::instance();
-    int userID = userMgr.getCurrentUserID();*/
-
-    int userID = 1;
+    UserManager& userMgr = UserManager::instance();
+    int userID = userMgr.getCurrentUserID();
 
     if (!m_practiceRecordsService->getCharCountPracticeData(userID, correct, error)) {
 
@@ -336,10 +319,9 @@ void DataVisualization::updatepieChartsDataPractice()
 
 void DataVisualization::updateTableViewPractice()
 {
-    /*UserManager& userMgr = UserManager::instance();
-    int userID = userMgr.getCurrentUserID();*/
+    UserManager& userMgr = UserManager::instance();
+    int userID = userMgr.getCurrentUserID();
 
-    int userID = 1; // 改成当前用户
 
     auto records = m_practiceRecordsService->getFullPracticeRecords(userID);
 

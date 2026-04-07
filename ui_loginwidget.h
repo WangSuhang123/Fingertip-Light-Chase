@@ -262,14 +262,14 @@ public:
         label_2->setText(QCoreApplication::translate("LoginWidget", "Fingertip-Light-Chase", nullptr));
         label_3->setText(QCoreApplication::translate("LoginWidget", "\346\214\207\345\260\226\351\200\220\345\205\211", nullptr));
         groupBox->setTitle(QCoreApplication::translate("LoginWidget", "Username", nullptr));
-        usernameEdit->setPlaceholderText(QCoreApplication::translate("LoginWidget", "Enter Username", nullptr));
+        usernameEdit->setPlaceholderText(QCoreApplication::translate("LoginWidget", "\350\276\223\345\205\245\347\234\237\345\256\236\345\247\223\345\220\215", nullptr));
         groupBox_2->setTitle(QCoreApplication::translate("LoginWidget", "Password", nullptr));
         PasswordEdit->setInputMask(QString());
-        PasswordEdit->setPlaceholderText(QCoreApplication::translate("LoginWidget", "Enter Password", nullptr));
+        PasswordEdit->setPlaceholderText(QCoreApplication::translate("LoginWidget", "\350\276\223\345\205\245\347\231\273\345\275\225\345\257\206\347\240\201", nullptr));
         groupBox_3->setTitle(QCoreApplication::translate("LoginWidget", "Student ID", nullptr));
-        StudentIDEdit->setPlaceholderText(QCoreApplication::translate("LoginWidget", "Enter Student ID", nullptr));
+        StudentIDEdit->setPlaceholderText(QCoreApplication::translate("LoginWidget", "\350\276\223\345\205\245\345\255\246\345\217\267", nullptr));
         groupBox_4->setTitle(QCoreApplication::translate("LoginWidget", "School", nullptr));
-        SchoolNameEdit->setPlaceholderText(QCoreApplication::translate("LoginWidget", "Enter School Name", nullptr));
+        SchoolNameEdit->setPlaceholderText(QCoreApplication::translate("LoginWidget", "\350\276\223\345\205\245\345\255\246\346\240\241\345\220\215\347\247\260\357\274\210\345\205\250\347\247\260\357\274\211", nullptr));
         LoginBtn->setText(QCoreApplication::translate("LoginWidget", "Login", nullptr));
         registerBtn->setText(QCoreApplication::translate("LoginWidget", "Register", nullptr));
         forgotBtn->setText(QCoreApplication::translate("LoginWidget", "Forgot Password?", nullptr));
